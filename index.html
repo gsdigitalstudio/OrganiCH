@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chimica organica in 3D</title>
+<meta name="theme-color" content="#0d1426">
+<meta name="description" content="Carbonio e idrocarburi (C1 + C2) in 3D: laboratorio, flashcard e quiz.">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chimica organica in 3D">
+<meta property="og:description" content="Carbonio e idrocarburi (C1 + C2): 3D, laboratorio, flashcard e quiz.">
+<meta property="og:image" content="/og-image-1200x630.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#d9ebf6;--ink:#0f1a36;--mut:#4a5877;--acc:#ff6b4a;--pan:rgba(255,255,255,.92);--line:rgba(16,26,51,.1);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1426;--ink:#eaf0ff;--mut:#a3b0cc;--acc:#8aa3ff;--pan:rgba(20,30,56,.72);--line:rgba(255,255,255,.12)}}
+:root[data-theme="dark"]{--bg:#0d1426;--ink:#eaf0ff;--mut:#a3b0cc;--acc:#8aa3ff;--pan:rgba(20,30,56,.72);--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.6 'Source Serif 4',Georgia,serif}
+#c{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+section{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-columns:minmax(300px,460px) 1fr;gap:4vw;align-items:center;padding:8vh 6vw}
+.stage{height:min(70vh,560px);border-radius:6px;border:1px solid var(--line);cursor:grab;touch-action:pan-y}.stage:active{cursor:grabbing}
+@media (min-width:861px){section:nth-of-type(even){grid-template-columns:1fr minmax(300px,460px)}section:nth-of-type(even) .stage{order:-1}}
+.panel{max-width:460px;background:var(--pan);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;padding:30px 32px;box-shadow:0 24px 50px -32px rgba(10,20,60,.4)}
+section:first-of-type .panel{background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding-left:0}
+h1,h2{font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.08;margin:0 0 14px;letter-spacing:-.02em}
+h1{font-size:clamp(38px,5.4vw,66px)}h2{font-size:clamp(26px,3vw,36px)}
+p{margin:0 0 12px;color:var(--mut)}p b,li b{color:var(--ink)}
+ul{margin:0;padding-left:20px;color:var(--mut)}li{margin-bottom:6px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px}
+button{font:600 15px 'Bricolage Grotesque',system-ui,sans-serif;padding:9px 18px;border-radius:99px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+button.on,button:hover{background:var(--acc);color:#fff;border-color:var(--acc)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+input[type=range]{width:100%;accent-color:var(--acc);margin:10px 0}
+.k{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:700;color:var(--acc)}
+.hint{font-size:14px}
+.stage{position:relative;overflow:hidden;user-select:none;-webkit-user-select:none}
+.lg{position:absolute;left:14px;top:12px;display:flex;gap:6px 14px;flex-wrap:wrap;pointer-events:none;max-width:70%}
+.lg i{display:inline-flex;align-items:center;gap:6px;font:600 12px 'Bricolage Grotesque',system-ui,sans-serif;color:#33415f;font-style:normal}
+.lg b{width:11px;height:11px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(15,26,54,.35)}
+.pz{position:absolute;right:12px;top:10px;padding:5px 14px;font-size:12px;pointer-events:auto;background:rgba(255,255,255,.8);color:#0f1a36;border-color:var(--line)}.pz:hover{background:var(--acc);color:#fff}
+.cap small{display:block;margin-top:4px;font:12px 'Bricolage Grotesque',system-ui,sans-serif;color:#5b6b8c}
+.cap{position:absolute;left:0;right:0;bottom:0;padding:38px 18px 14px;font:15px/1.45 'Source Serif 4',Georgia,serif;color:#0f1a36;background:linear-gradient(transparent,rgba(255,255,255,.88));pointer-events:none}
+@media (max-width:860px){section{grid-template-columns:1fr;gap:16px;padding:4vh 4vw;align-content:center}.stage{order:-1;height:42vh;min-height:260px}.panel{max-width:none;padding:22px;font-size:16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* ===== laboratorio 3D ===== */
+section.lab{display:block;min-height:0;padding:9vh 4vw 10vh;background:var(--bg)}
+.lab-head{max-width:760px;margin:0 auto 26px}
+.lab-head p{font-size:17px}
+.lab-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);gap:22px;max-width:1280px;margin:0 auto;align-items:start}
+.lab-left,.lab-right{min-width:0}
+.pal{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;align-items:center;position:sticky;top:44px;z-index:6;padding:8px 0;background:var(--bg)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 8px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;background:var(--pan)}
+.chip i{width:26px;height:26px;border-radius:50%;background:var(--c);display:grid;place-items:center;color:#fff;font:700 12px 'Bricolage Grotesque',system-ui,sans-serif;font-style:normal;box-shadow:inset -3px -4px 7px rgba(0,0,0,.28),inset 0 0 0 1px rgba(15,26,54,.3)}
+.chip i.lt{color:#0f1a36}
+.chip:hover i,.chip.on i{box-shadow:inset -3px -4px 7px rgba(0,0,0,.28),0 0 0 2px #fff}
+.ghost{position:fixed;z-index:50;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;display:none;place-items:center;pointer-events:none;color:#fff;font:700 18px 'Bricolage Grotesque',system-ui,sans-serif;box-shadow:inset -6px -8px 14px rgba(0,0,0,.3),0 10px 24px rgba(10,20,60,.35)}
+.pal .hint{flex-basis:100%;margin:2px 0 0}
+.lv{position:relative;height:min(66vh,620px);min-height:380px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(155deg,#dcebf7 0%,#e4e2f6 100%)}
+.lv canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.lv canvas:active{cursor:grabbing}
+.lv.armed canvas{cursor:crosshair}.lv.over{box-shadow:inset 0 0 0 3px var(--acc)}
+.tools{position:absolute;left:10px;right:10px;top:10px;display:flex;gap:6px;flex-wrap:wrap;pointer-events:none}
+.tools button{pointer-events:auto;padding:6px 12px;font-size:13px;background:rgba(255,255,255,.86);color:#0f1a36;border-color:rgba(15,26,54,.14)}
+.tools button:hover,.tools button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools button:disabled{opacity:.4;cursor:default;background:rgba(255,255,255,.7);color:#0f1a36}
+.tools .sp{flex:1}
+.msg{position:absolute;left:12px;right:12px;bottom:12px;padding:10px 14px;border-radius:12px;background:rgba(15,26,54,.88);color:#fff;font:15px/1.4 'Source Serif 4',Georgia,serif;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;pointer-events:none}
+.msg.show{opacity:1;transform:none}
+.empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#33415f;font:600 17px 'Bricolage Grotesque',system-ui,sans-serif;pointer-events:none;padding:30px}
+.lab-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.lab-bar select{font:600 14px 'Bricolage Grotesque',system-ui,sans-serif;padding:8px 12px;border-radius:99px;border:1px solid var(--line);background:var(--pan);color:var(--ink)}
+.card{background:var(--pan);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+.card h3{font:700 15px 'Bricolage Grotesque',system-ui,sans-serif;margin:0 0 8px;color:var(--acc)}
+.lname{font:700 clamp(24px,2.6vw,32px)/1.12 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.01em;margin:0 0 6px;overflow-wrap:anywhere}
+.lname.fail{font-size:17px;color:var(--mut);font-weight:600}
+.lmeta{color:var(--mut);font-size:15px;margin:0}
+.lmeta b{color:var(--ink)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{padding:3px 10px;border-radius:99px;border:1px solid var(--line);font:600 13px 'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink)}
+.tag.a{background:var(--acc);color:#fff;border-color:var(--acc)}
+.rat{font:600 18px 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:.01em;overflow-wrap:anywhere;margin:0}
+.sk{background:#f4f8fc;border-radius:10px;padding:6px;color:#0f1a36}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl th{font:700 12px 'Bricolage Grotesque',system-ui,sans-serif;text-align:left;color:var(--mut);padding:4px 6px}
+.tbl td{padding:5px 6px;border-top:1px solid var(--line);color:var(--ink)}.tbl tr.sel td,.tbl tr:hover td{background:rgba(255,107,74,.12)}
+.task{display:flex;flex-direction:column;gap:8px}.task .row{margin:4px 0 0}
+.opts{display:grid;gap:6px}.opts button{text-align:left;border-radius:12px}
+.opts button.ok{background:#1fa86a;border-color:#1fa86a;color:#fff}.opts button.no{background:#e0453a;border-color:#e0453a;color:#fff}
+.good{color:#1fa86a;font-weight:700}
+@media (max-width:980px){.lab-grid{grid-template-columns:1fr}.lv{height:62vh}}
+@media (max-width:860px){section.lab{padding:5vh 4vw 8vh}}
+/* navigazione e ripasso */
+.top{position:fixed;z-index:20;top:0;left:0;right:0;display:flex;gap:4px;align-items:center;justify-content:center;flex-wrap:wrap;padding:calc(8px + env(safe-area-inset-top,0px)) 12px 8px;background:var(--pan);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top a{font:600 14px 'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink);text-decoration:none;padding:5px 12px;border-radius:99px}.top a:hover,.top a:focus-visible{background:var(--acc);color:#fff;outline:none}
+.top .bar{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:var(--acc)}
+section.rip{display:block;min-height:0;padding:8vh 4vw 10vh}.rip .panel{max-width:860px;margin:0 auto;background:var(--pan)}
+.rip details{border-top:1px solid var(--line);padding:10px 0}.rip summary{cursor:pointer;font:700 17px 'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink)}.rip details p{margin:8px 0 0}
+[hidden]{display:none!important}
+
+@media (max-width:640px){
+.top{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:0;padding:calc(6px + env(safe-area-inset-top,0px)) 8px 6px;scrollbar-width:none}.top::-webkit-scrollbar{display:none}.top a{white-space:nowrap;font-size:13px;padding:5px 10px}
+.pal{gap:4px;top:40px}.chip{padding:4px;gap:0}.chip .cn{display:none}.chip i{width:34px;height:34px;font-size:13px}
+.tools button{padding:5px 9px;font-size:12px}.lv{height:56vh;min-height:320px}}
+
+section{scroll-margin-top:44px}
+/* ===== studio, flashcard, quiz, guida laterale ===== */
+section.pg{display:block;min-height:0;padding:9vh 4vw 8vh;background:var(--bg)}
+.pg .wrap{max-width:980px;margin:0 auto}
+.pg .wrap>p{max-width:760px}
+.box{border-left:4px solid var(--acc);padding:8px 14px;background:rgba(255,107,74,.08);border-radius:8px;margin:10px 0;color:var(--ink)}
+.box.bl{background:rgba(70,120,255,.08)}.box.rd{border-color:#e0453a;background:rgba(224,69,58,.08)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:14px 0 20px}
+.step{background:var(--pan);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.4;color:var(--mut)}
+.step b{display:block;font:700 16px 'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink);margin-bottom:2px}
+.prog{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 0 4px}.prog i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+.grp{font:700 13px 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:22px 0 6px}
+.tp{background:var(--pan);border:1px solid var(--line);border-radius:14px;margin-bottom:8px;padding:2px 16px}
+.tp summary{cursor:pointer;padding:12px 0;font:700 17px 'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink);display:flex;gap:10px;align-items:center}
+.tp summary .ck{margin-left:auto;font:600 12px 'Bricolage Grotesque',system-ui,sans-serif;color:var(--mut)}
+.tp.done summary .ck{color:#1fa86a}
+.tp .bd{padding:0 0 12px;font-size:16px}.tp .bd p,.tp .bd li{color:var(--mut)}.tp .bd ul{margin:6px 0}
+.tp .bd table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}.tp .bd th{font:700 12px 'Bricolage Grotesque',system-ui,sans-serif;text-align:left;color:var(--mut);padding:4px 6px}.tp .bd td{padding:5px 6px;border-top:1px solid var(--line);color:var(--ink)}
+.tp .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.tp .acts button{font-size:13px;padding:6px 14px}
+.fc{background:var(--pan);border:1px solid var(--line);border-radius:18px;min-height:230px;padding:26px 28px;display:flex;flex-direction:column;justify-content:center;gap:8px;box-shadow:0 24px 50px -34px rgba(10,20,60,.45);margin:12px 0}
+.fc .tag{align-self:flex-start}.fc .fq{font:700 clamp(20px,2.6vw,26px)/1.25 'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink)}
+.fc .fa{font-size:18px;color:var(--ink);border-top:1px dashed var(--line);padding-top:10px}
+button.big{padding:11px 22px;font-size:16px}button.go{background:var(--acc);color:#fff;border-color:var(--acc)}
+.qh{display:flex;justify-content:space-between;gap:10px;font:600 14px 'Bricolage Grotesque',system-ui,sans-serif;color:var(--mut)}
+.qq{font:700 clamp(19px,2.4vw,24px)/1.3 'Bricolage Grotesque',system-ui,sans-serif;margin:10px 0 12px;color:var(--ink)}
+.qx{margin-top:12px}.qwhy{border-radius:12px;padding:10px 14px;margin-top:12px;background:rgba(255,107,74,.1);border:1px solid var(--line);color:var(--ink);font-size:16px}.qwhy.okk{background:rgba(31,168,106,.12)}
+.qlist .qr{border-top:1px solid var(--line);padding:10px 0;color:var(--mut);font-size:15px}.qlist .qr b{color:var(--ink)}
+.opts button.dim{opacity:.55}
+/* guida laterale */
+.gbtn{position:fixed;z-index:31;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:10px 18px;background:var(--acc);color:#fff;border-color:var(--acc);box-shadow:0 10px 26px -10px rgba(10,20,60,.55)}
+.grail,.gdraw{position:fixed;z-index:30;top:calc(46px + env(safe-area-inset-top,0px));bottom:0;background:var(--pan);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-left:1px solid var(--line);display:flex;flex-direction:column;box-shadow:-18px 0 40px -30px rgba(10,20,60,.5)}
+.grail{right:0;width:min(290px,88vw)}
+.gdraw{right:min(290px,88vw);width:min(430px,calc(100vw - min(290px,88vw)))}
+.gh{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);font:700 16px 'Bricolage Grotesque',system-ui,sans-serif;color:var(--ink)}
+.gh span{display:flex;gap:4px}.gh button{padding:4px 10px;font-size:13px}
+.grail ol{list-style:none;margin:0;padding:6px 8px 80px;overflow-y:auto;flex:1;overscroll-behavior:contain}
+.grail li{display:flex;gap:4px;align-items:stretch;margin-bottom:3px}
+.grail li.gg{font:700 12px 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);padding:10px 6px 2px}
+.grail .gi{flex:1;text-align:left;border-radius:10px;font-size:14px;padding:7px 10px;border-color:transparent;line-height:1.25}
+.grail .gb{border-radius:10px;font-size:12px;padding:4px 9px}
+.grail li.act .gi{background:var(--acc);color:#fff}
+.gdraw .gbody{padding:14px 16px;overflow-y:auto;flex:1;overscroll-behavior:contain;font-size:16px}.gdraw .gbody p,.gdraw .gbody li{color:var(--mut)}.gdraw .gbody table{width:100%;border-collapse:collapse;font-size:14px}.gdraw .gbody td,.gdraw .gbody th{padding:4px 6px;border-top:1px solid var(--line);text-align:left;color:var(--ink)}
+.gdraw .gf{display:flex;gap:6px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);flex-wrap:wrap}.gdraw .gf button{font-size:13px;padding:6px 14px}
+@media (max-width:900px){.gdraw{right:0;left:0;top:auto;bottom:0;width:auto;height:64vh;border-left:0;border-top:1px solid var(--line);border-radius:18px 18px 0 0}}
+.lab-bar .lv2{display:flex;gap:6px;align-items:center;font:600 13px 'Bricolage Grotesque',system-ui,sans-serif;color:var(--mut)}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="Navigazione"><a href="#top">Inizio</a><a href="#c1">C1 · Carbonio</a><a href="#c2">C2 · Idrocarburi</a><a href="#lab">Laboratorio 3D</a><a href="#studio">Studio</a><a href="#flash">Flashcard</a><a href="#quiz">Quiz</a><a href="#ripasso">Ripasso</a><span class="bar"></span></nav>
+<canvas id="c" aria-hidden="true"></canvas>
+<button type="button" class="gbtn" id="gbtn" aria-expanded="false" aria-controls="grail">☰ Guida</button>
+<aside class="grail" id="grail" hidden aria-label="Guida degli argomenti">
+<div class="gh"><b>Guida</b><span><button type="button" id="gup" aria-label="Argomento precedente">▲</button><button type="button" id="gdn" aria-label="Argomento successivo">▼</button><button type="button" id="gx" aria-label="Chiudi">✕</button></span></div>
+<ol id="glist"></ol>
+</aside>
+<aside class="gdraw" id="gdraw" hidden aria-label="Spiegazione dell'argomento">
+<div class="gh"><b id="gdt"></b><button type="button" id="gdx" aria-label="Chiudi spiegazione">✕</button></div>
+<div class="gbody" id="gdb"></div>
+<div class="gf"><button type="button" id="gdp">◂ Precedente</button><button type="button" id="gdn2">Successivo ▸</button><button type="button" class="go" id="gdgo">Vai alla sezione ▸</button></div>
+</aside>
+<main>
+<section data-s="0"><div class="panel">
+<h1>Il carbonio costruisce tutto ciò che vive.</h1>
+<p>Una guida interattiva ai capitoli C1 e C2: dalla chimica del carbonio agli idrocarburi. Trascina la molecola per ruotarla, poi scorri.</p>
+<p class="hint">Qui: il metano, CH₄. Un atomo di carbonio al centro, quattro idrogeni ai vertici di un tetraedro.</p>
+</div></section>
+
+<section data-s="0"><div class="panel">
+<h2>Cinque proprietà che lo rendono unico</h2>
+<ul>
+<li><b>4 legami covalenti</b> e tre possibili ibridazioni: sp³, sp², sp.</li>
+<li><b>Numero di ossidazione</b> variabile da −4 a +4.</li>
+<li><b>Elettronegatività media</b> (2,5): condivide gli elettroni, non li perde né li prende.</li>
+<li><b>Raggio piccolo</b> (77 pm): legami singoli, doppi e tripli.</li>
+<li><b>Concatenazione</b>: catene aperte o chiuse, lineari o ramificate.</li>
+</ul>
+</div></section>
+
+<section data-s="11"><div class="panel">
+<h2>Numero di ossidazione: contare i legami</h2>
+<p>Ogni legame C–H vale −1, ogni legame con un atomo più elettronegativo (qui O) vale +1, C–C vale 0. Sposta il cursore e ossida il carbonio da metano a CO₂.</p>
+<input id="nr" type="range" min="0" max="4" value="0" aria-label="Ossidazione">
+<p id="nt"><span class="k">Metano CH₄</span> · n.o. −4</p>
+<p class="hint">Percorso: alcano → alcol → aldeide → acido → CO₂. Il modello conta solo i legami C–H e C–O.</p>
+</div></section>
+
+<section data-s="1"><div class="panel">
+<h2>Ibridazione: la forma decide tutto</h2>
+<p>Il carbonio ha solo 2 elettroni spaiati, ma ne servono 4. Un elettrone passa da 2s a 2p e gli orbitali si ibridano. Scegli e guarda la molecola trasformarsi.</p>
+<div class="row"><button class="on" data-m="sp3">sp³</button><button data-m="sp2">sp²</button><button data-m="sp">sp</button></div>
+<p id="hi"><span class="k">C sp³ · come nell’etano</span><br>4 legami σ, geometria tetraedrica, 109,5°, 25% di carattere s.</p>
+<p class="hint">Le nuvole azzurre sono i legami π: più deboli e reattivi dei σ. Per questo alcheni e alchini reagiscono.</p>
+</div></section>
+
+<section data-s="2"><div class="panel">
+<h2>Una rotazione, due conformazioni</h2>
+<p>Attorno a un legame semplice C–C gli atomi ruotano liberamente. Nell'etano muovi il cursore: gli idrogeni passano da <b>sfalsati</b> (stabile) a <b>eclissati</b> (instabile).</p>
+<input id="rg" type="range" min="0" max="60" value="0" aria-label="Angolo di rotazione">
+<p id="en"><span class="k">Sfalsata</span> · energia 0 kJ/mol</p>
+<p class="hint">Differenza circa 12 kJ/mol. I conformeri si interconvertono da soli e non sono separabili.</p>
+</div></section>
+
+<section data-s="3"><div class="panel">
+<h2>Chiralità: mani che non si sovrappongono</h2>
+<p>Un carbonio con 4 gruppi tutti diversi è uno stereocentro. Qui CHFClBr e la sua immagine speculare: sono due <b>enantiomeri</b>.</p>
+<div class="row"><button id="spin">Ruota la seconda molecola</button></div>
+<p class="hint">Comunque la ruoti, non coincide con la prima. Stesse proprietà fisiche, ma ruotano la luce polarizzata in versi opposti e reagiscono diversamente con gli enzimi.</p>
+</div></section>
+
+<section data-s="4"><div class="panel">
+<h2>Quando l'anello si apre</h2>
+<p>Il ciclopropano ha angoli di 60° invece di 109,5°: è molto teso e reattivo. Con H₂ e catalizzatore Pt un legame C–C si rompe.</p>
+<div class="row"><button id="ring">Aggiungi H₂ / Pt</button></div>
+<p id="rt"><span class="k">Ciclopropano</span> C₃H₆</p>
+<p class="hint">Solo ciclopropano e ciclobutano si aprono. Il ciclopentano non reagisce così. Gli alcheni, invece, aprono il loro legame π e danno addizione: etene + H₂ → etano.</p>
+</div></section>
+
+<section data-s="12"><div class="panel">
+<h2>Nomenclatura: dai un nome alla catena</h2>
+<p>Sposta il metile lungo la catena di 6 C (sfera blu). Si numera dall’estremità che dà il numero più basso al sostituente.</p>
+<div class="row"><button class="on" data-n="2">posizione 2</button><button data-n="3">3</button><button data-n="4">4</button><button data-n="5">5</button></div>
+<p id="nm"><span class="k">2-metilesano</span><br>Metile in posizione 2.</p>
+<p class="hint">Regole: catena più lunga, numeri più bassi, poi ordine alfabetico. Nei composti insaturi il legame multiplo ha la priorità nella numerazione.</p>
+</div></section>
+
+<section data-s="14"><div class="panel">
+<h2>Proprietà fisiche: la catena cresce</h2>
+<p>Aggiungi atomi di carbonio agli alcani lineari. Più la massa aumenta, più forti sono le forze di dispersione e più sale il punto di ebollizione.</p>
+<input id="nc" type="range" min="1" max="8" value="1" aria-label="Numero di atomi di carbonio">
+<p id="pe"><span class="k">Metano</span> · p.e. −162 °C · gas</p>
+<p class="hint">Da 1 a 4 C sono gas, da 5 C liquidi. Gli alcoli bollono molto più in alto per i legami a idrogeno: l’etanolo (46 u) bolle a 78 °C, il butano (58 u) a −0,5 °C.</p>
+</div></section>
+
+<section data-s="13"><div class="panel">
+<h2>Effetto induttivo</h2>
+<p>Gli elettroni dei legami σ si spostano verso l’atomo più elettronegativo. L’effetto si attenua rapidamente con la distanza.</p>
+<div class="row"><button class="on" data-e="1">−I · cloro</button><button data-e="-1">+I · alchile</button></div>
+<p id="ie"><span class="k">−I</span><br>Il Cl attira elettroni: δ+ sul carbonio vicino (luce blu), sempre più debole lungo la catena.</p>
+<p class="hint">−I (alogeni, NO₂, C=O, COOH) aumenta la reattività. +I (gruppi alchilici) la riduce.</p>
+</div></section>
+
+<section data-s="10"><div class="panel">
+<h2>Alogenazione radicalica, passo passo</h2>
+<p>Clorurazione del metano con luce UV: una reazione a catena in tre stadi. Premi Avanti per seguirla.</p>
+<div class="row"><button id="rx">Avanti</button></div>
+<p id="rt2"><span class="k">Prima del via</span><br>Cl₂ e CH₄. Serve luce UV o calore.</p>
+<p class="hint">Radicale = specie con un elettrone spaiato, molto reattiva. Con eccesso di Cl₂ si arriva a CH₂Cl₂, CHCl₃, CCl₄.</p>
+</div></section>
+
+<section data-s="6"><div class="panel">
+<h2>Stessa formula, molecole diverse</h2>
+<p>C₅H₁₂ ha tre isomeri di catena. Scegli e guarda lo scheletro di carbonio ridisporsi: più è ramificato, più la molecola è compatta.</p>
+<div class="row"><button class="on" data-i="n">pentano</button><button data-i="m">2-metilbutano</button><button data-i="d">neopentano</button></div>
+<p id="is"><span class="k">Pentano · 36 °C</span><br>Catena lineare: molta superficie di contatto, forze di dispersione più forti.</p>
+<p class="hint">Il punto di ebollizione scende con le ramificazioni. Le sfere sono atomi di C (gli H non sono disegnati).</p>
+</div></section>
+
+<section data-s="7"><div class="panel">
+<h2>cis o trans: il doppio legame blocca</h2>
+<p>Attorno a un doppio legame non c'è libera rotazione, perché il legame π (le nuvole azzurre) lo impedisce. Così nascono due isomeri geometrici.</p>
+<div class="row"><button class="on" data-c="1">cis</button><button data-c="-1">trans</button></div>
+<p id="ct"><span class="k">cis-1,2-dicloroetene</span><br>I due Cl stanno dalla stessa parte.</p>
+<p class="hint">Serve che ogni C del doppio legame abbia due sostituenti diversi. Nell'1-butene un C ha due H: niente cis/trans.</p>
+</div></section>
+
+<section data-s="8"><div class="panel">
+<h2>Addizione: il legame π si apre</h2>
+<p>L'etene reagisce con H₂ e catalizzatore (Pt). Il π scompare e al suo posto si formano due nuovi legami σ C–H.</p>
+<div class="row"><button id="ad">Aggiungi H₂ / Pt</button></div>
+<p id="at"><span class="k">Etene</span> C₂H₄ · doppio legame</p>
+<p class="hint">H₂ si ossida (riducente), l'alchene si riduce: i C passano da n.o. −2 a −3. Gli alcani invece danno sostituzione, non addizione.</p>
+</div></section>
+
+<section data-s="9"><div class="panel">
+<h2>Perché l'alchino terminale è acido</h2>
+<p>Nell'etino il C è sp: 50% di carattere s, quindi trattiene forte gli elettroni e il legame C–H è molto polarizzato. Una base forte strappa l'H⁺.</p>
+<div class="row"><button id="ac">Aggiungi base forte (NaNH₂)</button></div>
+<p id="ct2"><span class="k">Etino</span> HC≡CH, triplo legame lineare</p>
+<p class="hint">Succede solo con alchini terminali (non con il 2-butino) e non con alcani o alcheni. Si forma un acetiluro.</p>
+</div></section>
+
+<section data-s="5"><div class="panel">
+<h2>Il carbonio non sta mai fermo</h2>
+<p>Il carbonio passa tra atmosfera (CO₂), esseri viventi, oceani e rocce. Fotosintesi, respirazione e decomposizione lo fanno circolare.</p>
+<p>La combustione dei fossili, che sono idrocarburi, e la deforestazione immettono CO₂ più in fretta di quanto venga assorbita: è l'effetto serra, uno dei confini planetari definiti nel 2009.</p>
+<div class="row"><button id="fo">Brucia combustibili fossili</button></div>
+<p id="cc"><span class="k">Equilibrio</span><br>La CO₂ circola tra atmosfera, piante e oceani.</p>
+<p><b>Formule da ricordare:</b> alcani CₙH₂ₙ₊₂ · alcheni CₙH₂ₙ · alchini CₙH₂ₙ₋₂.</p>
+<p class="hint">Fonte: Guida di Chimica organica, capitoli C1 e C2.</p>
+</div></section>
+<section class="lab" id="lab" data-lab="1" aria-labelledby="lab-t">
+<div class="lab-head">
+<h2 id="lab-t">Laboratorio 3D: costruisci una molecola</h2>
+<p>Trascina un atomo dalla tavolozza sopra una <b>sfera bianca</b> (un idrogeno): l'atomo prende il suo posto e legge il nome IUPAC, la formula e i numeri di ossidazione in tempo reale. Tocca un legame per renderlo doppio o triplo. Trascina lo sfondo per ruotare.</p>
+</div>
+<div class="lab-grid">
+<div class="lab-left">
+<div class="pal" id="pal">
+<button class="chip" data-el="C" type="button" aria-label="Carbonio"><i style="--c:#2b3a6b">C</i><span class="cn">Carbonio</span></button>
+<button class="chip" data-el="O" type="button" aria-label="Ossigeno"><i style="--c:#ff4d4d">O</i><span class="cn">Ossigeno</span></button>
+<button class="chip" data-el="N" type="button" aria-label="Azoto"><i style="--c:#3a6bff">N</i><span class="cn">Azoto</span></button>
+<button class="chip" data-el="Cl" type="button" aria-label="Cloro"><i style="--c:#25c17f">Cl</i><span class="cn">Cloro</span></button>
+<button class="chip" data-el="Br" type="button" aria-label="Bromo"><i style="--c:#e8553c">Br</i><span class="cn">Bromo</span></button>
+<button class="chip" data-el="F" type="button" aria-label="Fluoro"><i style="--c:#ffb020" class="lt">F</i><span class="cn">Fluoro</span></button>
+<button class="chip" data-el="I" type="button" aria-label="Iodio"><i style="--c:#8a3ffc">I</i><span class="cn">Iodio</span></button>
+</div>
+<p class="hint" style="margin:-4px 0 10px">Su schermo tattile: tocca un atomo della tavolozza, poi tocca l'idrogeno dove metterlo. Gli idrogeni si aggiungono da soli.</p>
+<div class="lv" id="lv">
+<canvas id="lc" role="img" aria-label="Modello 3D della molecola"></canvas>
+<div class="tools" id="tools">
+<button type="button" id="bUndo">Annulla</button>
+<button type="button" id="bMir" title="Immagine speculare: scambia R e S">Specchio</button>
+<button type="button" id="bCT" title="Inverti cis/trans sul doppio legame">cis ⇄ trans</button>
+<button type="button" id="bRot" title="Tocca un legame singolo per ruotarlo di 60°">Ruota legame</button>
+<button type="button" id="bLink" title="Tocca due atomi per chiudere un anello">Collega</button>
+<button type="button" id="bDel" title="Tocca un atomo per eliminarlo">Elimina</button>
+<span class="sp"></span>
+<button type="button" id="tH" class="on">H</button>
+<button type="button" id="tN">1,2,3</button>
+<button type="button" id="bFit">Inquadra</button>
+<button type="button" id="bClr">Azzera</button>
+</div>
+<div class="empty" id="empty" hidden>Scena vuota.<br>Trascina qui un atomo di carbonio.</div>
+<div class="msg" id="msg" role="status" aria-live="polite"></div>
+</div>
+<div class="lab-bar">
+<select id="exs" aria-label="Carica un esempio"><option value="">Carica un esempio…</option></select>
+<label class="lv2">Sfide <select id="lvl" aria-label="Tipo di sfida"><option value="mix">Mix casuale</option><option value="f">Facile (alcani)</option><option value="m">Medio (alogeni, OH, legami multipli)</option><option value="d">Difficile (più sostituenti)</option><option value="c">Gruppi e anelli (lista)</option></select></label><button type="button" id="gnx">Sfida: costruisci il nome</button>
+<button type="button" id="gqz">Quiz: riconosci il nome</button>
+</div>
+</div>
+<aside class="lab-right" id="info" aria-live="polite">
+<div class="card task" id="task" hidden></div>
+<div class="card"><h3>Nome IUPAC</h3><p class="lname" id="lname">…</p><p class="lmeta" id="lsub"></p><p class="lmeta" id="lform"></p></div>
+<div class="card"><h3>Gruppi funzionali</h3><div class="tags" id="lgrp"></div></div>
+<div class="card"><h3>Stereochimica</h3><p class="lmeta" id="lst"></p></div>
+<div class="card"><h3>Formula razionale e a scheletro</h3><p class="rat" id="lrat"></p><div class="sk" id="lsk" style="margin-top:10px"></div></div>
+<div class="card"><h3>Carboni: ibridazione e numero di ossidazione</h3><div style="overflow-x:auto"><table class="tbl" id="ltb"></table></div><p class="hint" id="lsel" style="margin:8px 0 0"></p></div>
+</aside>
+</div>
+</section>
+
+<section class="pg" id="studio" aria-labelledby="st-t"><div class="wrap">
+<h2 id="st-t">Studio: da dove studiare</h2>
+<p>Tutta la teoria dei capitoli C1 e C2 in 19 argomenti brevi, nell’ordine giusto per imparare. Apri un argomento, poi premi «Vedi in 3D» per provarlo con la molecola. Dal pulsante <b>Guida</b> in basso a destra puoi aprire la spiegazione di lato senza perdere il punto.</p>
+<div class="pgrid">
+<div class="step"><b>1 · Leggi</b>Un argomento alla volta, in ordine.</div>
+<div class="step"><b>2 · Prova in 3D</b>Muovi la molecola e il laboratorio.</div>
+<div class="step"><b>3 · Flashcard</b>Ripeti a voce, poi gira la carta.</div>
+<div class="step"><b>4 · Quiz</b>Gli errori ti vengono spiegati.</div>
+<div class="step"><b>5 · Sfide</b>Costruisci i nomi nel laboratorio.</div>
+</div>
+<div class="prog" aria-hidden="true"><i id="spf"></i></div><p class="hint" id="spt" style="margin:0 0 6px"></p>
+<div id="stl"></div>
+</div></section>
+
+<section class="pg" id="flash" aria-labelledby="fl-t"><div class="wrap">
+<h2 id="fl-t">Flashcard</h2>
+<p>Leggi la domanda, rispondi a voce, poi gira la carta. «Da ripassare» le rimette in coda e le trovi nel filtro dedicato.</p>
+<div class="row" id="ffl"><button type="button" class="on" data-f="all">Tutte</button><button type="button" data-f="C1">C1</button><button type="button" data-f="C2">C2</button><button type="button" data-f="again">Da ripassare</button><button type="button" id="fsh">Mescola</button></div>
+<div class="fc" id="fc" aria-live="polite"></div>
+<div class="row"><button type="button" class="big go" id="fbtn">Mostra la risposta</button></div>
+<div class="row" id="fres" hidden><button type="button" class="big go" id="fk">Lo sapevo</button><button type="button" class="big" id="fr">Da ripassare</button></div>
+<p class="hint" id="fst"></p>
+</div></section>
+
+<section class="pg" id="quiz" aria-labelledby="qz-t"><div class="wrap">
+<h2 id="qz-t">Quiz di teoria</h2>
+<p>49 domande a risposta multipla su tutta la guida. Ogni giro ne pesca di nuove e mescola le risposte.</p>
+<div class="row" id="qgf"><button type="button" class="on" data-g="all">Tutti i capitoli</button><button type="button" data-g="C1">Solo C1</button><button type="button" data-g="C2">Solo C2</button></div>
+<div class="row" id="qnf"><button type="button" data-n="5">5 domande</button><button type="button" class="on" data-n="10">10 domande</button><button type="button" data-n="20">20 domande</button></div>
+<div id="qbox" aria-live="polite"></div>
+</div></section>
+
+<section class="rip" id="ripasso"><div class="panel">
+<h2>Ripasso: domande d'esame</h2>
+<p>Una risposta completa ha tre parti: definizione, motivo o meccanismo, esempio. Prova a rispondere a voce prima di aprire.</p>
+<details><summary>Perché il carbonio è tetravalente e quali geometrie derivano dalle ibridazioni?</summary><p>Configurazione 1s² 2s² 2p²: promuovendo un elettrone da 2s a 2p ci sono 4 elettroni spaiati e quindi 4 legami. sp³: 4σ, tetraedrica, 109,5°. sp²: 3σ + 1π, trigonale planare, 120°. sp: 2σ + 2π, lineare, 180°.</p></details>
+<details><summary>Differenza tra isomeria conformazionale e configurazionale</summary><p>La conformazionale nasce dalla libera rotazione attorno a un legame semplice C–C: i conformeri si interconvertono da soli e non sono separabili (etano sfalsato/eclissato). La configurazionale (geometrica e ottica) richiede la rottura di legami: gli isomeri sono specie distinte e separabili.</p></details>
+<details><summary>Condizioni per l'enantiomeria: chiralità e attività ottica</summary><p>Serve almeno uno stereocentro (C sp³ con 4 gruppi diversi) e nessun piano di simmetria. Gli enantiomeri hanno uguali proprietà fisiche e chimiche con reagenti achirali, ma ruotano la luce polarizzata di angoli uguali e opposti: destrogiro (+) e levogiro (−). La forma meso, come il 2,3-diclorobutano (R,S), ha un piano di simmetria ed è achirale.</p></details>
+<details><summary>Perché i punti di ebollizione degli idrocarburi sono bassi, e perché i ramificati bollono più in basso dei lineari?</summary><p>Sono apolari: solo deboli forze di dispersione. Con la massa aumentano le interazioni e il punto di ebollizione. I ramificati sono più compatti: meno superficie di contatto, interazioni più deboli (pentano 36 °C, neopentano 9,5 °C).</p></details>
+<details><summary>Gruppo funzionale ed effetto induttivo</summary><p>Il gruppo funzionale è l'atomo o gruppo di atomi che dà alla molecola una reattività specifica. L'effetto induttivo è lo spostamento permanente di elettroni lungo i legami σ verso l'atomo più elettronegativo, con cariche parziali δ+ e δ−; si attenua con la distanza. I gruppi −I (alogeni, NO₂, C=O, COOH) aumentano la reattività, i +I (alchili) la riducono.</p></details>
+<details><summary>Meccanismo dell'alogenazione radicalica degli alcani</summary><p>Sostituzione radicalica in tre stadi. Inizio: scissione omolitica X₂ → 2 X· con UV o calore. Propagazione: X· strappa un H dall'alcano (R· + HX), poi R· + X₂ → RX + X·. Terminazione: ricombinazione di due radicali. Con eccesso di alogeno: polialogenazione.</p></details>
+<details><summary>Perché gli alcheni sono più reattivi degli alcani? Che reazioni danno?</summary><p>Hanno un legame π, più debole del σ e ricco di elettroni, attaccabile da elettrofili. Danno addizione: idrogenazione (H₂ con Pt, Pd o Ni, → alcano), X₂, HX (Markovnikov), H₂O. Gli alcani danno solo combustione e sostituzione radicalica.</p></details>
+<details><summary>Perché gli alchini terminali sono più acidi di alcheni e alcani?</summary><p>Il C è sp, con carattere s del 50% (33% in sp², 25% in sp³): trattiene più forte gli elettroni di legame, il C–H è più polarizzato e H⁺ si cede più facilmente a una base forte. Si forma un acetiluro (R–C≡C⁻). Il 2-butino non ha H sul C sp e non reagisce.</p></details>
+<details><summary>Perché solo ciclopropano e ciclobutano si aprono per addizione?</summary><p>Per l'elevata tensione d'anello: gli angoli (60° e circa 90°) sono lontani da 109,5° e i legami C–C sono deboli. Con H₂/Pt il ciclopropano dà propano; con Br₂/UV dà 1,3-dibromopropano. Ciclopentano e cicloesano non si aprono.</p></details>
+<details><summary>Errori che fanno perdere punti</summary><p>Numerare dall'estremità sbagliata o dimenticare l'ordine alfabetico; non scegliere la catena più lunga; sbagliare il numero di H; dire che un composto è chirale solo perché un C ha 4 sostituenti (devono essere tutti diversi); dimenticare catalizzatore o condizioni (UV, Pt); non bilanciare le combustioni.</p></details>
+<p class="hint" style="margin-top:14px">Fonte: Guida di Chimica organica, capitoli C1 e C2.</p>
+</div></section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ===================== MOTORE CHIMICO (nessuna dipendenza da DOM/THREE) ===================== */
+const CHEM=(()=>{
+'use strict';
+const VAL={H:1,C:4,N:3,O:2,F:1,Cl:1,Br:1,I:1};
+const ZN={H:1,C:6,N:7,O:8,F:9,Cl:17,Br:35,I:53};
+const MASS={H:1.008,C:12.011,N:14.007,O:15.999,F:18.998,Cl:35.45,Br:79.904,I:126.904};
+const VDW={H:1.2,C:1.7,N:1.55,O:1.52,F:1.47,Cl:1.75,Br:1.85,I:1.98};
+const COVR={H:.31,C:.76,N:.71,O:.66,F:.57,Cl:1.02,Br:1.2,I:1.39};
+const EN={H:2.2,C:2.55,N:3.04,O:3.44,F:3.98,Cl:3.16,Br:2.96,I:2.66};
+const LEN={'C-C':[1.54,1.34,1.20],'C-H':[1.09],'C-O':[1.43,1.23],'C-N':[1.47,1.28,1.16],'C-F':[1.35],'C-Cl':[1.77],'C-Br':[1.94],'C-I':[2.14],'H-O':[.96],'H-N':[1.01],'O-O':[1.48,1.21],'N-O':[1.40,1.21],'N-N':[1.45,1.25]};
+const bondLen=(a,b,o)=>{const k=[a,b].sort().join('-'),t=LEN[k]||LEN[[b,a].join('-')];if(t)return t[Math.min(o,t.length)-1];return COVR[a]+COVR[b]-.08*(o-1)};
+
+/* ---- vettori ---- */
+const add=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]],sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],mul=(a,s)=>[a[0]*s,a[1]*s,a[2]*s];
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2],cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const vlen=a=>Math.sqrt(dot(a,a)),norm=a=>{const l=vlen(a)||1;return[a[0]/l,a[1]/l,a[2]/l]};
+const dist=(a,b)=>vlen(sub(a,b));
+const perp=(v,n)=>sub(v,mul(n,dot(v,n)));
+const rotAxis=(v,ax,t)=>{const c=Math.cos(t),s=Math.sin(t);return add(add(mul(v,c),mul(cross(ax,v),s)),mul(ax,dot(ax,v)*(1-c)))};
+
+/* ---- struttura: {atoms:[{el,p}], bonds:[{a,b,o}]} ---- */
+const clone=m=>({atoms:m.atoms.map(a=>({el:a.el,p:a.p.slice()})),bonds:m.bonds.map(b=>({a:b.a,b:b.b,o:b.o}))});
+function adj(m){const A=m.atoms.map(()=>[]);m.bonds.forEach((b,i)=>{A[b.a].push({j:b.b,o:b.o,bi:i});A[b.b].push({j:b.a,o:b.o,bi:i})});return A}
+function hyb(m,A,i){const e=m.atoms[i].el;if(VAL[e]===1)return 'sp3';let d=0,t=0;A[i].forEach(n=>{if(n.o===2)d++;else if(n.o===3)t++});return(t||d>1)?'sp':d?'sp2':'sp3'}
+const DOM={sp3:4,sp2:3,sp:2};
+
+/* ---- direzioni libere attorno a un atomo ---- */
+const TX=[[.8165,.5774,0],[-.8165,.5774,0],[0,-.5774,.8165],[0,-.5774,-.8165]];
+const anyPerp=n=>{let e=cross([0,0,1],n);if(vlen(e)<1e-3)e=cross([0,1,0],n);return norm(e)};
+function freeDirs(dirs,dom,ref){
+ const k=dirs.length;if(dom-k<=0)return[];let out=[];
+ if(dom===4){
+  if(k===0)out=TX.map(v=>v.slice());
+  else if(k===1){const n=dirs[0];let e1=null,ph0=0;
+   if(ref){const pr=perp(ref,n);if(vlen(pr)>1e-3){e1=norm(pr);ph0=Math.PI}}
+   if(!e1){e1=anyPerp(n);ph0=0}
+   const e2=cross(n,e1),c=-1/3,s=Math.sqrt(8)/3;
+   for(let j=0;j<3;j++){const ph=ph0+j*2.0944;out.push(add(mul(n,c),mul(add(mul(e1,Math.cos(ph)),mul(e2,Math.sin(ph))),s)))}}
+  else if(k===2){const[a,b]=dirs,bs=mul(add(a,b),-1),p=cross(a,b);
+   if(vlen(bs)<1e-3||vlen(p)<1e-3){const u=anyPerp(a);out=[u,mul(u,-1)]}
+   else{const B=norm(bs),P=norm(p);out=[add(mul(B,.5774),mul(P,.8165)),sub(mul(B,.5774),mul(P,.8165))]}}
+  else if(k===3){const s=mul(add(add(dirs[0],dirs[1]),dirs[2]),-1);out=[vlen(s)<1e-3?anyPerp(dirs[0]):norm(s)]}
+ }else if(dom===3){
+  if(k===0)out=[[0,1,0],[-.866,-.5,0],[.866,-.5,0]];
+  else if(k===1){const n=dirs[0];let e1=null,anti=false;
+   if(ref){const pr=perp(ref,n);if(vlen(pr)>1e-3){e1=norm(pr);anti=true}}
+   if(!e1)e1=anyPerp(n);
+   const a=add(mul(n,-.5),mul(e1,.866)),b=sub(mul(n,-.5),mul(e1,.866));out=anti?[b,a]:[a,b]}
+  else if(k===2){const s=mul(add(dirs[0],dirs[1]),-1);out=[vlen(s)<1e-3?anyPerp(dirs[0]):norm(s)]}
+ }else{
+  if(k===0)out=[[1,0,0],[-1,0,0]];else out=[mul(dirs[0],-1)];
+ }
+ return out.slice(0,dom-k);
+}
+/* riferimento di torsione per l'atomo i con un solo vicino P: vettore P->altro vicino di P */
+function torsionRef(m,A,i,P){const o=A[P].filter(x=>x.j!==i);if(!o.length)return null;
+ const heavy=o.filter(x=>m.atoms[x.j].el!=='H');const q=(heavy[0]||o[0]).j;return sub(m.atoms[q].p,m.atoms[P].p)}
+
+/* ---- idrogeni impliciti: porta ogni atomo pesante alla valenza giusta ---- */
+function normalizeH(m0){
+ let m=clone(m0),A=adj(m);const del=new Set();
+ const hv=(i)=>A[i].reduce((s,x)=>s+(m.atoms[x.j].el==='H'?0:x.o),0);
+ m.atoms.forEach((a,i)=>{if(a.el==='H')return;const want=Math.max(0,VAL[a.el]-hv(i));
+  const hs=A[i].filter(x=>m.atoms[x.j].el==='H');
+  if(hs.length>want)hs.slice(want).forEach(x=>del.add(x.j))});
+ if(del.size){const map=[];let c=0;m.atoms.forEach((_,i)=>map[i]=del.has(i)?-1:c++);
+  m={atoms:m.atoms.filter((_,i)=>!del.has(i)),bonds:m.bonds.filter(b=>!del.has(b.a)&&!del.has(b.b)).map(b=>({a:map[b.a],b:map[b.b],o:b.o}))};A=adj(m)}
+ const n0=m.atoms.length;
+ for(let i=0;i<n0;i++){const a=m.atoms[i];if(a.el==='H')continue;
+  const want=Math.max(0,VAL[a.el]-A[i].reduce((s,x)=>s+(m.atoms[x.j].el==='H'?0:x.o),0));
+  let have=A[i].filter(x=>m.atoms[x.j].el==='H').length;if(have>=want)continue;
+  const dom=DOM[hyb(m,A,i)];const dirs=A[i].map(x=>norm(sub(m.atoms[x.j].p,a.p)));
+  const ref=A[i].length===1?torsionRef(m,A,i,A[i][0].j):null;
+  while(have<want){const f=freeDirs(dirs,dom,ref)[0];if(!f)break;dirs.push(f);
+   const h=m.atoms.length;m.atoms.push({el:'H',p:add(a.p,mul(f,bondLen(a.el,'H',1)))});m.bonds.push({a:i,b:h,o:1});have++}}
+ return m}
+
+/* ---- rilassamento (position based dynamics) ---- */
+const angOf=(el,hy,deg)=>hy==='sp'?180:hy==='sp2'?120:(el==='O'&&deg===2?104.5:el==='N'&&deg===3?107:109.47);
+function dihedralCos(m,u,a,b,w){const ab=norm(sub(m.atoms[b].p,m.atoms[a].p));
+ const x=perp(sub(m.atoms[u].p,m.atoms[a].p),ab),y=perp(sub(m.atoms[w].p,m.atoms[b].p),ab);
+ if(vlen(x)<1e-6||vlen(y)<1e-6)return 1;return dot(norm(x),norm(y))}
+function d14(l1,l2,l3,t1,t2,phi){const a=[l1*Math.cos(t1),l1*Math.sin(t1),0];
+ const bp=[l2+l3*(-Math.cos(t2)),l3*Math.sin(t2)*Math.cos(phi),l3*Math.sin(t2)*Math.sin(phi)];return dist(a,bp)}
+function buildCons(m){
+ const A=adj(m),C=[],H=m.atoms.map((_,i)=>hyb(m,A,i)),near=new Set();
+ const key=(i,j)=>i<j?i*100000+j:j*100000+i;
+ m.bonds.forEach(b=>{C.push({i:b.a,j:b.b,d:bondLen(m.atoms[b.a].el,m.atoms[b.b].el,b.o),k:1});near.add(key(b.a,b.b))});
+ m.atoms.forEach((a,c)=>{const nb=A[c],th=angOf(a.el,H[c],nb.length)*Math.PI/180;
+  for(let p=0;p<nb.length;p++)for(let q=p+1;q<nb.length;q++){
+   const l1=bondLen(a.el,m.atoms[nb[p].j].el,nb[p].o),l2=bondLen(a.el,m.atoms[nb[q].j].el,nb[q].o);
+   C.push({i:nb[p].j,j:nb[q].j,d:Math.sqrt(l1*l1+l2*l2-2*l1*l2*Math.cos(th)),k:.35});near.add(key(nb[p].j,nb[q].j))}});
+ m.bonds.forEach(b=>{if(b.o!==2)return;
+  const ua=A[b.a].filter(x=>x.j!==b.b),wb=A[b.b].filter(x=>x.j!==b.a);if(!ua.length||!wb.length)return;
+  if(H[b.a]!=='sp2'||H[b.b]!=='sp2')return;
+  const tr0=dihedralCos(m,ua[0].j,b.a,b.b,wb[0].j)<0;
+  ua.forEach((u,iu)=>wb.forEach((w,iw)=>{const trans=((iu===0)===(iw===0))?tr0:!tr0;
+   const l1=bondLen(m.atoms[b.a].el,m.atoms[u.j].el,u.o),l3=bondLen(m.atoms[b.b].el,m.atoms[w.j].el,w.o),l2=bondLen(m.atoms[b.a].el,m.atoms[b.b].el,2);
+   C.push({i:u.j,j:w.j,d:d14(l1,l2,l3,2.0944,2.0944,trans?Math.PI:0),k:.8})}))});
+ return{C,near,key,w:m.atoms.map(a=>a.el==='H'?1:.45)}}
+function relaxStep(m,cons,iters){let mv=0;const{C,near,key,w}=cons,P=m.atoms.map(a=>a.p),n=P.length;
+ for(let it=0;it<iters;it++){mv=0;
+  for(let pass=0;pass<2;pass++)for(const c of C){if(pass&&c.k<.99)continue;const pi=P[c.i],pj=P[c.j];let dx=sub(pj,pi),d=vlen(dx);if(d<1e-6){dx=[Math.random()*.01,Math.random()*.01,Math.random()*.01];d=vlen(dx)}
+   const s=(d-c.d)/d*c.k,wi=w[c.i],wj=w[c.j],t=wi+wj;P[c.i]=add(pi,mul(dx,s*wi/t));P[c.j]=sub(pj,mul(dx,s*wj/t));mv=Math.max(mv,Math.abs(d-c.d))}
+  for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){if(near.has(key(i,j)))continue;
+   const dm=.78*(VDW[m.atoms[i].el]+VDW[m.atoms[j].el]);let dx=sub(P[j],P[i]),d=vlen(dx);if(d>=dm)continue;if(d<1e-6){dx=[.01,.02,.03];d=vlen(dx)}
+   const s=(d-dm)/d*.5,wi=w[i],wj=w[j],t=wi+wj;P[i]=add(P[i],mul(dx,s*wi/t));P[j]=sub(P[j],mul(dx,s*wj/t))}}
+ m.atoms.forEach((a,i)=>a.p=P[i]);return mv}
+function relax(m,iters=250){const c=buildCons(m);relaxStep(m,c,iters);return m}
+
+/* ---- operazioni di editing ---- */
+function setBondOrder(m,bi,newO){
+ if(newO>3||newO<1)return null;const b=m.bonds[bi],A=adj(m);let d=newO-b.o;
+ if(d>0){const need=a=>A[a].filter(x=>m.atoms[x.j].el==='H').length;
+  const val=a=>A[a].reduce((s,x)=>s+(m.atoms[x.j].el==='H'?0:x.o),0)+d;
+  for(const a of[b.a,b.b]){if(val(a)>VAL[m.atoms[a].el]||need(a)<d)return null}
+  const kill=new Set();
+  const Ha=A[b.a].filter(x=>m.atoms[x.j].el==='H'),Hb=A[b.b].filter(x=>m.atoms[x.j].el==='H');
+  const chosenA=[],chosenB=[];
+  for(let t=0;t<d;t++){let best=null;Ha.forEach(x=>{if(kill.has(x.j))return;Hb.forEach(y=>{if(kill.has(y.j))return;const dd=dist(m.atoms[x.j].p,m.atoms[y.j].p);if(!best||dd<best.d)best={d:dd,x:x.j,y:y.j}})});
+   if(!best)return null;kill.add(best.x);kill.add(best.y)}
+  const r=clone(m);r.bonds[bi].o=newO;
+  const map=[];let c=0;r.atoms.forEach((_,i)=>map[i]=kill.has(i)?-1:c++);
+  return{atoms:r.atoms.filter((_,i)=>!kill.has(i)),bonds:r.bonds.filter(x=>!kill.has(x.a)&&!kill.has(x.b)).map(x=>({a:map[x.a],b:map[x.b],o:x.o}))}}
+ const r=clone(m);r.bonds[bi].o=newO;return normalizeH(r)}
+/* collega due atomi pesanti con legame singolo (chiusura di anelli) */
+function joinAtoms(m,a,b){const A=adj(m);if(A[a].some(x=>x.j===b))return null;
+ const Ha=A[a].filter(x=>m.atoms[x.j].el==='H'),Hb=A[b].filter(x=>m.atoms[x.j].el==='H');if(!Ha.length||!Hb.length)return null;
+ let best=null;Ha.forEach(x=>Hb.forEach(y=>{const dd=dist(m.atoms[x.j].p,m.atoms[y.j].p);if(!best||dd<best.d)best={d:dd,x:x.j,y:y.j}}));
+ const r=clone(m);r.bonds.push({a,b,o:1});const kill=new Set([best.x,best.y]),map=[];let c=0;r.atoms.forEach((_,i)=>map[i]=kill.has(i)?-1:c++);
+ return{atoms:r.atoms.filter((_,i)=>!kill.has(i)),bonds:r.bonds.filter(x=>!kill.has(x.a)&&!kill.has(x.b)).map(x=>({a:map[x.a],b:map[x.b],o:x.o}))}}
+/* sostituisce l'idrogeno hIdx con un atomo di tipo el */
+function substituteH(m,hIdx,el){const A=adj(m);const hb=A[hIdx][0];if(!hb||m.atoms[hIdx].el!=='H')return null;
+ const X=hb.j,r=clone(m);r.atoms[hIdx].el=el;r.atoms[hIdx].p=add(r.atoms[X].p,mul(norm(sub(r.atoms[hIdx].p,r.atoms[X].p)),bondLen(r.atoms[X].el,el,1)));
+ return normalizeH(r)}
+/* elimina un atomo pesante: restano i vicini (ricevono H), si tiene la componente maggiore */
+function deleteAtom(m,i){if(m.atoms[i].el==='H')return null;const A=adj(m);const kill=new Set([i]);A[i].forEach(x=>{if(m.atoms[x.j].el==='H')kill.add(x.j)});
+ const map=[];let c=0;m.atoms.forEach((_,k)=>map[k]=kill.has(k)?-1:c++);
+ let r={atoms:m.atoms.filter((_,k)=>!kill.has(k)).map(a=>({el:a.el,p:a.p.slice()})),bonds:m.bonds.filter(b=>!kill.has(b.a)&&!kill.has(b.b)).map(b=>({a:map[b.a],b:map[b.b],o:b.o}))};
+ if(!r.atoms.length)return r;r=normalizeH(r);return keepBiggest(r)}
+function components(m){const A=adj(m),seen=new Array(m.atoms.length).fill(-1);let c=0;
+ for(let i=0;i<m.atoms.length;i++){if(seen[i]>=0)continue;const st=[i];seen[i]=c;while(st.length){const x=st.pop();A[x].forEach(n=>{if(seen[n.j]<0){seen[n.j]=c;st.push(n.j)}})}c++}return{seen,c}}
+function keepBiggest(m){const{seen,c}=components(m);if(c<=1)return m;const cnt=new Array(c).fill(0);seen.forEach(s=>cnt[s]++);
+ const best=cnt.indexOf(Math.max(...cnt));const map=[];let k=0;m.atoms.forEach((_,i)=>map[i]=seen[i]===best?k++:-1);
+ return{atoms:m.atoms.filter((_,i)=>seen[i]===best),bonds:m.bonds.filter(b=>seen[b.a]===best).map(b=>({a:map[b.a],b:map[b.b],o:b.o}))}}
+/* i due lati di un legame (per rotazioni); null se il legame sta in un anello */
+function sideOf(m,bi){const b=m.bonds[bi],A=adj(m),seen=new Set([b.b]),st=[b.b];
+ while(st.length){const x=st.pop();for(const n of A[x]){if(n.bi===bi)continue;if(n.j===b.a)return null;if(!seen.has(n.j)){seen.add(n.j);st.push(n.j)}}}return seen}
+function rotateSide(m,bi,ang){const s=sideOf(m,bi);if(!s)return false;const b=m.bonds[bi],o=m.atoms[b.a].p,ax=norm(sub(m.atoms[b.b].p,o));
+ s.forEach(i=>{m.atoms[i].p=add(o,rotAxis(sub(m.atoms[i].p,o),ax,ang))});return true}
+function mirror(m){m.atoms.forEach(a=>a.p=[-a.p[0],a.p[1],a.p[2]]);return m}
+function center(m){const c=[0,0,0];m.atoms.forEach(a=>{c[0]+=a.p[0];c[1]+=a.p[1];c[2]+=a.p[2]});const n=m.atoms.length||1;m.atoms.forEach(a=>a.p=sub(a.p,mul(c,1/n)));return m}
+
+/* ---- SMILES minimale -> struttura 3D ---- */
+function fromSmiles(s){
+ const at=[],bo=[],ring={};let stack=[],cur=-1,order=1,i=0;
+ while(i<s.length){const ch=s[i];
+  if(ch==='('){stack.push(cur);i++}else if(ch===')'){cur=stack.pop();i++}
+  else if(ch==='='){order=2;i++}else if(ch==='#'){order=3;i++}else if(ch==='-'||ch==='/'||ch==='\\'){i++}
+  else if(/\d/.test(ch)){if(ring[ch]!==undefined){bo.push({a:ring[ch],b:cur,o:order,rc:1});delete ring[ch]}else ring[ch]=cur;order=1;i++}
+  else{let el=ch;if((ch==='C'&&s[i+1]==='l')||(ch==='B'&&s[i+1]==='r')){el=s.substr(i,2);i+=2}else i++;
+   const id=at.length;at.push({el,p:null});if(cur>=0){bo.push({a:cur,b:id,o:order})}cur=id;order=1}}
+ const nb=at.map(()=>[]);bo.forEach(b=>{nb[b.a].push({j:b.b,o:b.o,rc:b.rc});nb[b.b].push({j:b.a,o:b.o,rc:b.rc})});
+ const m={atoms:at.map(a=>({el:a.el,p:null})),bonds:bo.map(b=>({a:b.a,b:b.b,o:b.o}))};
+ const tree=bo.filter(b=>!b.rc),tn=at.map(()=>[]);tree.forEach(b=>{tn[b.a].push({j:b.b,o:b.o});tn[b.b].push({j:b.a,o:b.o})});
+ const hyOf=i=>{let d=0,t=0;nb[i].forEach(x=>{if(x.o===2)d++;if(x.o===3)t++});return(t||d>1)?'sp':d?'sp2':'sp3'};
+ m.atoms[0].p=[0,0,0];const done=new Set([0]),placed=at.map(()=>[]);
+ (function go(i,par){const pos=m.atoms[i].p,dirs=[],kids=[];
+  tn[i].forEach(x=>{if(done.has(x.j)&&x.j===par)dirs.push(norm(sub(m.atoms[x.j].p,pos)))});
+  let ref=null;if(par!==null&&par!==undefined){const g=tn[par].find(x=>x.j!==i&&done.has(x.j));if(g)ref=sub(m.atoms[g.j].p,m.atoms[par].p)}
+  tn[i].forEach(x=>{if(x.j!==par&&!done.has(x.j))kids.push(x)});
+  const dom=DOM[hyOf(i)];
+  kids.forEach(x=>{const f=freeDirs(dirs,dom,dirs.length===1?ref:null)[0]||[1,0,0];dirs.push(f);
+   m.atoms[x.j].p=add(pos,mul(f,bondLen(m.atoms[i].el,m.atoms[x.j].el,x.o)));done.add(x.j)});
+  kids.forEach(x=>go(x.j,i))})(0,null);
+ const r=normalizeH(m);relax(r,400);return center(r)}
+
+/* ================= ANALISI STRUTTURALE ================= */
+function heavy(m){const A=adj(m),idx=[],map=new Map();m.atoms.forEach((a,i)=>{if(a.el!=='H'){map.set(i,idx.length);idx.push(i)}});
+ const g={n:idx.length,idx,el:[],h:[],nb:[],hIdx:[]};
+ idx.forEach(i=>{g.el.push(m.atoms[i].el);g.hIdx.push(A[i].filter(x=>m.atoms[x.j].el==='H').map(x=>x.j));g.h.push(g.hIdx[g.hIdx.length-1].length);
+  g.nb.push(A[i].filter(x=>m.atoms[x.j].el!=='H').map(x=>({j:map.get(x.j),o:x.o})))});return g}
+function ringSet(g){const alive=new Set(g.nb.map((_,i)=>i));let ch=true;
+ while(ch){ch=false;for(const i of[...alive]){let d=0;g.nb[i].forEach(x=>{if(alive.has(x.j))d++});if(d<=1){alive.delete(i);ch=true}}}
+ let E=0;g.nb.forEach(a=>E+=a.length);E/=2;return{atoms:alive,rings:E-g.n+1}}
+const HAL={F:'fluoro',Cl:'cloro',Br:'bromo',I:'iodo'};
+function catC(g,c){if(g.el[c]!=='C')return null;let oxo=-1;
+ for(const x of g.nb[c])if(g.el[x.j]==='O'&&x.o===2)oxo=x.j;if(oxo<0)return 'c';
+ const ot=g.nb[c].filter(x=>x.j!==oxo),O1=ot.filter(x=>g.el[x.j]==='O'&&x.o===1),N1=ot.filter(x=>g.el[x.j]==='N'&&x.o===1),C1=ot.filter(x=>g.el[x.j]==='C');
+ if(ot.some(x=>HAL[g.el[x.j]]))return 'x';
+ if(O1.length===1&&!N1.length){const o=O1[0].j;if(g.h[o]===1)return 'acid';if(g.nb[o].some(x=>x.j!==c&&g.el[x.j]==='C'))return 'ester';return 'x'}
+ if(N1.length===1&&!O1.length)return 'amide';
+ if(!O1.length&&!N1.length){if(g.h[c]>=1&&C1.length<=1)return 'ald';if(C1.length===2)return 'ket'}
+ return 'x'}
+
+/* gruppi funzionali (solo riconoscimento) */
+function groupsOf(g){const out=[],add=(t,at)=>out.push({t,at});
+ g.nb.forEach((nb,i)=>{const e=g.el[i];
+  if(e==='C'){const k=catC(g,i);
+   if(k==='acid')add('acido carbossilico',[i]);else if(k==='ester')add('estere',[i]);else if(k==='amide')add('ammide',[i]);else if(k==='ald')add('aldeide',[i]);else if(k==='ket')add('chetone',[i]);
+   nb.forEach(x=>{const j=x.j,f=g.el[j];
+    if(f==='C'&&x.o===2&&j>i)add('alchene (C=C)',[i,j]);
+    if(f==='C'&&x.o===3&&j>i)add('alchino (C≡C)',[i,j]);
+    if(f==='N'&&x.o===3)add('nitrile',[i,j]);
+    if(HAL[f])add('alogenuro alchilico ('+f+')',[i,j]);
+    if(f==='O'&&x.o===1&&g.h[j]===1&&k==='c')add('alcol (–OH)',[i,j]);
+    if(f==='N'&&x.o===1&&k==='c'&&!g.nb[j].some(y=>y.j!==i&&catC(g,y.j)&&catC(g,y.j)!=='c'&&catC(g,y.j)!=='x')){add(g.h[j]===2?'ammina primaria':g.h[j]===1?'ammina secondaria':'ammina terziaria',[i,j])}})}
+  if(e==='O'&&g.h[i]===0&&nb.length===2&&nb.every(x=>x.o===1&&g.el[x.j]==='C')&&!nb.some(x=>catC(g,x.j)==='ester'||catC(g,x.j)==='acid'||catC(g,x.j)==='amide')&&!nb.some(x=>['ester'].includes(catC(g,x.j))))add('etere (C–O–C)',[i])});
+ return out}
+
+/* ======================= NOMENCLATURA ======================= */
+const STEM=['','met','et','prop','but','pent','es','ept','ott','non','dec','undec','dodec','tridec','tetradec','pentadec','esadec','eptadec','ottadec','nonadec','eicos'];
+const MU=['','','di','tri','tetra','penta','esa','epta','otta','nona','deca'],MUC=['','','bis','tris','tetrakis','pentakis','esakis'];
+const TERMC=new Set(['acid','ester','amide','ald']);
+const PRI={acid:7,ester:6,amide:5,ald:4,ket:3,alc:2,amine:1};
+const TERM=new Set(['acid','ester','amide','ald']);
+const SUF={acid:'oico',ester:'oato',amide:'ammide',ald:'ale',ket:'one',alc:'olo',amine:'ammina'};
+const COMMON={'1-metiletile':'isopropile','1,1-dimetiletile':'terz-butile','1-metilpropile':'sec-butile','2-metilpropile':'isobutile'};
+const TRIV={'2-metilpropano':'isobutano','2-metilbutano':'isopentano','2,2-dimetilpropano':'neopentano','2,2,4-trimetilpentano':'isottano','etene':'etilene','etino':'acetilene','propene':'propilene','propanone':'acetone','acido etanoico':'acido acetico','acido metanoico':'acido formico','metanale':'formaldeide','etanale':'acetaldeide','triclorometano':'cloroformio','tetraclorometano':'tetracloruro di carbonio','metanolo':'alcol metilico','etanolo':'alcol etilico','1,3-butadiene':'butadiene','etanoato di metile':'acetato di metile','etanoato di etile':'acetato di etile','propanale':'propionaldeide','metilpropene':'isobutene','2-metilpropene':'isobutene','1,2-etandiolo':'glicole etilenico','1,2,3-propantriolo':'glicerolo','cicloesano':'(anello a sedia)'};
+const cmpArr=(a,b)=>{for(let i=0;i<Math.max(a.length,b.length);i++){const x=a[i]===undefined?1e9:a[i],y=b[i]===undefined?1e9:b[i];if(x!==y)return x-y}return 0};
+const keyOf=n=>n.replace(/^(terz|sec)-/,'').replace(/[^a-z]/g,'');
+const SIMPLE=/^((met|et|prop|but|pent|es|ept|ott|non|dec|undec|dodec)ile|vinile|allile|ciclo[a-z]+ile|isopropile|isobutile|sec-butile|terz-butile)$/;
+const cmpKey=(a,b)=>{for(const f of['a','b','c','d','e']){const d=cmpArr(a[f],b[f]);if(d)return d}return 0};
+function namer(g){
+ const RS=ringSet(g);
+ if(RS.rings>1)return{fail:'più anelli: nome non generato automaticamente'};
+ if(!g.el.includes('C'))return{fail:'composto senza carbonio: non è organico'};
+ const cat=g.nb.map((_,i)=>catC(g,i));
+ for(let i=0;i<g.n;i++){
+  if(cat[i]==='x')return{fail:'gruppo carbonilico particolare: nome non generato'};
+  for(const x of g.nb[i]){if(g.el[i]!=='C'&&g.el[x.j]!=='C')return{fail:'legame tra eteroatomi: nome non generato'};
+   if(g.el[i]==='N'&&x.o>1)return{fail:'N con legami multipli (nitrili, immine): nome non generato'}}}
+ const memo=new Map();
+ const sub=(root,from)=>{const k=root+','+from;if(!memo.has(k))memo.set(k,sub0(root,from));return memo.get(k)};
+ const mk=nm=>({name:nm,cx:!SIMPLE.test(nm)});
+ /* gruppo alchilico (ramo) attaccato a 'from' tramite l'atomo root */
+ function sub0(root,from){
+  if(g.el[root]!=='C')return null;
+  const seen=new Set([from,root]),comp=[],st=[root];
+  while(st.length){const x=st.pop();comp.push(x);g.nb[x].forEach(n=>{if(!seen.has(n.j)){seen.add(n.j);st.push(n.j)}})}
+  if(comp.some(x=>g.el[x]==='C'&&cat[x]!=='c'))return null;
+  if(RS.atoms.has(root)){const ring=[...RS.atoms];
+   if(ring.length!==comp.length||ring.some(x=>g.el[x]!=='C'||g.h[x]!==(g.nb[x].some(n=>n.j===from)?1:2)))return null;
+   if(g.nb[root].some(n=>n.o>1))return null;return mk('ciclo'+STEM[ring.length]+'ile')}
+  if(comp.some(x=>RS.atoms.has(x)))return null;
+  const att=g.nb[root].find(n=>n.j===from);if(att&&att.o>1)return null;
+  const mult=[];comp.forEach(i=>g.nb[i].forEach(n=>{if(n.o>1&&n.j>i&&comp.includes(n.j))mult.push(n.o)}));
+  if(mult.length){
+   if(comp.length===2&&mult.length===1&&mult[0]===2&&g.h[root]===1&&g.el[comp[1]]==='C')return mk('vinile');
+   if(comp.length===3&&mult.length===1&&mult[0]===2&&g.h[root]===2&&comp.every(x=>g.el[x]==='C'))return mk('allile');
+   return null}
+  let best=null;
+  (function dfs(p){const r=analyzePath(p,{branch:true,from});
+   if(r){const key=[-r.n,-r.subs.length,...r.subs.map(s=>s.loc).sort((a,b)=>a-b)];if(!best||cmpArr(key,best.key)<0)best={key,r}}
+   g.nb[p[p.length-1]].forEach(n=>{if(g.el[n.j]==='C'&&!p.includes(n.j)&&n.j!==from){p.push(n.j);dfs(p);p.pop()}})})([root]);
+  if(!best)return null;
+  const nm=prefixes(best.r.subs,best.r.n===1)+STEM[best.r.n]+'ile';
+  return mk(COMMON[nm]||nm)}
+ /* sostituente sull'atomo p tramite il legame x */
+ function attach(p,x){const j=x.j,f=g.el[j];
+  if(HAL[f]&&x.o===1)return{name:HAL[f],sk:HAL[f]};
+  if(f==='O'){if(x.o===2)return{consumed:1};
+   if(g.h[j]===1)return{name:'idrossi',sk:'idrossi',role:'alc'};
+   const k=g.nb[j].find(y=>y.j!==p);if(!k)return null;const r=sub(k.j,j);if(!r)return null;
+   const nm=r.name.replace(/ile$/,'')+'ossi';return{name:nm,sk:keyOf(nm),cx:r.cx}}
+  if(f==='N'){if(g.h[j]===2&&g.nb[j].length===1)return{name:'ammino',sk:'ammino',role:'amine'};return null}
+  if(f==='C'){if(x.o>1)return null;const r=sub(j,p);if(!r)return null;return{name:r.name.replace(/ile$/,'il'),sk:keyOf(r.name),cx:r.cx}}
+  return null}
+ /* analisi di un cammino di C (numerazione = ordine nella lista) */
+ function analyzePath(path,ctx){
+  const n=path.length,P=[],M=[],subs=[],terms=[],inPath=new Set(path);
+  for(let i=0;i<n;i++){const p=path[i],c=cat[p];
+   if(ctx.branch&&c!=='c')return null;
+   if(TERM.has(c)){if(!(i===0||i===n-1)||c!==ctx.pc)return null;P.push(i+1);terms.push({p,c})}
+   for(const x of g.nb[p]){
+    if(inPath.has(x.j)){if(x.o>1&&path[i+1]===x.j)M.push({loc:i+1,o:x.o});continue}
+    if(ctx.branch&&x.j===ctx.from)continue;
+    const f=g.el[x.j];
+    if(TERM.has(c)&&(f==='O'||f==='N'))continue;
+    if(c==='ket'&&f==='O'&&x.o===2){if(ctx.pc==='ket')P.push(i+1);else subs.push({loc:i+1,name:'osso',sk:'osso'});continue}
+    const a=attach(p,x);if(!a)return null;if(a.consumed)continue;
+    if(a.role&&ctx.pc===a.role){P.push(i+1);continue}
+    subs.push({loc:i+1,name:a.name,sk:a.sk,cx:a.cx})}}
+  let esterR=null;
+  for(const t of terms){
+   if(t.c==='amide'){const N=g.nb[t.p].find(x=>g.el[x.j]==='N');if(g.h[N.j]!==2||g.nb[N.j].length!==1)return null}
+   if(t.c==='ester'){const O=g.nb[t.p].find(x=>g.el[x.j]==='O'&&x.o===1),R=g.nb[O.j].find(x=>x.j!==t.p),r=sub(R.j,O.j);if(!r)return null;esterR=r.name}}
+  P.sort((a,b)=>a-b);M.sort((a,b)=>a.loc-b.loc);
+  return{n,P,M,subs,path:path.slice(),esterR,pc:ctx.pc}}
+ function prefixes(subs,omit){if(!subs.length)return '';
+  const G=new Map();subs.forEach(s=>{if(!G.has(s.name))G.set(s.name,{name:s.name,locs:[],sk:s.sk||keyOf(s.name),cx:s.cx})});
+  subs.forEach(s=>G.get(s.name).locs.push(s.loc));
+  return[...G.values()].sort((a,b)=>a.sk<b.sk?-1:a.sk>b.sk?1:0).map(x=>{x.locs.sort((a,b)=>a-b);const c=x.locs.length;
+   return(omit?'':x.locs.join(',')+'-')+(x.cx?MUC[c]:MU[c])+(x.cx?'('+x.name+')':x.name)}).join(omit?'':'-')}
+ function assemble(r,ring){
+  const{n,P,M,subs,pc}=r,dbl=M.filter(x=>x.o===2),trp=M.filter(x=>x.o===3);
+  if(dbl.length&&trp.length)return null;
+  const unsat=trp.length?'in':dbl.length?'en':'',cnt=M.length,stem=(ring?'ciclo':'')+STEM[n]+'',mark=cnt>1?'a'+MU[cnt]:'';
+  const terminal=!!pc&&TERM.has(pc)&&P.length>0;
+  const omitSub=ring?(subs.length===1&&!P.length&&!M.length):(n===1||(n===2&&subs.length===1&&!M.length&&(!P.length||terminal)));
+  let pre=prefixes(subs,omitSub);
+  const showM=unsat&&!(ring?(cnt===1&&!P.length):(n<=2||(n===3&&cnt===1&&!P.length)));
+  const mloc=showM?M.map(x=>x.loc).join(',')+'-':'';
+  let base;
+  if(!pc||!P.length){base=unsat?mloc+stem+mark+unsat+(unsat==='en'?'e':'o'):stem+'ano'}
+  else{const suf=(P.length>1?MU[P.length]:'')+SUF[pc];
+   const omitP=terminal||(P.length===1&&(n<=2||(pc==='ket'&&n===3&&!unsat)||(ring&&!unsat)));
+   const ploc=omitP?'':P.join(',');
+   base=unsat?mloc+stem+mark+unsat+(ploc?'-'+ploc+'-':'')+suf:(ploc?ploc+'-':'')+stem+'an'+suf}
+  if(pc==='acid'&&terminal){return 'acido '+(pre?pre+(/^\d/.test(base)?'-':''):'')+base}
+  let nm=pre?pre+(/^\d/.test(base)?'-':'')+base:base;
+  if(pc==='ester'&&terminal)nm+=' di '+r.esterR;
+  return nm}
+ const alpha=s=>[...s].sort((a,b)=>a.sk<b.sk?-1:a.sk>b.sk?1:0).map(x=>x.loc);
+ function pick(cands,ring){let best=null;
+  for(const r of cands){r.key={a:ring?[-r.P.length]:[-r.P.length,-r.M.length,-r.n,-r.subs.length],b:r.P,c:r.M.map(x=>x.loc),d:r.subs.map(s=>s.loc).sort((x,y)=>x-y),e:alpha(r.subs)};
+   if(!best||cmpKey(r.key,best.key)<0)best=r}return best}
+ /* gruppo principale della molecola */
+ const present=new Set();
+ g.nb.forEach((nb,i)=>{if(TERM.has(cat[i])||cat[i]==='ket')present.add(cat[i]);
+  const e1=nb.length===1&&g.el[nb[0].j]==='C'&&cat[nb[0].j]==='c';
+  if(g.el[i]==='O'&&g.h[i]===1&&e1)present.add('alc');if(g.el[i]==='N'&&g.h[i]===2&&e1)present.add('amine')});
+ let pc=null;for(const k of Object.keys(PRI))if(present.has(k)&&(!pc||PRI[k]>PRI[pc]))pc=k;
+ if([...present].filter(k=>TERM.has(k)).length>1)return{fail:'più gruppi carbonilici diversi: nome non generato'};
+ const carbons=[];g.el.forEach((e,i)=>{if(e==='C')carbons.push(i)});
+ let nMult=0;g.nb.forEach((nb,i)=>nb.forEach(x=>{if(x.j>i&&x.o>1&&g.el[i]==='C'&&g.el[x.j]==='C'&&!(RS.atoms.has(i)&&RS.atoms.has(x.j)))nMult++}));
+ function chainParent(){
+  const allowed=new Set(carbons.filter(i=>!RS.atoms.has(i)));if(!allowed.size)return null;const cands=[];
+  for(const s of allowed)(function dfs(p){const r=analyzePath(p,{pc});if(r&&r.M.length===nMult)cands.push(r);
+   g.nb[p[p.length-1]].forEach(n=>{if(allowed.has(n.j)&&!p.includes(n.j)){p.push(n.j);dfs(p);p.pop()}})})([s]);
+  if(!cands.length)return null;const best=pick(cands,false),nm=assemble(best,false);if(!nm)return null;
+  const loc=new Map();best.path.forEach((a,i)=>loc.set(a,i+1));return{name:nm,loc,path:best.path,ring:false,best}}
+ function ringParent(){
+  const R=RS.atoms;if(R.size<3||[...R].some(i=>g.el[i]!=='C'))return null;
+  if([...present].some(k=>TERM.has(k)))return null;
+  const order=[],start=[...R][0];let prev=-1,cur=start;
+  do{order.push(cur);const nx=g.nb[cur].find(x=>R.has(x.j)&&x.j!==prev&&x.j!==order[order.length-2]);if(!nx)break;prev=cur;cur=nx.j}while(cur!==start&&order.length<40);
+  if(order.length!==R.size)return null;
+  const N=order.length,cands=[];
+  for(let s=0;s<N;s++)for(const dir of[1,-1]){const path=[];for(let k=0;k<N;k++)path.push(order[((s+dir*k)%N+N)%N]);
+   const P=[],M=[],subs=[];let bad=false;
+   path.forEach((p,i)=>{for(const x of g.nb[p]){
+    if(R.has(x.j)){if(x.o>1&&x.j===path[i+1])M.push({loc:i+1,o:x.o});else if(x.o>1&&i===N-1&&x.j===path[0])bad=true;continue}
+    const f=g.el[x.j];
+    if(cat[p]==='ket'&&f==='O'&&x.o===2){if(pc==='ket')P.push(i+1);else subs.push({loc:i+1,name:'osso',sk:'osso'});continue}
+    const a=attach(p,x);if(!a){bad=true;return}if(a.consumed)continue;
+    if(a.role&&pc===a.role){P.push(i+1);continue}subs.push({loc:i+1,name:a.name,sk:a.sk,cx:a.cx})}});
+   if(bad||M.length>1||M.some(x=>x.o>2))continue;if(M.length&&M[0].loc!==1&&!P.length)continue;
+   P.sort((a,b)=>a-b);cands.push({n:N,P,M,subs,path,pc})}
+  if(!cands.length)return null;const best=pick(cands,true),nm=assemble(best,true);if(!nm)return null;
+  const loc=new Map();best.path.forEach((a,i)=>loc.set(a,i+1));return{name:nm,loc,path:best.path,ring:true,best}}
+ let res=null;
+ if(RS.atoms.size){let maxCh=0;const al=new Set(carbons.filter(i=>!RS.atoms.has(i)));
+  for(const s of al)(function d(p){maxCh=Math.max(maxCh,p.length);g.nb[p[p.length-1]].forEach(n=>{if(al.has(n.j)&&!p.includes(n.j)){p.push(n.j);d(p);p.pop()}})})([s]);
+  res=maxCh>RS.atoms.size?(chainParent()||ringParent()):(ringParent()||chainParent())}
+ else res=chainParent();
+ return res||{fail:'struttura o gruppo funzionale non gestito dal generatore di nomi'}}
+
+/* ======================= STEREOCHIMICA ======================= */
+function branchSig(g,i,from,seen){if(seen.has(i))return 'r';const s2=new Set(seen);s2.add(i);
+ const ch=g.nb[i].filter(x=>x.j!==from).map(x=>x.o+branchSig(g,x.j,i,s2)).sort().join(',');return g.el[i]+g.h[i]+'('+ch+')'}
+/* nodo CIP: espande fino a prof. d con duplicati per legami multipli */
+function cipTree(g,i,from,path,d){const node={z:ZN[g.el[i]],ch:[]};if(d<=0)return node;
+ const p2=new Set(path);p2.add(i);
+ g.nb[i].forEach(x=>{if(x.j===from){for(let r=1;r<x.o;r++)node.ch.push({z:ZN[g.el[x.j]],ch:[{z:0,ch:[]},{z:0,ch:[]},{z:0,ch:[]}]});return}
+  const reps=x.o;
+  if(p2.has(x.j)){node.ch.push({z:ZN[g.el[x.j]],ch:[{z:0,ch:[]},{z:0,ch:[]},{z:0,ch:[]}]})}
+  else node.ch.push(cipTree(g,x.j,i,p2,d-1));
+  for(let r=1;r<reps;r++)node.ch.push({z:ZN[g.el[x.j]],ch:[{z:0,ch:[]},{z:0,ch:[]},{z:0,ch:[]}]})});
+ for(let t=0;t<g.h[i];t++)node.ch.push({z:1,ch:[]});
+ node.ch.sort((a,b)=>b.z-a.z||cmpNode(b,a));return node}
+function sphere(node){return node.ch}
+function cmpNode(A,B){let fa=[[A]],fb=[[B]];if(A.z!==B.z)return A.z-B.z;
+ for(let depth=0;depth<9;depth++){
+  const na=[],nb=[];let any=false;
+  fa.forEach(gp=>gp.forEach(n=>{na.push(n.ch.slice())}));fb.forEach(gp=>gp.forEach(n=>{nb.push(n.ch.slice())}));
+  const L=Math.max(na.length,nb.length);
+  for(let k=0;k<L;k++){const a=(na[k]||[]).map(x=>x.z).sort((x,y)=>y-x),b=(nb[k]||[]).map(x=>x.z).sort((x,y)=>y-x);
+   for(let t=0;t<Math.max(a.length,b.length);t++){const x=a[t]===undefined?-1:a[t],y=b[t]===undefined?-1:b[t];if(x!==y)return x-y}}
+  fa=na.map(x=>x.sort((p,q)=>q.z-p.z));fb=nb.map(x=>x.sort((p,q)=>q.z-p.z));
+  if(!fa.some(x=>x.length)&&!fb.some(x=>x.length))break}
+ return 0}
+function cipOrder(g,c,nbs){const trees=nbs.map(x=>({x,t:cipTree(g,x.j,c,new Set([c]),7)}));
+ trees.sort((p,q)=>cmpNode(q.t,p.t));
+ for(let i=0;i<trees.length-1;i++)if(cmpNode(trees[i].t,trees[i+1].t)===0)return null;
+ return trees.map(t=>t.x)}
+function stereo(m,g){
+ const A=adj(m),out={centers:[],dbl:[]},RSs=ringSet(g);
+ /* g.idx: heavy->mol ; per CIP servono anche gli H come sostituenti: li gestiamo con g.h */
+ const molOf=g.idx;
+ for(let c=0;c<g.n;c++){if(g.el[c]!=='C')continue;const nb=A[molOf[c]];if(nb.length!==4||nb.some(x=>x.o!==1))continue;
+  const subs=nb.map(x=>({mj:x.j,hv:m.atoms[x.j].el==='H'?-1:g.idx.indexOf(x.j)}));
+  const sigs=subs.map(s=>s.hv<0?'H':branchSig(g,s.hv,c,new Set([c])));
+  if(new Set(sigs).size<4)continue;
+  /* ordine CIP: costruiamo vicini pseudo-pesanti con H come foglia */
+  const ord=subs.map(s=>({j:s.hv,mj:s.mj,o:1}));
+  const trees=ord.map(x=>({x,t:x.j<0?{z:1,ch:[]}:cipTree(g,x.j,c,new Set([c]),7)}));
+  trees.sort((p,q)=>cmpNode(q.t,p.t));let tie=false;for(let i=0;i<3;i++)if(cmpNode(trees[i].t,trees[i+1].t)===0)tie=true;
+  let cip='?';if(!tie){const P=m.atoms[molOf[c]].p,v=trees.map(t=>sub(m.atoms[t.x.mj].p,P));cip=dot(cross(v[0],v[1]),v[2])<0?'R':'S'}
+  out.centers.push({atom:c,cip,sig:sigs.slice().sort().join('|')})}
+ for(const b of m.bonds){if(b.o!==2)continue;const ha=g.idx.indexOf(b.a),hb=g.idx.indexOf(b.b);if(ha<0||hb<0||g.el[ha]!=='C'||g.el[hb]!=='C'||(RSs.atoms.has(ha)&&RSs.atoms.has(hb)))continue;
+  const ua=A[b.a].filter(x=>x.j!==b.b),wb=A[b.b].filter(x=>x.j!==b.a);if(ua.length!==2||wb.length!==2)continue;
+  const sg=(x,from)=>m.atoms[x.j].el==='H'?'H':branchSig(g,g.idx.indexOf(x.j),g.idx.indexOf(from),new Set([g.idx.indexOf(from)]));
+  if(sg(ua[0],b.a)===sg(ua[1],b.a)||sg(wb[0],b.b)===sg(wb[1],b.b))continue;
+  const hi=(U,at)=>{const t=U.map(x=>({x,t:m.atoms[x.j].el==='H'?{z:1,ch:[]}:cipTree(g,g.idx.indexOf(x.j),g.idx.indexOf(at),new Set([g.idx.indexOf(at)]),7)}));return cmpNode(t[0].t,t[1].t)>=0?t[0].x:t[1].x};
+  const u=hi(ua,b.a),w=hi(wb,b.b);const cs=dihedralCos(m,u.j,b.a,b.b,w.j);
+  out.dbl.push({a:ha,b:hb,bi:m.bonds.indexOf(b),cfg:cs>0?'Z':'E'})}
+ return out}
+function isMeso(g,st){if(st.centers.length<2||st.centers.some(c=>c.cip==='?'))return false;
+ const by={};st.centers.forEach(c=>{(by[c.sig]=by[c.sig]||[]).push(c.cip)});
+ return Object.values(by).every(a=>a.length%2===0&&a.filter(x=>x==='R').length===a.length/2)}
+
+/* ======================= DESCRIZIONE COMPLETA ======================= */
+const SUBS='₀₁₂₃₄₅₆₇₈₉';const sb=n=>n>1?String(n).replace(/\d/g,d=>SUBS[d]):'';
+function formula(m){const c={};m.atoms.forEach(a=>c[a.el]=(c[a.el]||0)+1);
+ const ord=Object.keys(c).filter(k=>k!=='C'&&k!=='H').sort();const seq=(c.C?['C','H']:[]).concat(c.C?[]:['H']).concat(ord);
+ let mass=0;m.atoms.forEach(a=>mass+=MASS[a.el]);
+ return{f:seq.filter(k=>c[k]).map(k=>k+sb(c[k])).join(''),mass,counts:c}}
+function razionale(g,start){
+ if(ringSet(g).rings)return null;
+ const sym=(i)=>{const e=g.el[i],h=g.h[i];return e+(h>1?'H'+h:h===1?'H':'')};
+ const size=(i,f)=>{let s=1;g.nb[i].forEach(x=>{if(x.j!==f)s+=size(x.j,i)});return s};
+ const bs=o=>o===2?'=':o===3?'≡':'–';
+ function go(i,f){const kids=g.nb[i].filter(x=>x.j!==f).sort((a,b)=>size(a.j,i)-size(b.j,i));let s=sym(i);
+  kids.forEach((k,ix)=>{const last=ix===kids.length-1;const sub=go(k.j,i);
+   if(last)s+=bs(k.o)+sub;else s+='('+(k.o>1?bs(k.o):'')+sub+')'});return s}
+ return go(start,-1)}
+function describe(m){
+ const g=heavy(m),F=formula(m);
+ const res={formula:F.f,mass:F.mass,counts:F.counts,empty:!g.n};
+ if(!g.n)return res;
+ const nm=namer(g);res.nameFail=nm.fail||null;res.loc=nm.loc||new Map();
+ res.groups=groupsOf(g);
+ const st=stereo(m,g);res.stereo=st;res.meso=isMeso(g,st);
+ let name=nm.name||null;
+ if(name){
+  const loc=nm.loc;let pre='';
+  const cs=st.centers.filter(c=>c.cip!=='?'&&loc.has(c.atom));
+  if(cs.length&&cs.length===st.centers.length){const lc=nm.best&&nm.best.n>1;pre='('+cs.sort((a,b)=>loc.get(a.atom)-loc.get(b.atom)).map(c=>(lc?loc.get(c.atom):'')+c.cip).join(',')+')-'}
+  const dl=st.dbl.filter(d=>loc.has(d.a)&&loc.has(d.b));
+  if(dl.length===1&&st.dbl.length===1&&!st.centers.length)pre=(dl[0].cfg==='Z'?'cis':'trans')+'-';
+  name=pre+name}
+ res.name=name;const bare=name&&name.replace(/^(\(.*?\)-|cis-|trans-)/,'');res.trivial=bare&&TRIV[bare]||null;
+ /* carboni */
+ const ringA=ringSet(g).atoms,cats=g.nb.map((_,i)=>catC(g,i));
+ res.rings=ringSet(g).rings;
+ res.carbons=[];
+ for(let i=0;i<g.n;i++){if(g.el[i]!=='C')continue;
+  const nb=g.nb[i];let no=-g.h[i];nb.forEach(x=>{const e=g.el[x.j];if(e!=='C')no+=(EN[e]>EN.C?x.o:-x.o)});
+  let sig=0,pi=0;let tr=0,db=0;nb.forEach(x=>{if(x.o===3)tr++;if(x.o===2)db++});
+  const hy=(tr||db>1)?'sp':db?'sp2':'sp3';
+  const cn=nb.filter(x=>g.el[x.j]==='C').length;
+  res.carbons.push({i,loc:res.loc.get(i)||null,hyb:hy,no,type:['—','primario','secondario','terziario','quaternario'][cn]||'—',h:g.h[i],stereo:st.centers.some(c=>c.atom===i)})}
+ if(nm.path&&!nm.ring){const pa=nm.path,start=(TERMC.has(catC(g,pa[0]))&&pa.length>1)?pa[pa.length-1]:pa[0];res.razionale=razionale(g,start)}else if(!nm.path||!nm.ring){const t=g.nb.findIndex((nb,i)=>g.el[i]==='C'&&nb.filter(x=>g.el[x.j]==='C').length<=1);res.razionale=razionale(g,t<0?0:t)}
+ const C=F.counts.C||0,H=F.counts.H||0,X=(F.counts.F||0)+(F.counts.Cl||0)+(F.counts.Br||0)+(F.counts.I||0),Nn=F.counts.N||0;
+ res.unsat=C?(2*C+2+Nn-H-X)/2:null;
+ res.chiral=st.centers.length>0&&!res.meso;res.g=g;return res}
+
+/* ======================= DISEGNO 2D A SCHELETRO (SVG) ======================= */
+function skeletal(m,W,Hh){const g=heavy(m);if(!g.n)return '';
+ const P=g.idx.map(i=>m.atoms[i].p);const c=[0,0,0];P.forEach(p=>{c[0]+=p[0];c[1]+=p[1];c[2]+=p[2]});const n=P.length;const mc=mul(c,1/n);
+ const Q=P.map(p=>sub(p,mc));
+ /* PCA 3x3 con iterazione di potenza */
+ const cov=[[0,0,0],[0,0,0],[0,0,0]];Q.forEach(q=>{for(let a=0;a<3;a++)for(let b=0;b<3;b++)cov[a][b]+=q[a]*q[b]});
+ const mv=(M,v)=>[dot(M[0],v),dot(M[1],v),dot(M[2],v)];
+ let e1=norm([1,.7,.3]);for(let t=0;t<40;t++)e1=norm(mv(cov,e1));
+ const l1=dot(e1,mv(cov,e1));let e2=norm(cross(e1,[0,0,1]));if(vlen(cross(e1,[0,0,1]))<1e-3)e2=[0,1,0];
+ e2=norm(perp([.2,1,.5],e1));for(let t=0;t<40;t++){e2=perp(mv(cov,e2),e1);e2=norm(e2)}
+ let pts=Q.map(q=>[dot(q,e1),dot(q,e2)]);
+ let minx=1e9,maxx=-1e9,miny=1e9,maxy=-1e9;pts.forEach(p=>{minx=Math.min(minx,p[0]);maxx=Math.max(maxx,p[0]);miny=Math.min(miny,p[1]);maxy=Math.max(maxy,p[1])});
+ const pad=26,sx=(W-2*pad)/Math.max(maxx-minx,1e-3),sy=(Hh-2*pad)/Math.max(maxy-miny,1e-3),s=Math.min(sx,sy,46);
+ const cx=(minx+maxx)/2,cy=(miny+maxy)/2;pts=pts.map(p=>[W/2+(p[0]-cx)*s,Hh/2-(p[1]-cy)*s]);
+ const COL={O:'#e0453a',N:'#3a6bff',F:'#d98a10',Cl:'#1fa86a',Br:'#b5483a',I:'#8a3ffc'};
+ const lab=i=>{const e=g.el[i];if(e==='C')return '';const h=g.h[i];return e==='O'&&h===1?'OH':e==='N'&&h===2?'NH₂':e==='N'&&h===1?'NH':e};
+ let out='<svg viewBox="0 0 '+W+' '+Hh+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Formula a scheletro" style="width:100%;height:auto;display:block;color:var(--ink)">';
+ g.nb.forEach((nb,i)=>nb.forEach(x=>{if(x.j<i)return;const a=pts[i],b=pts[x.j];let dx=b[0]-a[0],dy=b[1]-a[1];const L=Math.hypot(dx,dy)||1;dx/=L;dy/=L;
+  const sa=lab(i)?11:0,sbb=lab(x.j)?11:0,p0=[a[0]+dx*sa,a[1]+dy*sa],p1=[b[0]-dx*sbb,b[1]-dy*sbb];
+  for(let k=0;k<x.o;k++){const o=(k-(x.o-1)/2)*4.6;out+='<line x1="'+(p0[0]-dy*o).toFixed(1)+'" y1="'+(p0[1]+dx*o).toFixed(1)+'" x2="'+(p1[0]-dy*o).toFixed(1)+'" y2="'+(p1[1]+dx*o).toFixed(1)+'" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'}}));
+ g.el.forEach((e,i)=>{const t=lab(i);if(!t)return;out+='<text x="'+pts[i][0].toFixed(1)+'" y="'+(pts[i][1]+5).toFixed(1)+'" text-anchor="middle" font-size="15" font-weight="700" font-family="Bricolage Grotesque,system-ui,sans-serif" fill="'+(COL[e]||'currentColor')+'">'+t+'</text>'});
+ return out+'</svg>'}
+
+return{VAL,ZN,MASS,EN,VDW,bondLen,clone,adj,hyb,freeDirs,normalizeH,buildCons,relaxStep,relax,setBondOrder,joinAtoms,substituteH,deleteAtom,keepBiggest,sideOf,rotateSide,mirror,center,fromSmiles,heavy,namer,describe,formula,skeletal,stereo,dist,sub,add,mul,norm,dot,cross,vlen,perp,components,dihedralCos,catC,groupsOf,TRIV}
+})();
+if(typeof module!=='undefined')module.exports=CHEM;
+
+</script>
+<script>
+const $=s=>document.querySelector(s);
+const ren=new THREE.WebGLRenderer({canvas:$('#c'),alpha:true,antialias:true});
+ren.setPixelRatio(Math.min(devicePixelRatio,2));
+const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(40,1,.1,100);cam.position.z=8;
+sc.add(new THREE.AmbientLight(0xffffff,.8));
+const dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(3,5,6);sc.add(dl);
+const root=new THREE.Group();sc.add(root);
+ren.shadowMap.enabled=true;ren.shadowMap.type=THREE.PCFSoftShadowMap;dl.position.set(3,8,5);dl.castShadow=true;dl.shadow.mapSize.set(1024,1024);Object.assign(dl.shadow.camera,{left:-6,right:6,top:6,bottom:-6,near:1,far:25});dl.shadow.camera.updateProjectionMatrix();
+const gnd=new THREE.Mesh(new THREE.CircleGeometry(4.4,64),new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:.6,roughness:1}));gnd.rotation.x=-Math.PI/2;gnd.position.y=-2.3;gnd.receiveShadow=true;sc.add(gnd);
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const col={C:0x2b3a6b,H:0xffffff,F:0xffb020,Cl:0x25c17f,Br:0xe8553c,O:0xff4d4d};
+const A=(c,r)=>new THREE.Mesh(new THREE.SphereGeometry(r,32,20),new THREE.MeshPhysicalMaterial({color:c,roughness:.25,clearcoat:1,clearcoatRoughness:.15}));
+const bg=new THREE.CylinderGeometry(.07,.07,1,12),bm=new THREE.MeshStandardMaterial({color:0x93a1c0,roughness:.35});
+const B=g=>{const b=new THREE.Mesh(bg,bm);g.add(b);return b};
+const Yv=V(0,1,0);
+const L=(b,p,q)=>{const d=q.clone().sub(p),l=d.length()||1e-4;b.position.copy(p).add(q).multiplyScalar(.5);b.scale.set(1,l,1);b.quaternion.setFromUnitVectors(Yv,d.divideScalar(l))};
+const T=[V(1,1,1),V(1,-1,-1),V(-1,1,-1),V(-1,-1,1)].map(v=>v.normalize());
+const S=[];
+function add(i,u){const g=new THREE.Group();root.add(g);S[i]={g,u,s:0};return g}
+
+/* 0 metano */
+{const g=add(0);g.add(A(col.C,.55));T.forEach(d=>{const h=A(col.H,.3);h.position.copy(d).multiplyScalar(1.5);g.add(h);L(B(g),V(0,0,0),h.position)})}
+
+/* 1 ibridazione */
+let mode='sp3';
+{const g=add(1,()=>{
+ hs.forEach((h,i)=>{const [p,v]=tg[mode][i];h.position.lerp(p,.08);h.scale.setScalar(h.scale.x+(Math.max(v,.001)-h.scale.x)*.1);L(bs[i],V(0,0,0),h.position)});
+ lobes.forEach((l,i)=>{const v=lv[mode][i];
+  const t=V(...l.userData.b).multiplyScalar(Math.max(v,.001));l.scale.lerp(t,.1)})});
+ g.add(A(col.C,.55));
+ const a=k=>V(Math.cos(Math.PI/2+k*2.094),Math.sin(Math.PI/2+k*2.094),0).multiplyScalar(1.5),z=V(0,0,0);
+ var tg={sp3:T.map(d=>[d.clone().multiplyScalar(1.5),1]),sp2:[0,1,2,3].map(k=>k<3?[a(k),1]:[z,0]),sp:[[V(1.5,0,0),1],[V(-1.5,0,0),1],[z,0],[z,0]]};
+ var lv={sp3:[0,0,0,0],sp2:[1,1,0,0],sp:[1,1,1,1]};
+ var hs=[],bs=[],lobes=[];
+ for(let i=0;i<4;i++){const h=A(col.H,.3);h.position.copy(tg.sp3[i][0]);g.add(h);hs.push(h);bs.push(B(g))}
+ const lm=new THREE.MeshStandardMaterial({color:0x4d8dff,transparent:true,opacity:.5,roughness:.3});
+ [[0,0,.85,[.55,.55,.9]],[0,0,-.85,[.55,.55,.9]],[0,.85,0,[.55,.9,.55]],[0,-.85,0,[.55,.9,.55]]].forEach(o=>{const l=new THREE.Mesh(new THREE.SphereGeometry(.5,24,16),lm);l.position.set(o[0],o[1],o[2]);l.userData.b=o[3];l.scale.setScalar(.001);g.add(l);lobes.push(l)})}
+const info={sp3:'<span class="k">C sp³ · come nell’etano</span><br>4 legami σ, geometria tetraedrica, 109,5°, 25% di carattere s.',sp2:'<span class="k">C sp² · come nell’etene</span><br>3 σ + 1 π, trigonale planare, 120°, 33% di carattere s.',sp:'<span class="k">C sp · come nell’etino</span><br>2 σ + 2 π, geometria lineare, 180°, 50% di carattere s.'};
+document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$('#hi').innerHTML=info[mode];document.querySelectorAll('[data-m]').forEach(x=>x.classList.toggle('on',x===b))});
+
+/* 2 etano */
+{const hA=[],hB=[],bA=[],bB=[],c1=V(-.77,0,0),c2=V(.77,0,0);
+ const g=add(2,()=>{const phi=$('#rg').value*Math.PI/180;
+  for(let k=0;k<3;k++){const a=k*2.094,a2=a+1.047-phi;
+   hA[k].position.set(-1.13,Math.cos(a),Math.sin(a));hB[k].position.set(1.13,Math.cos(a2),Math.sin(a2));
+   L(bA[k],c1,hA[k].position);L(bB[k],c2,hB[k].position)}});
+ [c1,c2].forEach(p=>{const c=A(col.C,.5);c.position.copy(p);g.add(c)});L(B(g),c1,c2);
+ for(let k=0;k<3;k++){[hA,hB].forEach((h,j)=>{const m=A(col.H,.3);g.add(m);h.push(m);(j?bB:bA).push(B(g))})}}
+$('#rg').oninput=e=>{const v=+e.target.value;$('#en').innerHTML=`<span class="k">${v<8?'Sfalsata':v>52?'Eclissata':'Intermedia'}</span> · energia ${(12*Math.pow(Math.sin(1.5*v*Math.PI/180),2)).toFixed(1)} kJ/mol`};
+
+/* 3 chiralità */
+let spin=false,right;
+{const g=add(3,()=>{if(spin)right.rotation.y+=.03});
+ const cs=[col.H,col.F,col.Cl,col.Br],rs=[.3,.4,.45,.5];
+ const mol=s=>{const m=new THREE.Group();m.add(A(col.C,.5));T.forEach((d,i)=>{const p=V(d.x*s,d.y,d.z).multiplyScalar(1.4),a=A(cs[i],rs[i]);a.position.copy(p);m.add(a);L(B(m),V(0,0,0),p)});return m};
+ const l=mol(1),r=mol(-1);l.position.x=-1.7;r.position.x=1.7;right=r;g.add(l,r);
+ const pl=new THREE.Mesh(new THREE.PlaneGeometry(4,4),new THREE.MeshBasicMaterial({color:0x4d8dff,transparent:true,opacity:.14,side:2}));pl.rotation.y=Math.PI/2;g.add(pl)}
+$('#spin').onclick=e=>{spin=!spin;e.target.classList.toggle('on',spin)};
+
+/* 4 ciclopropano */
+let open=0,tgt=0;
+{const P0=[V(-.9,-.6,0),V(0,.9,0),V(.9,-.6,0)],P1=[V(-1.3,-.35,0),V(0,.35,0),V(1.3,-.35,0)],cp=[],hh=[],bb=[],cb=[];
+ const g=add(4,()=>{open+=(tgt-open)*.06;
+  for(let i=0;i<3;i++)cp[i].position.lerpVectors(P0[i],P1[i],open);
+  [[0,1],[1,2],[0,2]].forEach(([a,b],j)=>{L(cb[j],cp[a].position,cp[b].position);if(j==2){cb[j].scale.x=cb[j].scale.z=Math.max(.001,1-open*1.2)}});
+  hh.forEach((h,i)=>{const c=cp[i>>1];h.position.copy(c.position).add(V(0,.35,i%2?.85:-.85));L(hb[i],c.position,h.position)});
+  nh.forEach((h,i)=>{const c=cp[i*2],s=Math.max(.001,open);h.scale.setScalar(s);h.position.copy(c.position).add(V(i?.95:-.95,-.4,0));L(nb[i],c.position,h.position);nb[i].scale.x=nb[i].scale.z=s})});
+ for(let i=0;i<3;i++){const c=A(col.C,.5);g.add(c);cp.push(c)}
+ for(let j=0;j<3;j++)cb.push(B(g));
+ var hb=[],nh=[],nb=[];
+ for(let i=0;i<6;i++){const h=A(col.H,.3);g.add(h);hh.push(h);hb.push(B(g))}
+ for(let i=0;i<2;i++){const h=A(0xe0a030,.3);g.add(h);nh.push(h);nb.push(B(g))}}
+$('#ring').onclick=e=>{tgt=tgt?0:1;e.target.classList.toggle('on',tgt);$('#rt').innerHTML=tgt?'<span class="k">Propano</span> C₃H₈ · anello aperto':'<span class="k">Ciclopropano</span> C₃H₆'};
+
+const mk=(g,c,p)=>{const a=A(c,{[col.C]:.5,[col.H]:.3}[c]||.45);a.position.copy(p);g.add(a);return a};
+const bt=(s,f)=>document.querySelectorAll(s).forEach(b=>b.onclick=()=>{f(b);document.querySelectorAll(s).forEach(x=>x.classList.toggle('on',x===b))});
+const lmat=new THREE.MeshStandardMaterial({color:0x4d8dff,transparent:true,opacity:.5,roughness:.3});
+const lobe=(g,z,s)=>{const l=new THREE.Mesh(new THREE.SphereGeometry(.5,24,16),lmat);l.position.z=z;l.scale.set(...s);g.add(l);return l};
+
+/* 6 isomeri C5H12 */
+let iso='n';
+{const P={n:[V(-2,-.3,0),V(-1,.3,0),V(0,-.3,0),V(1,.3,0),V(2,-.3,0)],m:[V(-1.5,-.3,0),V(-.5,.4,0),V(.5,-.3,0),V(1.5,.3,0),V(-.5,1.8,0)],d:[T[0].clone().multiplyScalar(1.5),V(0,0,0),T[1].clone().multiplyScalar(1.5),T[2].clone().multiplyScalar(1.5),T[3].clone().multiplyScalar(1.5)]};
+ const Z={n:[[0,1],[1,2],[2,3],[3,4]],m:[[0,1],[1,2],[2,3],[1,4]],d:[[1,0],[1,2],[1,3],[1,4]]};
+ const g=add(6,()=>{cs.forEach((c,i)=>c.position.lerp(P[iso][i],.08));bs.forEach((b,j)=>L(b,cs[Z[iso][j][0]].position,cs[Z[iso][j][1]].position))});
+ const cs=P.n.map(p=>mk(g,col.C,p)),bs=[0,1,2,3].map(()=>B(g))}
+const ii={n:'<span class="k">Pentano · 36 °C</span><br>Catena lineare: molta superficie di contatto, forze di dispersione più forti.',m:'<span class="k">2-metilbutano · 28 °C</span><br>Una ramificazione: la molecola è più compatta.',d:'<span class="k">2,2-dimetilpropano · 9,5 °C</span><br>Quattro metili attorno a un C: quasi sferica, bolle molto più in basso.'};
+bt('[data-i]',b=>{iso=b.dataset.i;$('#is').innerHTML=ii[iso]});
+
+/* 7 cis/trans */
+let ct=1;
+{const g=add(7,()=>{ex.position.lerp(V(1.3,ct,0),.08);hx.position.lerp(V(1.3,-ct,0),.08);L(e1,c2,ex.position);L(e2,c2,hx.position)});
+ const c1=V(-.67,0,0),c2=V(.67,0,0),lc=V(-1.3,1,0),lh=V(-1.3,-1,0);
+ mk(g,col.C,c1);mk(g,col.C,c2);mk(g,col.Cl,lc);mk(g,col.H,lh);L(B(g),c1,c2);L(B(g),c1,lc);L(B(g),c1,lh);
+ const ex=mk(g,col.Cl,V(1.3,1,0)),hx=mk(g,col.H,V(1.3,-1,0)),e1=B(g),e2=B(g);lobe(g,.6,[1.4,.5,.5]);lobe(g,-.6,[1.4,.5,.5])}
+bt('[data-c]',b=>{ct=+b.dataset.c;$('#ct').innerHTML=ct>0?'<span class="k">cis-1,2-dicloroetene</span><br>I due Cl stanno dalla stessa parte.':'<span class="k">trans-1,2-dicloroetene</span><br>I due Cl stanno da parti opposte. Per passare da uno all\'altro servirebbe rompere il π.'});
+
+/* 8 addizione H2 */
+let ad=0,adt=0;
+{const g=add(8,()=>{ad+=(adt-ad)*.04;const q=Math.max(.001,1-ad*1.2),w=Math.max(.001,ad*1.2);
+  h1.position.set(-.35-ad*.32,0,3.2-ad*2.15);h2.position.set(.35+ad*.32,0,3.2-ad*2.15);
+  L(hh,h1.position,h2.position);hh.scale.x=hh.scale.z=q;L(k1,c1,h1.position);L(k2,c2,h2.position);[k1,k2].forEach(k=>k.scale.x=k.scale.z=w);
+  lb.forEach(l=>l.scale.set(1.4*q,.5*q,.5*q))});
+ const c1=V(-.67,0,0),c2=V(.67,0,0);mk(g,col.C,c1);mk(g,col.C,c2);L(B(g),c1,c2);
+ [[-1,1],[-1,-1],[1,1],[1,-1]].forEach(([x,y])=>{const p=V(x*1.25,y*.95,0);mk(g,col.H,p);L(B(g),V(x*.67,0,0),p)});
+ const h1=mk(g,0xe0a030,V(0,0,3.2)),h2=mk(g,0xe0a030,V(0,0,3.2)),hh=B(g),k1=B(g),k2=B(g),lb=[lobe(g,.6,[1.4,.5,.5]),lobe(g,-.6,[1.4,.5,.5])]}
+$('#ad').onclick=e=>{adt=adt?0:1;e.target.classList.toggle('on',adt);$('#at').innerHTML=adt?'<span class="k">Etano</span> C₂H₆ · solo legami σ':'<span class="k">Etene</span> C₂H₄ · doppio legame'};
+
+/* 9 acidità alchino */
+let ac=0,act=0;
+{const g=add(9,()=>{ac+=(act-ac)*.04;hx.position.x=1.7+ac*1.45;bs.position.x=4.3-ac*.55;
+  L(ch,a2.position,hx.position);ch.scale.x=ch.scale.z=Math.max(.001,1-ac*1.1);L(nb,hx.position,bs.position);nb.scale.x=nb.scale.z=Math.max(.001,ac*1.1);a2.material.color.setHex(ac>.5?0x8a3ffc:col.C)});
+ const m=new THREE.Group();m.position.x=-1.4;m.scale.setScalar(.8);g.add(m);
+ const a1=mk(m,col.C,V(-.6,0,0)),a2=mk(m,col.C,V(.6,0,0)),h0=mk(m,col.H,V(-1.7,0,0)),hx=mk(m,col.H,V(1.7,0,0)),bs=mk(m,0x3a6bff,V(4.3,0,0));bs.scale.setScalar(1.15);
+ const tb=B(m),lh=B(m),ch=B(m),nb=B(m);L(tb,a1.position,a2.position);tb.scale.x=tb.scale.z=2.6;L(lh,h0.position,a1.position)}
+$('#ac').onclick=e=>{act=act?0:1;e.target.classList.toggle('on',act);$('#ct2').innerHTML=act?'<span class="k">Acetiluro</span> HC≡C⁻ + NH₃<br>Il carbonio sp stabilizza la carica negativa.':'<span class="k">Etino</span> HC≡CH, triplo legame lineare'};
+
+const wd=(b,t)=>{const w=(b.userData.w??t)+(t-(b.userData.w??t))*.1;b.userData.w=w;b.scale.x=b.scale.z=Math.max(.001,w)};
+
+/* 10 radicalica */
+let rk=0;
+{const t0=T[0].clone(),Q={a:[V(3.2,1.8,0),V(2.8,2.4,0),t0.clone().multiplyScalar(3.4),V(3.8,3.2,1.5)],b:[V(4.5,1.8,0),V(4.8,1,0),V(4.2,-1.5,0),t0.clone().multiplyScalar(2.1)],h:[t0.clone().multiplyScalar(1.5),t0.clone().multiplyScalar(1.5),t0.clone().multiplyScalar(2.6),V(3,2.5,1.2)]};
+ const g=add(10,()=>{ca.position.lerp(Q.a[rk],.07);cb.position.lerp(Q.b[rk],.07);h0.position.lerp(Q.h[rk],.07);
+  L(b0,c0.position,h0.position);wd(b0,rk<2?1:0);L(b1,h0.position,ca.position);wd(b1,rk>1?1:0);L(b2,ca.position,cb.position);wd(b2,rk==0?1:0);L(b3,c0.position,cb.position);wd(b3,rk==3?1:0)});
+ const m=new THREE.Group();m.position.x=-1.6;m.scale.setScalar(.75);g.add(m);
+ const c0=mk(m,col.C,V(0,0,0)),h0=mk(m,col.H,Q.h[0].clone()),ca=mk(m,col.Cl,Q.a[0].clone()),cb=mk(m,col.Cl,Q.b[0].clone());
+ T.slice(1).forEach(d=>{const p=d.clone().multiplyScalar(1.5);mk(m,col.H,p);L(B(m),V(0,0,0),p)});
+ const b0=B(m),b1=B(m),b2=B(m),b3=B(m)}
+const rxt=['<span class="k">Prima del via</span><br>Cl₂ e CH₄. Serve luce UV o calore.','<span class="k">Inizio</span><br>La luce rompe Cl–Cl in modo omolitico: Cl₂ → 2 Cl· (radicali).','<span class="k">Propagazione</span><br>Cl· strappa un H al metano: HCl + CH₃·. Poi CH₃· + Cl₂ → CH₃Cl + Cl· e la catena continua.','<span class="k">Terminazione</span><br>Due radicali si ricombinano, per esempio CH₃· + Cl· → CH₃Cl. La catena si ferma.'];
+$('#rx').onclick=()=>{rk=(rk+1)%4;$('#rt2').innerHTML=rxt[rk]};
+
+/* 11 numero di ossidazione */
+let no=0;
+{const lg=[],g=add(11,()=>{lg.forEach((a,i)=>{const o=i<no;a.material.color.setHex(o?col.O:col.H);a.scale.setScalar(a.scale.x+((o?1.5:1)-a.scale.x)*.15)})});
+ mk(g,col.C,V(0,0,0));T.forEach(d=>{const p=d.clone().multiplyScalar(1.5);lg.push(mk(g,col.H,p));L(B(g),V(0,0,0),p)})}
+const nn=['Metano CH₄ · n.o. −4','Metanolo CH₃OH · n.o. −2','Metanale CH₂O · n.o. 0','Acido metanoico HCOOH · n.o. +2','Anidride carbonica CO₂ · n.o. +4'];
+$('#nr').oninput=e=>{no=+e.target.value;$('#nt').innerHTML='<span class="k">'+nn[no].split(' · ')[0]+'</span> · '+nn[no].split(' · ')[1]};
+
+/* 12 nomenclatura */
+let nk=2;
+{const pc=[0,1,2,3,4,5].map(i=>V(-2.5+i,i%2?.35:-.35,0)),tg=()=>pc[nk-1].clone().add(V(0,(nk-1)%2?1.4:-1.4,0));
+ const g=add(12,()=>{br.position.lerp(tg(),.1);L(bb,pc[nk-1],br.position)});
+ pc.forEach((p,i)=>{mk(g,col.C,p);if(i)L(B(g),pc[i-1],p)});
+ const br=mk(g,0x5ea0ff,tg()),bb=B(g)}
+bt('[data-n]',b=>{nk=+b.dataset.n;const n=Math.min(nk,7-nk);$('#nm').innerHTML='<span class="k">'+n+'-metilesano</span><br>Metile in posizione '+nk+' da sinistra'+(nk>3?', ma numerando da destra diventa '+n+': si sceglie il numero più basso.':'.')});
+
+/* 13 effetto induttivo */
+let ie=1;
+{const cs=[0,1,2,3].map(i=>null),g=add(13,()=>{cs.forEach((c,i)=>{c.material.emissive.setHex(ie>0?0x3355ff:0xff5050);const t=(ie>0?[.9,.55,.3,.12]:[.5,.3,.15,.06])[3-i];c.material.emissiveIntensity+=(t-c.material.emissiveIntensity)*.1});x.material.color.lerp(new THREE.Color(ie>0?col.Cl:col.C),.1)});
+ for(let i=0;i<4;i++){cs[i]=mk(g,col.C,V(-2.2+i*1.2,i%2?.3:-.3,0));if(i)L(B(g),cs[i-1].position,cs[i].position)}
+ const x=mk(g,col.Cl,V(2.6,-.3,0));L(B(g),cs[3].position,x.position)}
+bt('[data-e]',b=>{ie=+b.dataset.e;$('#ie').innerHTML=ie>0?'<span class="k">−I</span><br>Il Cl attira elettroni: δ+ sul carbonio vicino (luce blu), sempre più debole lungo la catena.':'<span class="k">+I</span><br>Il gruppo alchilico spinge elettroni: δ− sul carbonio vicino (luce rossa). Riduce la reattività.'});
+
+/* 14 proprietà fisiche */
+let nc=1;
+{const cs=[],bs=[],m=new THREE.Group(),g=add(14,()=>{cs.forEach((c,i)=>{c.scale.setScalar(c.scale.x+((i<nc?1:.001)-c.scale.x)*.15);if(i){L(bs[i-1],cs[i-1].position,c.position);bs[i-1].scale.x=bs[i-1].scale.z=c.scale.x}})});
+ m.scale.setScalar(.55);g.add(m);
+ for(let i=0;i<8;i++){cs.push(mk(m,col.C,V(-3.5+i,i%2?.3:-.3,0)));if(i)bs.push(B(m))}}
+const al=['Metano','Etano','Propano','Butano','Pentano','Esano','Eptano','Ottano'],pe=[-162,-89,-42,-.5,36,69,98,126];
+$('#nc').oninput=e=>{nc=+e.target.value;$('#pe').innerHTML='<span class="k">'+al[nc-1]+'</span> · p.e. '+pe[nc-1]+' °C · '+(nc<5?'gas':'liquido')};
+
+/* 5 CO2 */
+{const g=add(5);g.add(A(col.C,.55));[-1,1].forEach(s=>{const o=A(col.O,.5);o.position.x=s*1.7;g.add(o);[-.09,.09].forEach(z=>{const b=B(g);L(b,V(0,0,z),V(s*1.7,0,z))})})}
+
+let fo=0,fot=0;
+{const g=S[5].g,orb=new THREE.Group(),exg=new THREE.Group();exg.rotation.x=.5;g.add(orb,exg);
+ for(let i=0;i<12;i++){const a=i*Math.PI/6,s=A(0x6fa8ff,.16),r=A(0xe0453a,.2);s.position.set(Math.cos(a)*2.8,0,Math.sin(a)*2.8);r.position.set(Math.cos(a)*3.4,0,Math.sin(a)*3.4);orb.add(s);exg.add(r)}
+ S[5].u=()=>{fo+=(fot-fo)*.05;orb.rotation.y+=.01;exg.rotation.y-=.008;exg.scale.setScalar(Math.max(.001,fo))}}
+$('#fo').onclick=e=>{fot=fot?0:1;e.target.classList.toggle('on',fot);$('#cc').innerHTML=fot?'<span class="k">Squilibrio</span><br>La combustione dei fossili immette CO₂ (sfere rosse) più in fretta di quanto venga assorbita: effetto serra.':'<span class="k">Equilibrio</span><br>La CO₂ circola tra atmosfera, piante e oceani.'};
+
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function rs(){const w=innerWidth,h=innerHeight,wide=w>860;ren.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix();root.position.set(wide?2.4:0,wide?0:1.7,0);root.scale.setScalar(wide?1:.6)}
+addEventListener('resize',rs);rs();
+/* angoli sp */
+function lab(t){const c=document.createElement('canvas');c.width=256;c.height=96;const x=c.getContext('2d');x.font='700 52px sans-serif';x.fillStyle='#ff7a3d';x.textAlign='center';x.fillText(t,128,66);const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthTest:false}));s.scale.set(1.6,.6,1);return s}
+{const g=S[1].g,N=28,geo=new THREE.BufferGeometry(),pa=new THREE.BufferAttribute(new Float32Array(N*3),3),arc=new THREE.Line(geo,new THREE.LineBasicMaterial({color:0xff7a3d})),ang={sp3:'109,5°',sp2:'120°',sp:'180°'};
+ geo.setAttribute('position',pa);arc.frustumCulled=false;
+ let sp=lab(ang.sp3),pm='sp3',pr=0;g.add(arc,sp);const u0=S[1].u;
+ S[1].u=()=>{u0();if(pm!==mode){pm=mode;g.remove(sp);sp=lab(ang[mode]);g.add(sp);pr=0}pr=Math.min(1,pr+.012);
+  const a=hs[0].position.clone().normalize(),b=hs[1].position.clone().normalize(),c=Math.max(-1,Math.min(1,a.dot(b))),om=Math.acos(c),pp=b.clone().sub(a.clone().multiplyScalar(c));
+  if(pp.length()<.01)pp.set(0,1,0);pp.normalize();
+  for(let i=0;i<N;i++){const th=i/(N-1)*pr*om,p=a.clone().multiplyScalar(Math.cos(th)).add(pp.clone().multiplyScalar(Math.sin(th)));pa.setXYZ(i,p.x,p.y,p.z)}
+  pa.needsUpdate=true;
+  sp.position.copy(a.clone().multiplyScalar(Math.cos(om/2)).add(pp.clone().multiplyScalar(Math.sin(om/2))).multiplyScalar(1.5))}}
+
+/* testo di approfondimento dal PDF */
+const MORE={0:'<p>Un tempo si credeva servisse una «forza vitale»: nel 1826 Wöhler sintetizzò l’urea dal cianato di ammonio. Restano inorganici gli ossidi di carbonio, l’acido carbonico, i carbonati e i cianuri.</p><p>Elementi tipici: C, H, O, N, P, S. Un C è primario, secondario, terziario o quaternario in base ai carboni a cui è legato (non agli H).</p>',
+11:'<p>Regole: legame C–C = 0, con H = −1, con atomi più elettronegativi (O, N, S, alogeni) = +1; C=O vale +2.</p><p>Etanolo: CH₃ = −3, CH₂OH = −1. Da alcol ad aldeide ad acido il C guadagna +2 a ogni passaggio (−1, +1, +3).</p>',
+1:'<p>Configurazione 1s² 2s² 2p²: si promuove un elettrone da 2s a 2p e gli orbitali si ibridano. Il legame σ è forte, il π più debole e reattivo. Lunghezze: C–C 154 pm, C=C 134 pm, C≡C 120 pm.</p><p>Trucco: conta i legami σ più le coppie solitarie del C. 4 → sp³, 3 → sp², 2 → sp.</p>',
+2:'<p>I conformeri nascono dalla rotazione attorno a un legame semplice e si interconvertono da soli. Nell’etano la sfalsata è la più stabile, l’eclissata costa circa 12 kJ/mol.</p><p>Errore tipico: confondere conformeri e isomeri configurazionali. I primi si convertono ruotando, i secondi no.</p>',
+3:'<p>Servono uno stereocentro (C sp³ con 4 gruppi tutti diversi) e nessun piano di simmetria. Gli enantiomeri hanno uguali p.f., p.e. e densità, ma ruotano la luce polarizzata in versi opposti: destrogiro (+) e levogiro (−). Un racemo 50:50 non ruota la luce.</p><p>La forma meso (2,3-diclorobutano) ha stereocentri ma un piano di simmetria: è achirale. Con n stereocentri ci sono al massimo 2ⁿ stereoisomeri. Il segno (+)/(−) non dipende da R/S.</p>',
+4:'<p>Gli angoli ideali sp³ sono 109,5°: ciclopropano (60°) e ciclobutano (circa 90°) sono tesi e reattivi, ciclopentano e cicloesano (a sedia) quasi no. Ciclopropano + H₂/Pt → propano; + Br₂/UV → 1,3-dibromopropano.</p><p>Gli altri cicloalcani fanno solo combustione e sostituzione radicalica. Alcheni e cicloalcani hanno la stessa formula CₙH₂ₙ: propene e ciclopropano sono isomeri.</p>',
+6:'<p>Il numero di isomeri cresce con i C: C₄H₁₀ ne ha 2, C₅H₁₂ 3, C₆H₁₄ 5, C₇H₁₆ 9. Metodo: grado di insaturazione, catena lineare, poi accorcia di un C e sposta il C tolto come ramificazione.</p><p>Pentano 36 °C, 2-metilbutano 28 °C, 2,2-dimetilpropano 9,5 °C: più ramificato, meno superficie di contatto, p.e. più basso.</p>',
+7:'<p>Serve che ogni C del doppio legame abbia due sostituenti diversi. Sì: 2-butene, 1,2-dicloroetene. No: 1-butene, 1,1-dicloroetene, 2-metil-2-butene.</p><p>Vale anche nei cicloalcani: cis- e trans-1,4-dimetilcicloesano, con i due CH₃ dalla stessa parte o da parti opposte rispetto al piano dell’anello.</p>',
+8:'<p>Il π è ricco di elettroni e viene attaccato da elettrofili: dà addizione. H₂ con Pt, Pd o Ni → alcano. Br₂ → 1,2-dibromoetano (decolora l’acqua di bromo, test per gli insaturi). HBr segue Markovnikov: H va sul C con più H. H₂O/H⁺ dà un alcol.</p><p>Alcani: sostituzione radicalica. Alcheni: addizione. Non confonderle.</p>',
+9:'<p>Più alto è il carattere s, più il C trattiene gli elettroni di legame e più il C–H si polarizza: alcano (sp³, 25%) pKa ≈ 50; alchene (sp², 33%) ≈ 44; alchino (sp, 50%) ≈ 25. Con NaNH₂ si forma un acetiluro. Il 2-butino non reagisce: non ha H sul C sp.</p><p>Con un solo equivalente di H₂ e catalizzatore di Lindlar l’alchino si ferma all’alchene cis.</p>',
+10:'<p>Tre stadi: inizio (scissione omolitica di Cl₂), propagazione (si ripete migliaia di volte), terminazione (due radicali si combinano). Con eccesso di Cl₂: CH₃Cl → CH₂Cl₂ → CHCl₃ → CCl₄.</p><p>Stabilità dei radicali: terziario > secondario > primario > metile. Il Br è più selettivo del Cl. Combustione: C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O.</p>',
+12:'<p>Sei regole: catena continua più lunga; numeri più bassi ai sostituenti; nome con numero e trattino; di-, tri-, tetra- per i ripetuti; ordine alfabetico ignorando i prefissi; a parità di catena, quella con più sostituenti.</p><p>Per alcheni e alchini la catena contiene il legame multiplo, che ha la priorità nella numerazione. Radicali: vinile CH₂=CH–, allile CH₂=CH–CH₂–.</p>',
+14:'<p>Stato fisico e p.e. dipendono dalle forze intermolecolari. Gli alcani fino a 4 C sono gas, da 5 C liquidi. Con gruppi che fanno legami a idrogeno (OH, COOH, NH₂) il p.e. sale molto.</p><p>Il simile scioglie il simile: l’etanolo, con la parte polare dominante, è solubile in acqua; l’1-esanolo, con la lunga catena apolare, quasi no.</p>',
+13:'<p>L’effetto induttivo è lo spostamento permanente di elettroni lungo i legami σ verso l’atomo più elettronegativo, con cariche parziali δ+ e δ−. Si attenua con la distanza.</p><p>−I: alogeni, NO₂, C=O, COOH (aumentano la reattività). +I: gruppi alchilici (la riducono). Gruppi funzionali: −OH alcoli (-olo), C=O aldeidi (-ale) e chetoni (-one), −COOH acidi (acido -oico), −NH₂ ammine.</p>',
+5:'<p>I confini planetari, proposti nel 2009 dallo Stockholm Resilience Centre, indicano le soglie entro cui l’umanità non destabilizza il sistema Terra: clima, biodiversità, cicli di azoto e fosforo, ozono, acidificazione degli oceani, acqua dolce. La carbon footprint misura le emissioni di gas serra in CO₂ equivalente.</p>',
+15:'<p>Errori che fanno perdere punti: numerare dall’estremità sbagliata, dimenticare l’ordine alfabetico, non scegliere la catena più lunga, sbagliare il numero di H. Un composto non è chirale solo perché un C ha 4 sostituenti: devono essere tutti diversi.</p>'};
+/* palette pastello e ombre */
+const PAL=[0xcfe4f3,0xd5efe0,0xe2dcf7,0xfdeeb8,0xfbd8cc];root.traverse(m=>{if(m.isMesh)m.castShadow=!m.material.transparent});
+/* vista iniziale (ferma) e inquadratura per ogni scena */
+const DV={rx:.18,ry:.35},VIEW={15:{rx:.1,ry:.3},2:{rx:.12,ry:1.5708},4:{rx:.35,ry:.12},5:{rx:.6,ry:0},6:{rx:.08,ry:0},7:{rx:-.6,ry:.2},8:{rx:-1.15,ry:.15},9:{rx:.1,ry:0},10:{rx:.1,ry:0},12:{rx:.08,ry:0},13:{rx:.08,ry:.1},14:{rx:.08,ry:0}},
+HW={0:1.9,1:2.1,2:2.4,3:3.5,4:1.9,5:3.7,6:2.7,7:2.1,8:2.1,9:3.4,10:3.4,11:2.1,12:3.3,13:3.4,14:2.3};
+
+/* legende e didascalie */
+const AT={C:['carbonio','#2b3a6b'],H:['idrogeno','#ffffff'],O:['ossigeno','#e0453a'],Cl:['cloro','#2bb673'],F:['fluoro','#f2a33a'],Br:['bromo','#d9654f'],Me:['metile (sostituente)','#5ea0ff'],H2:['H₂ aggiunto','#e0a030'],N:['base forte','#3a6bff']};
+const LG={0:'C H',1:'C H',2:'C H',3:'C H F Cl Br',4:'C H H2',5:'C O',6:'C',7:'C H Cl',8:'C H H2',9:'C H N',10:'C H Cl',11:'C H O',12:'C Me',13:'C Cl',14:'C'};
+const CAP={0:'Il carbonio sta al centro di un tetraedro: 4 legami identici a 109,5°.',1:'Premi sp³, sp² o sp: l’arco arancione misura l’angolo tra due legami mentre la molecola si trasforma.',2:'Vista lungo il legame C–C (proiezione di Newman): gli H davanti e dietro, sfalsati o eclissati.',3:'Le due molecole sono immagini speculari: ruotando la seconda non coincide mai con la prima.',4:'Gli angoli di 60° rendono l’anello teso: con H₂/Pt il legame in alto si rompe.',5:'Sfere azzurre: CO₂ in circolo. Sfere rosse: CO₂ in più dalla combustione dei fossili.',6:'Scheletro di carbonio: più la catena è ramificata, più la molecola è compatta e bolle a temperatura più bassa.',7:'Le due nuvole azzurre sono il legame π: impedisce la rotazione e blocca la posizione dei Cl.',8:'Quando H₂ arriva, il legame π scompare e si formano due legami σ C–H.',9:'Una base forte strappa l’H dell’alchino terminale: resta il carbonio con carica negativa (acetiluro).',10:'Premi Avanti: i radicali (un elettrone spaiato) guidano la reazione a catena.',11:'Ogni O al posto di un H sposta il numero di ossidazione del carbonio di +2.',12:'La sfera blu è il metile: la sua posizione, contata dal lato giusto, dà il numero nel nome.',13:'La luce mostra dove si accumula la carica parziale: più intensa vicino all’atomo che attira o spinge elettroni.',14:'Ogni C in più aumenta le forze di dispersione: il punto di ebollizione sale.'};
+LG[15]='C O Cl Br';CAP[15]='Il modello si aggiorna con quello che costruisci. Gli idrogeni non sono disegnati.';
+function ov(i){return '<button class="pz" type="button">Ferma</button><div class="lg">'+(LG[i]||'C').split(' ').map(k=>'<i><b style="--c:'+AT[k][1]+'"></b>'+AT[k][0]+'</i>').join('')+'</div><div class="cap">'+(CAP[i]||'')+'<small>Trascina per ruotare · doppio clic per ripristinare</small></div>'}
+
+/* un modello per ogni sezione */
+const stages=[];
+document.querySelectorAll('section[data-s]').forEach(s=>{const pn=s.querySelector('.panel'),k=+s.dataset.s;if(MORE[k]&&pn&&!(k==0&&!pn.querySelector('h2')))pn.insertAdjacentHTML('beforeend','<details class="more"'+(innerWidth>860?' open':'')+'><summary>Dal testo di studio</summary>'+MORE[k]+'</details>');const d=document.createElement('div');d.className='stage';d.innerHTML=ov(k);s.appendChild(d);
+ const o={el:d,i:k,...(VIEW[k]||DV),dr:0};stages.push(o);d.ondblclick=()=>{o.fr=0;Object.assign(o,VIEW[o.i]||DV)};d.onclick=e=>{const b=e.target.closest('.pz');if(b){o.pz=!o.pz;o.fr=o.pz;b.textContent=o.pz?'Riprendi':'Ferma'}};d.onpointerleave=()=>{o.hx=o.hy=0};
+ d.onpointerdown=e=>{if(e.target.closest('.pz'))return;o.sw=.1;o.fr=0;document.body.style.userSelect='none';o.dr=1;o.px=e.clientX;o.py=e.clientY;d.setPointerCapture(e.pointerId)};
+ d.onpointermove=e=>{const r=d.getBoundingClientRect();o.hx=(e.clientX-r.left)/r.width*2-1;o.hy=(e.clientY-r.top)/r.height*2-1;if(!o.dr)return;o.vy=(e.clientX-o.px)*.003;o.ry+=(e.clientX-o.px)*.01;o.rx=Math.max(-1.2,Math.min(1.2,o.rx+(e.clientY-o.py)*.01));o.px=e.clientX;o.py=e.clientY};
+ d.onpointerup=d.onpointercancel=()=>{o.dr=0;document.body.style.userSelect=''}});
+(function loop2(){requestAnimationFrame(loop2);
+ const H=innerHeight,done={};root.position.set(0,0,0);root.scale.setScalar(1);
+ ren.setClearColor(0,0);ren.setScissorTest(false);ren.clear();ren.setScissorTest(true);
+ stages.forEach(o=>{const r=o.el.getBoundingClientRect();if(r.bottom<0||r.top>H||r.width<2)return;
+  const a=r.width/r.height;cam.aspect=a;cam.position.z=Math.max(6.4,(HW[o.i]||2.5)/(.364*a));cam.position.y=cam.position.z*(o.tl??.34);cam.lookAt(0,-1.2*(o.tl??.34),0);cam.updateProjectionMatrix();
+  if(!o.dr){o.ry+=(o.pz?0:o.vy||0);o.vy=(o.vy||0)*.94;if(!o.pz&&!calm)o.ry+=.004}if(o.fr&&!o.dr){const t=Math.round(o.ry/6.2832)*6.2832;o.ry+=(t-o.ry)*.1;o.rx+=(0-o.rx)*.1}o.tl=(o.tl??.34)+((o.pz?0:.34)-(o.tl??.34))*.1;o.sx=(o.sx||0)+((o.hx||0)-(o.sx||0))*.08;o.sy=(o.sy||0)+((o.hy||0)-(o.sy||0))*.08;o.sw=(o.sw||0)-(o.ss||0)*.22;o.sw*=.84;o.ss=(o.ss||0)+o.sw;const k2=o.pz?0:1;root.rotation.set(o.rx-o.sy*.15*k2,o.ry+o.sx*.25*k2,0);root.scale.set(1+o.ss,1-o.ss*1.2,1+o.ss);
+  S.forEach((q,k)=>{q.g.visible=k===o.i;q.g.scale.setScalar(1)});
+  if(!done[o.i]){done[o.i]=1;const q=S[o.i];q.u&&q.u()}
+  ren.setClearColor(PAL[o.i%5],1);ren.setViewport(r.left,H-r.bottom,r.width,r.height);ren.setScissor(r.left,H-r.bottom,r.width,r.height);ren.render(sc,cam)})})();
+
+/* ===================== LABORATORIO 3D (renderer proprio, canvas proprio) ===================== */
+(()=>{
+const E=CHEM,$q=s=>document.querySelector(s),lv=$q('#lv');if(!lv)return;
+const cv=$q('#lc'),rn=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
+rn.setPixelRatio(Math.min(devicePixelRatio||1,2));
+const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(36,1,.1,200);
+sc.add(new THREE.AmbientLight(0xffffff,.85));const dl=new THREE.DirectionalLight(0xffffff,.95);dl.position.set(3,6,9);sc.add(dl);
+const rot=new THREE.Group(),mg=new THREE.Group();sc.add(rot);rot.add(mg);rot.rotation.set(.25,-.45,0);
+const COL={C:0x2b3a6b,H:0xffffff,N:0x3a6bff,O:0xff4d4d,F:0xffb020,Cl:0x25c17f,Br:0xe8553c,I:0x8a3ffc},RAD={H:.27,C:.42,N:.4,O:.39,F:.34,Cl:.48,Br:.52,I:.56};
+const NAME={C:'carbonio',H:'idrogeno',N:'azoto',O:'ossigeno',F:'fluoro',Cl:'cloro',Br:'bromo',I:'iodio'};
+const sg=new THREE.SphereGeometry(1,28,18),cg=new THREE.CylinderGeometry(1,1,1,10,1,true);
+const bondMat=new THREE.MeshStandardMaterial({color:0x93a1c0,roughness:.4}),pickMat=new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false});
+const V=p=>new THREE.Vector3(p[0],p[1],p[2]),Yv=new THREE.Vector3(0,1,0);
+let mol=E.fromSmiles('C'),hist=[],atomM=[],bondG=[],pickM=[],adjc=[],labels=[],mats=[];
+let sel=-1,hoverA=-1,armed=null,linkA=-1,showH=true,showNum=false,dragging=false,cons=null,relaxLeft=0,cur=null,zoom=1,camD=9,vis=false,raf=0,msgT=0;
+let chal=-1,chalDone=false,solved=0,quiz=null,qScore=0;
+const $=s=>document.getElementById(s);
+const say=(t,ms=3200)=>{const m=$('msg');m.textContent=t;m.classList.add('show');clearTimeout(msgT);msgT=setTimeout(()=>m.classList.remove('show'),ms)};
+const stripS=n=>(n||'').replace(/^(\([^)]*\)-|cis-|trans-)/,'');
+/* ---------- costruzione scena ---------- */
+function clearGroup(){while(mg.children.length){const c=mg.children.pop();if(c.material&&c.material.map)c.material.map.dispose()}mats.forEach(m=>m.dispose());mats=[]}
+function rebuild(){clearGroup();atomM=[];bondG=[];pickM=[];labels=[];adjc=E.adj(mol);
+ mol.atoms.forEach((a,i)=>{const mt=new THREE.MeshStandardMaterial({color:COL[a.el],roughness:.3,metalness:.05,emissive:0x000000});mats.push(mt);
+  const m=new THREE.Mesh(sg,mt);m.scale.setScalar(RAD[a.el]);m.userData={atom:i};mg.add(m);atomM.push(m)});
+ mol.bonds.forEach((b,bi)=>{const g=[];for(let k=0;k<b.o;k++){const c=new THREE.Mesh(cg,bondMat);mg.add(c);g.push(c)}bondG.push(g);
+  if(mol.atoms[b.a].el!=='H'&&mol.atoms[b.b].el!=='H'){const p=new THREE.Mesh(cg,pickMat);p.userData={bond:bi};mg.add(p);pickM[bi]=p}});
+ syncPos();applyVis();$('empty').hidden=mol.atoms.length>0}
+function seg(c,p,q,r){const d=q.clone().sub(p),l=d.length()||1e-4;c.position.copy(p).add(q).multiplyScalar(.5);c.scale.set(r,l,r);c.quaternion.setFromUnitVectors(Yv,d.divideScalar(l))}
+function syncPos(){mol.atoms.forEach((a,i)=>atomM[i]&&atomM[i].position.set(a.p[0],a.p[1],a.p[2]));
+ mol.bonds.forEach((b,bi)=>{const p=V(mol.atoms[b.a].p),q=V(mol.atoms[b.b].p),g=bondG[bi];if(!g)return;const dir=q.clone().sub(p).normalize();
+  const hb=mol.atoms[b.a].el==='H'||mol.atoms[b.b].el==='H';
+  if(b.o===1){seg(g[0],p,q,hb?.065:.085)}
+  else{let ref=null;for(const side of[b.a,b.b]){const y=adjc[side].find(x=>x.bi!==bi);if(y){ref=V(mol.atoms[y.j].p).sub(V(mol.atoms[side].p));break}}
+   let off=ref?ref.sub(dir.clone().multiplyScalar(ref.dot(dir))):null;if(!off||off.length()<1e-3)off=new THREE.Vector3(0,0,1).cross(dir);if(off.length()<1e-3)off=new THREE.Vector3(1,0,0).cross(dir);off.normalize();
+   const n=b.o,st=n===2?.12:.17;for(let k=0;k<n;k++){const o=off.clone().multiplyScalar((k-(n-1)/2)*st);seg(g[k],p.clone().add(o),q.clone().add(o),n===2?.062:.052)}}
+  if(pickM[bi])seg(pickM[bi],p,q,.3)});
+ labels.forEach(s=>{const a=mol.atoms[s.userData.atom];if(a)s.position.set(a.p[0],a.p[1],a.p[2])})}
+function applyVis(){mol.atoms.forEach((a,i)=>{atomM[i].visible=a.el!=='H'||showH});
+ mol.bonds.forEach((b,bi)=>{const hid=!showH&&(mol.atoms[b.a].el==='H'||mol.atoms[b.b].el==='H');bondG[bi].forEach(c=>c.visible=!hid)})}
+function mkLabel(t,i){const c=document.createElement('canvas');c.width=c.height=96;const x=c.getContext('2d');x.font='700 62px sans-serif';x.textAlign='center';x.textBaseline='middle';x.lineWidth=9;x.strokeStyle='#0f1a36';x.strokeText(t,48,52);x.fillStyle='#fff';x.fillText(t,48,52);
+ const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthTest:false}));s.scale.set(.85,.85,1);s.renderOrder=5;s.userData={atom:i};s.position.set(...mol.atoms[i].p);mg.add(s);return s}
+function buildLabels(){labels.forEach(s=>{mg.remove(s);s.material.map.dispose();s.material.dispose()});labels=[];
+ if(!showNum||!cur||!cur.g)return;cur.carbons.forEach(c=>{if(c.loc)labels.push(mkLabel(String(c.loc),cur.g.idx[c.i]))})}
+/* ---------- camera ---------- */
+const cen=new THREE.Vector3();
+function frame(){if(!mol.atoms.length){mg.position.lerp(new THREE.Vector3(),.1);return}
+ const c=[0,0,0];mol.atoms.forEach(a=>{c[0]+=a.p[0];c[1]+=a.p[1];c[2]+=a.p[2]});const n=mol.atoms.length;c[0]/=n;c[1]/=n;c[2]/=n;
+ let r=0;mol.atoms.forEach(a=>{r=Math.max(r,Math.hypot(a.p[0]-c[0],a.p[1]-c[1],a.p[2]-c[2]))});r+=.9;
+ cen.set(-c[0],-c[1],-c[2]);mg.position.lerp(cen,.12);
+ const t=Math.tan(cam.fov*Math.PI/360),d=Math.max(r/t,r/(t*cam.aspect))*1.04;camD+=(Math.max(5.5,d)*zoom-camD)*.1;cam.position.set(0,0,camD)}
+const resize=()=>{const w=lv.clientWidth,h=lv.clientHeight;if(!w||!h)return;rn.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};
+new ResizeObserver(resize).observe(lv);resize();
+/* ---------- ciclo di disegno ---------- */
+function loop(){if(!vis){raf=0;return}raf=requestAnimationFrame(loop);
+ if(relaxLeft>0&&cons){E.relaxStep(mol,cons,6);relaxLeft--;syncPos();if(relaxLeft===0)analyze()}
+ frame();const t=performance.now()/1000,pulse=.28+.22*Math.sin(t*5),hot=dragging||(armed&&armed.length<=2);
+ atomM.forEach((m,i)=>{const mt=m.material;if(i===sel||i===linkA){mt.emissive.setHex(0xff8a3d);mt.emissiveIntensity=.55}
+  else if(i===hoverA){mt.emissive.setHex(0x4d8dff);mt.emissiveIntensity=.6}
+  else if(hot&&mol.atoms[i].el==='H'){mt.emissive.setHex(0x4d8dff);mt.emissiveIntensity=pulse}else mt.emissiveIntensity=0});
+ rn.render(sc,cam)}
+new IntersectionObserver(e=>{vis=e[0].isIntersecting;if(vis&&!raf)loop()},{threshold:0}).observe(lv);
+/* ---------- picking ---------- */
+const ray=new THREE.Raycaster(),nd=new THREE.Vector2();
+function pick(cx,cy){const r=cv.getBoundingClientRect();if(cx<r.left||cx>r.right||cy<r.top||cy>r.bottom)return null;
+ nd.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height)*2+1);sc.updateMatrixWorld(true);ray.setFromCamera(nd,cam);
+ const h=ray.intersectObjects(atomM.filter(m=>m.visible).concat(pickM.filter(Boolean)),false)[0];return h?h.object.userData:null}
+function facingH(heavy){const hs=adjc[heavy].filter(x=>mol.atoms[x.j].el==='H').map(x=>x.j);if(!hs.length)return -1;
+ const w=new THREE.Vector3();let best=-1,bd=1e9;hs.forEach(h=>{atomM[h].getWorldPosition(w);const d=w.distanceTo(cam.position);if(d<bd){bd=d;best=h}});return best}
+/* ---------- modifica ---------- */
+function commit(nm,msg,relaxN){hist.push(E.clone(mol));if(hist.length>60)hist.shift();mol=nm;sel=-1;linkA=-1;rebuild();cons=E.buildCons(mol);relaxLeft=relaxN||45;analyze();if(msg)say(msg);$('bUndo').disabled=false}
+function place(el,hit){
+ if(!mol.atoms.length){const m=E.normalizeH({atoms:[{el,p:[0,0,0]}],bonds:[]});return commit(m,'Primo atomo: '+NAME[el]+'. Ora trascina altri atomi sugli idrogeni.')}
+ if(!hit||hit.atom===undefined){say('Rilascia l’atomo sopra una sfera bianca (idrogeno) o sopra un atomo.');return}
+ let h=hit.atom;if(mol.atoms[h].el!=='H'){h=facingH(h);if(h<0){say('Questo atomo ha già tutte le valenze occupate. Per aggiungere qualcosa, rendi singolo un legame multiplo o elimina un sostituente.');return}}
+ const parent=adjc[h][0].j,nm=E.substituteH(mol,h,el);if(!nm){say('Operazione non possibile.');return}
+ commit(nm,'Un H di '+mol.atoms[parent].el+' è stato sostituito da '+NAME[el]+'.')}
+function cycleBond(bi){const b=mol.bonds[bi],o=b.o;let n=o%3+1,nm=E.setBondOrder(mol,bi,n);
+ if(!nm){if(o===1){say('Per un legame doppio servono un H liberabile su entrambi gli atomi: uno dei due non ha valenza disponibile.');return}n=1;nm=E.setBondOrder(mol,bi,1)}
+ const lab=['','singolo','doppio','triplo'][n];commit(nm,'Legame '+mol.atoms[b.a].el+'–'+mol.atoms[b.b].el+': '+lab+'.',90)}
+function act(hit){
+ if(armed==='DEL'){if(hit&&hit.atom!==undefined&&mol.atoms[hit.atom].el!=='H'){commit(E.deleteAtom(mol,hit.atom),'Atomo eliminato: i vicini riprendono gli H.')}else say('Tocca un atomo pesante (non un H).');return}
+ if(armed==='LINK'){if(!hit||hit.atom===undefined||mol.atoms[hit.atom].el==='H'){say('Tocca un atomo pesante.');return}
+  if(linkA<0){linkA=hit.atom;say('Ora tocca il secondo atomo da collegare.');return}
+  if(linkA===hit.atom){linkA=-1;return}const nm=E.joinAtoms(mol,linkA,hit.atom);if(!nm){linkA=-1;say('Non posso collegarli: servono due atomi non ancora legati, ciascuno con un H libero.');return}
+  commit(nm,'Legame formato: se è un anello vedrai la tensione di angolo.',160);return}
+ if(armed==='ROT'){if(!hit||hit.bond===undefined){say('Tocca un legame tra due atomi pesanti.');return}
+  if(mol.bonds[hit.bond].o!==1){say('Un legame doppio o triplo non ruota: è l’isomeria cis/trans.');return}
+  const m=E.clone(mol);if(!E.rotateSide(m,hit.bond,Math.PI/3)){say('Il legame è in un anello: non ruota liberamente.');return}
+  hist.push(E.clone(mol));mol=m;cons=E.buildCons(mol);syncPos();say('Ruotato di 60°: guarda gli H passare da sfalsati a eclissati.');return}
+ if(armed&&armed.length<=2){place(armed,hit);return}
+ if(hit&&hit.bond!==undefined)return cycleBond(hit.bond);
+ sel=(hit&&hit.atom!==undefined&&hit.atom!==sel)?hit.atom:-1;showSel()}
+function setArmed(x){armed=armed===x?null:x;linkA=-1;
+ document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.dataset.el===armed));
+ ['bDel','bLink','bRot'].forEach(id=>$(id).classList.toggle('on',({bDel:'DEL',bLink:'LINK',bRot:'ROT'})[id]===armed));
+ lv.classList.toggle('armed',!!armed);
+ if(armed&&armed.length<=2)say('Ora tocca l’idrogeno (o l’atomo) dove vuoi mettere '+NAME[armed]+'.');
+ else if(armed==='DEL')say('Tocca un atomo da eliminare.');else if(armed==='LINK')say('Tocca il primo atomo da collegare.');else if(armed==='ROT')say('Tocca un legame singolo per ruotarlo.')}
+/* ---------- interazione sul canvas ---------- */
+const ptr=new Map();let down=null,pinch=0;
+cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);ptr.set(e.pointerId,[e.clientX,e.clientY]);
+ if(ptr.size===1)down={x:e.clientX,y:e.clientY,t:performance.now(),moved:false};else{down&&(down.moved=true);const[a,b]=[...ptr.values()];pinch=Math.hypot(a[0]-b[0],a[1]-b[1])}});
+cv.addEventListener('pointermove',e=>{if(!ptr.has(e.pointerId)){if(!dragging){const h=pick(e.clientX,e.clientY);hoverA=h&&h.atom!==undefined&&armed&&armed.length<=2?h.atom:-1}return}
+ const prev=ptr.get(e.pointerId);ptr.set(e.pointerId,[e.clientX,e.clientY]);
+ if(ptr.size===2){const[a,b]=[...ptr.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pinch)zoom=Math.max(.35,Math.min(2.6,zoom*pinch/d));pinch=d;return}
+ if(!down)return;if(!down.moved&&Math.hypot(e.clientX-down.x,e.clientY-down.y)>6)down.moved=true;
+ if(down.moved){const q=new THREE.Quaternion().setFromEuler(new THREE.Euler((e.clientY-prev[1])*.009,(e.clientX-prev[0])*.009,0));rot.quaternion.premultiply(q)}});
+const end=e=>{if(!ptr.has(e.pointerId))return;ptr.delete(e.pointerId);if(ptr.size<2)pinch=0;
+ if(down&&!down.moved&&e.type==='pointerup'&&ptr.size===0){act(pick(e.clientX,e.clientY))}if(ptr.size===0)down=null};
+cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);cv.addEventListener('pointerleave',()=>{if(!dragging)hoverA=-1});
+cv.addEventListener('wheel',e=>{if(!e.ctrlKey&&!e.metaKey)return;e.preventDefault();zoom=Math.max(.35,Math.min(2.6,zoom*(1+e.deltaY*.0025)))},{passive:false});
+cv.addEventListener('dblclick',()=>{zoom=1;rot.rotation.set(.25,-.45,0);rot.quaternion.setFromEuler(rot.rotation)});
+/* ---------- trascinamento dalla tavolozza ---------- */
+const ghost=document.createElement('div');ghost.className='ghost';document.body.appendChild(ghost);
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('pointerdown',e=>{
+ if(e.button>0)return;e.preventDefault();const el=ch.dataset.el,sx=e.clientX,sy=e.clientY;let moved=false;
+ ghost.textContent=el;ghost.style.background='#'+COL[el].toString(16).padStart(6,'0');if(el==='F')ghost.style.color='#0f1a36';else ghost.style.color='#fff';
+ const mv=ev=>{if(!moved&&Math.hypot(ev.clientX-sx,ev.clientY-sy)>7){moved=true;dragging=true;ghost.style.display='grid'}
+  if(moved){ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';const h=pick(ev.clientX,ev.clientY);hoverA=h&&h.atom!==undefined?h.atom:-1;lv.classList.toggle('over',!!h&&h.atom!==undefined)}};
+ const up=ev=>{document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);document.removeEventListener('pointercancel',up);
+  ghost.style.display='none';dragging=false;hoverA=-1;lv.classList.remove('over');
+  if(moved){const r=cv.getBoundingClientRect();if(ev.clientX>=r.left&&ev.clientX<=r.right&&ev.clientY>=r.top&&ev.clientY<=r.bottom){if(armed)setArmed(armed);place(el,pick(ev.clientX,ev.clientY))}}
+  else{if(!mol.atoms.length){place(el,null)}else setArmed(el)}};
+ document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);document.addEventListener('pointercancel',up)}));
+/* ---------- barra strumenti ---------- */
+$('bUndo').onclick=()=>{if(!hist.length)return;mol=hist.pop();sel=-1;linkA=-1;rebuild();cons=E.buildCons(mol);relaxLeft=0;analyze();$('bUndo').disabled=!hist.length};
+$('bClr').onclick=()=>{if(mol.atoms.length){hist.push(E.clone(mol))}mol={atoms:[],bonds:[]};sel=-1;rebuild();analyze();$('bUndo').disabled=false;say('Scena vuota: trascina un atomo di carbonio per ricominciare.')};
+$('bFit').onclick=()=>{zoom=1;rot.rotation.set(.25,-.45,0);rot.quaternion.setFromEuler(rot.rotation)};
+$('bMir').onclick=()=>{if(!mol.atoms.length)return;const m=E.clone(mol);E.mirror(m);hist.push(E.clone(mol));mol=m;rebuild();cons=E.buildCons(mol);analyze();
+ say(cur&&cur.stereo.centers.length?'Immagine speculare: gli stereocentri hanno cambiato R/S. È l’enantiomero.':'Immagine speculare. Senza stereocentri la molecola coincide con la sua immagine: è achirale.')};
+$('bCT').onclick=()=>{if(!cur||!cur.stereo.dbl.length){say('Serve un doppio legame con due sostituenti diversi su ciascun carbonio (es. 2-butene).');return}
+ const m=E.clone(mol);if(!E.rotateSide(m,cur.stereo.dbl[0].bi,Math.PI)){say('Il doppio legame sta in un anello.');return}hist.push(E.clone(mol));mol=m;rebuild();cons=E.buildCons(mol);relaxLeft=40;analyze();say('Scambiati cis e trans: per farlo servirebbe rompere il legame π.')};
+$('bRot').onclick=()=>setArmed('ROT');$('bLink').onclick=()=>setArmed('LINK');$('bDel').onclick=()=>setArmed('DEL');
+$('tH').onclick=e=>{showH=!showH;e.target.classList.toggle('on',showH);applyVis();if(!showH)say('Idrogeni nascosti: rilascia gli atomi direttamente su un carbonio.')};
+$('tN').onclick=e=>{showNum=!showNum;e.target.classList.toggle('on',showNum);buildLabels()};
+$('bUndo').disabled=true;
+/* ---------- esempi, sfide, quiz ---------- */
+const EX=[['Metano','C'],['Etano','CC'],['Etene','C=C'],['Etino','C#C'],['Propano','CCC'],['Butano','CCCC'],['2-metilpropano','CC(C)C'],['2,2,4-trimetilpentano','CC(C)CC(C)(C)C'],['Ciclopropano','C1CC1'],['Cicloesano','C1CCCCC1'],['Etanolo','CCO'],['Acetone','CC(=O)C'],['Acetaldeide','CC=O'],['Acido acetico','CC(=O)O'],['Etanoato di metile','CC(=O)OC'],['CHFClBr (chirale)','C(F)(Cl)Br'],['cis-2-butene','CC=CC',1],['trans-2-butene','CC=CC'],['2,3-diclorobutano','CC(Cl)C(Cl)C']];
+const CH=['CC(C)CC','CC(C)(C)C','CC(Cl)C','ClCCCl','CC=CCC','C#CCC','CC(C)C(Br)C','CC(O)CC','C=C(C)CC','CC(C)C=CC','C#CC(C)C','CC(C)(C)CC(C)C','CCC(CC)C(C)C','CC1CCCCC1','CCC1CCCC1C','CC(=O)CC','CCCC(=O)O','CC(C)CO','ClC(Cl)Cl','CC(C)(O)C','CCCCO','CC(=O)CCC','CCC=O','CC(C)C=O','CC#CC','C=CC=C','CC(Br)CC','CCC(=O)O','CC1CC1','C1CCC1','CC1CCC1','C1CCCC1','CC1CCCC1','CC1CCCCC1C','CCC(Cl)CC','CCCCCCl','C=CCC','CC(C)=CC','CCC(C)C(C)(C)C','CC(C)CC(C)C','C#CCCC'];
+const nameOf=s=>E.describe(E.fromSmiles(s)).name;
+const sel$=$('exs');EX.forEach((x,i)=>{const o=document.createElement('option');o.value=i;o.textContent=x[0];sel$.appendChild(o)});
+function load(s,flip){let m=E.fromSmiles(s);if(flip){const bi=m.bonds.findIndex(b=>b.o===2);E.rotateSide(m,bi,Math.PI);E.relax(m,300)}hist.push(E.clone(mol));mol=m;sel=-1;rebuild();cons=E.buildCons(mol);relaxLeft=0;analyze();$('bUndo').disabled=false;zoom=1}
+sel$.onchange=()=>{if(sel$.value==='')return;const x=EX[+sel$.value];quiz=null;chal=-1;taskUI();load(x[1],x[2]);sel$.value=''};
+function taskUI(){const t=$('task');t.hidden=chal<0&&!quiz;if(t.hidden)return;
+ if(quiz){t.innerHTML='<h3>Quiz</h3><div>Quale nome ha questa molecola? <span class="hint">('+qScore+' giuste)</span></div><div class="opts" id="opts">'+quiz.opts.map(o=>'<button type="button" data-q="'+o.replace(/"/g,'&quot;')+'">'+o+'</button>').join('')+'</div><div class="row"><button type="button" id="qx">Esci dal quiz</button></div>';
+  t.querySelector('#opts').onclick=e=>{const b=e.target.closest('[data-q]');if(!b||quiz.done)return;quiz.done=1;const ok=b.dataset.q===quiz.ans;if(ok)qScore++;b.classList.add(ok?'ok':'no');
+   if(!ok)t.querySelectorAll('[data-q]').forEach(x=>{if(x.dataset.q===quiz.ans)x.classList.add('ok')});
+   const r=document.createElement('div');r.className='row';r.innerHTML='<button type="button" id="qn" class="on">Avanti ▸</button>';if(!ok){const w=document.createElement('div');w.className='hint';w.innerHTML='Giusta: <b>'+esc(quiz.ans)+'</b>. Ricorda: catena più lunga, numeri più bassi, poi ordine alfabetico; il legame multiplo ha la priorità.';t.appendChild(w)}t.appendChild(r);r.firstChild.onclick=nextQ;analyze()};
+  t.querySelector('#qx').onclick=()=>{quiz=null;taskUI();analyze()};return}
+ t.innerHTML='<h3>Sfida '+(chal+1)+(solved?' · risolte '+solved:'')+'</h3><div>Costruisci: <b class="lname" style="font-size:22px">'+chal$+'</b></div><div class="hint" id="ch-st">Ricava dal nome la lunghezza della catena, le posizioni e i gruppi.</div><div class="row"><button type="button" id="cs">Mostra soluzione</button><button type="button" id="cn">Salta</button><button type="button" id="cx">Esci</button></div>';
+ $('cs').onclick=()=>{load(chalS);say('Ecco la soluzione: confronta numerazione e sostituenti.')};$('cn').onclick=nextC;$('cx').onclick=()=>{chal=-1;taskUI()}}
+let chal$='',chalS='';
+const R=n=>Math.floor(Math.random()*n);
+const recent=[];let bag=[];
+function genS(lv){
+ const L=lv==='f'?4+R(3):lv==='m'?5+R(3):6+R(3),n=lv==='f'?1:lv==='m'?2:3;
+ const pool=lv==='f'?['C','C','Cl','Br']:['C','C','CC','Cl','Br','O','F'];
+ const arr=[];for(let i=0;i<L;i++)arr.push({s:[],b:''});
+ for(let j=0;j<n;j++){const p=1+R(L-2),s=pool[R(pool.length)];if(arr[p].s.length<2)arr[p].s.push(s)}
+ if(lv!=='f'&&Math.random()<.45){const p=R(L-1);if(!arr[p].s.length&&!arr[p+1].s.length&&!(p>0&&arr[p-1].b)&&!arr[p+1].b)arr[p].b=Math.random()<.7?'=':'#'}
+ for(const a of arr){const h=a.s.filter(x=>x==='Cl'||x==='Br'||x==='F').length,o=a.s.filter(x=>x==='O').length;if(o>1||(o&&h))return null}
+ return arr.map(a=>'C'+a.s.map(x=>'('+x+')').join('')+a.b).join('')}
+function safeName(s){try{const x=stripS(nameOf(s));return x&&!/non generato/.test(x)?x:null}catch(e){return null}}
+function drawS(){const lvs=$('lvl')?$('lvl').value:'mix';let s,nm=null,t=0;
+ while(t++<80){let lv=lvs==='mix'?['f','m','m','d'][R(4)]:lvs;
+  if(lvs==='c'||(lvs==='mix'&&Math.random()<.25)){if(!bag.length)bag=shuffle(CH.map((_,i)=>i));s=CH[bag.pop()]}
+  else s=genS(lv==='c'?'m':lv);
+  if(!s)continue;nm=safeName(s);if(nm&&!recent.includes(nm))break;nm=null}
+ if(!nm){s=CH[R(CH.length)];nm=safeName(s)}
+ recent.push(nm);if(recent.length>40)recent.shift();return{s,nm}}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=R(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+function nextC(){quiz=null;chal++;chalDone=false;{const d=drawS();chalS=d.s;chal$=d.nm}taskUI();hist.push(E.clone(mol));mol={atoms:[],bonds:[]};rebuild();analyze();$('bUndo').disabled=false;say('Sfida: costruisci '+chal$+'. Parti da un carbonio.')}
+function nextQ(){const d=drawS(),ans=d.nm,opts=[ans];let t=0;
+ while(opts.length<4&&t++<120){const x=Math.random()<.3?safeName(CH[R(CH.length)]):safeName(genS(['f','m','m','d'][R(4)])||'CCC');if(x&&!opts.includes(x))opts.push(x)}
+ quiz={ans,opts:shuffle(opts),done:0};chal=-1;load(d.s);taskUI()}
+$('gnx').onclick=()=>{quiz=null;if(chal<0)chal=-1;nextC()};$('gqz').onclick=()=>{qScore=0;nextQ()};
+/* ---------- pannello informativo ---------- */
+const sgn=n=>n>0?'+'+n:n<0?'−'+(-n):'0';
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function showSel(){const el=$('lsel');document.querySelectorAll('#ltb tr').forEach(r=>r.classList.toggle('sel',cur&&cur.g&&+r.dataset.m===sel));
+ if(sel<0||!cur||!cur.g){el.textContent='Tocca un atomo nel modello per evidenziarlo nella tabella.';return}
+ el.textContent='Selezionato: '+mol.atoms[sel].el+(cur.g.idx.indexOf(sel)>=0?' (atomo '+(cur.g.idx.indexOf(sel)+1)+')':'')}
+function analyze(){const d=E.describe(mol);cur=d;
+ const nm=$('lname');
+ if(d.empty){nm.className='lname fail';nm.textContent='Scena vuota';$('lsub').textContent='';$('lform').textContent='';$('lgrp').innerHTML='';$('lst').textContent='';$('lrat').textContent='';$('lsk').innerHTML='';$('ltb').innerHTML='';showSel();cv.setAttribute('aria-label','Scena vuota');labels.forEach(()=>{});buildLabels();return}
+ const hide=quiz&&!quiz.done;
+ if(hide){nm.className='lname fail';nm.textContent='?'}
+ else if(d.name){nm.className='lname';nm.textContent=d.name}
+ else{nm.className='lname fail';nm.textContent='Nome non generato: '+(d.nameFail||'')}
+ $('lsub').innerHTML=(!hide&&d.trivial?'Detto anche <b>'+esc(d.trivial)+'</b>. ':'')+(d.unsat!==null?'Grado di insaturazione: <b>'+d.unsat+'</b>'+(d.rings?' · anelli: <b>'+d.rings+'</b>':'')+'.':'');
+ $('lform').innerHTML='Formula molecolare <b>'+d.formula+'</b> · M = <b>'+d.mass.toFixed(2).replace('.',',')+'</b> u';
+ const cnt={};d.groups.forEach(x=>cnt[x.t]=(cnt[x.t]||0)+1);
+ const gk=Object.keys(cnt);$('lgrp').innerHTML=gk.length?gk.map(k=>'<span class="tag a">'+esc(k)+(cnt[k]>1&&!/^(ammina|etere)/.test(k)?' ×'+cnt[k]:'')+'</span>').join(''):'<span class="tag">nessuno (solo C–C e C–H)</span>';
+ const st=d.stereo,parts=[];
+ if(st.centers.length){parts.push('<b>'+st.centers.length+' stereocentr'+(st.centers.length>1?'i':'o')+'</b> ('+st.centers.map(c=>'C'+(d.g.idx[c.atom]+1>0&&d.loc.get(c.atom)?d.loc.get(c.atom):'?')+': '+c.cip).join(', ')+'). '+(d.meso?'<b>Forma meso</b>: ha un piano di simmetria, è achirale.':'La molecola è <b>chirale</b>: esiste un enantiomero (usa «Specchio»). Stereoisomeri possibili: al massimo '+Math.pow(2,st.centers.length)+'.'))}
+ if(st.dbl.length)parts.push('Doppio legame con isomeria geometrica: <b>'+st.dbl.map(x=>x.cfg==='Z'?'cis (Z)':'trans (E)').join(', ')+'</b>. Prova «cis ⇄ trans».');
+ if(!parts.length)parts.push('Nessuno stereocentro e nessuna isomeria cis/trans: <b>achirale</b>. Per avere un C stereogenico servono 4 gruppi tutti diversi.');
+ $('lst').innerHTML=parts.join('<br>');
+ $('lrat').textContent=d.razionale||(d.rings?'composto ciclico':'');
+ $('lsk').innerHTML=E.skeletal(mol,330,170);
+ $('ltb').innerHTML='<tr><th>C</th><th>ibrid.</th><th>n.o.</th><th>H</th><th>tipo</th></tr>'+d.carbons.map(c=>'<tr data-m="'+d.g.idx[c.i]+'"><td>'+(c.loc||'sost.')+(c.stereo?'*':'')+'</td><td>'+c.hyb+'</td><td>'+sgn(c.no)+'</td><td>'+c.h+'</td><td>'+c.type+'</td></tr>').join('')+(d.carbons.length?'<tr><td colspan="5"><b>n.o. totale: '+sgn(d.carbons.reduce((s,c)=>s+c.no,0))+'</b>'+(d.carbons.some(c=>c.stereo)?' · * = stereocentro':'')+'</td></tr>':'');
+ $('ltb').querySelectorAll('tr[data-m]').forEach(r=>{r.onmouseenter=()=>hoverA=+r.dataset.m;r.onmouseleave=()=>hoverA=-1;r.onclick=()=>{sel=+r.dataset.m===sel?-1:+r.dataset.m;showSel()}});
+ showSel();buildLabels();cv.setAttribute('aria-label','Modello 3D: '+(d.name||'')+' '+d.formula);
+ if(chal>=0&&d.name&&!chalDone&&stripS(d.name)===chal$){chalDone=true;solved++;$('ch-st').innerHTML='<span class="good">Esatto!</span> Hai costruito '+esc(chal$)+'. Risolte: '+solved+'. Premi «Avanti» per la prossima.';{const cn=$('cn');if(cn){cn.textContent='Avanti ▸';cn.classList.add('on');cn.focus({preventScroll:true})}};say('Esatto: '+chal$)}}
+rebuild();cons=E.buildCons(mol);analyze();
+const screenOf=i=>{sc.updateMatrixWorld(true);const v=new THREE.Vector3();atomM[i].getWorldPosition(v);v.project(cam);const r=cv.getBoundingClientRect();return[r.left+(v.x+1)/2*r.width,r.top+(1-v.y)/2*r.height]};
+})();
+
+/* navigazione */
+{const S=[...document.querySelectorAll('main > section')];S[0].id='top';S[1].id='c1';S[6].id='c2';
+const bar=document.querySelector('.top .bar'),f=()=>{bar.style.width=(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)*100)+'%'};addEventListener('scroll',f,{passive:true});f()}
+</script>
+<script>
+/* ===== CONTENUTI: tutto ricavato dalla Guida C1+C2 ===== */
+const TOPICS=[
+{id:'organica',g:'C1',t:'Che cos’è la chimica organica',at:0,h:`
+<p>Studia i <b>composti del carbonio</b>. Nel 1826 Wöhler ottenne l’urea da un composto inorganico (cianato di ammonio) e smentì la «forza vitale».</p>
+<div class="box">NH₄OCN →(Δ) (NH₂)₂CO</div>
+<ul><li>Elementi tipici: <b>C, H, O, N, P, S</b> (CHONPS): piccoli e con elettronegatività simile, quindi legami covalenti saldi.</li>
+<li>Restano <b>inorganici</b>: CO, CO₂, acido carbonico, carbonati, cianuri.</li>
+<li>Tre gruppi: idrocarburi (solo C e H), derivati degli idrocarburi (con gruppi funzionali), biomolecole.</li></ul>`},
+{id:'cinque',g:'C1',t:'Le 5 proprietà del carbonio',at:1,h:`
+<ol><li><b>4 legami covalenti</b> e ibridazione (sp³, sp², sp).</li>
+<li><b>Numero di ossidazione</b> variabile da −4 a +4.</li>
+<li><b>Elettronegatività media</b> (2,5): condivide gli elettroni, non li perde né li prende.</li>
+<li><b>Raggio piccolo</b> (77 pm): legami singoli, doppi e tripli.</li>
+<li><b>Concatenazione</b>: catene aperte o chiuse.</li></ol>
+<div class="box">Domanda classica d’esame: sapere elencarle tutte e cinque.</div>`},
+{id:'ibrid',g:'C1',t:'Ibridazione sp³, sp², sp',at:3,h:`
+<p>Il C ha 1s² 2s² 2p²: solo 2 elettroni spaiati. Un elettrone passa da 2s a 2p (stato eccitato, 4 spaiati) e gli orbitali si <b>ibridano</b>: nascono orbitali tutti uguali.</p>
+<table><tr><th></th><th>sp³</th><th>sp²</th><th>sp</th></tr><tr><td>Legami</td><td>4 σ</td><td>3 σ + 1 π</td><td>2 σ + 2 π</td></tr><tr><td>Geometria</td><td>tetraedrica</td><td>trigonale planare</td><td>lineare</td></tr><tr><td>Angolo</td><td>109,5°</td><td>120°</td><td>180°</td></tr><tr><td>Carattere s</td><td>25%</td><td>33%</td><td>50%</td></tr><tr><td>Esempio</td><td>etano</td><td>etene</td><td>etino</td></tr></table>
+<ul><li>σ = sovrapposizione frontale, forte. π = sovrapposizione laterale di orbitali p, più debole e <b>reattivo</b>.</li>
+<li>Lunghezze: C–C 154 pm &gt; C=C 134 pm &gt; C≡C 120 pm.</li></ul>
+<div class="box">Trucco: conta i legami σ + le coppie solitarie attorno al C. 4 → sp³; 3 → sp²; 2 → sp.</div>`},
+{id:'no',g:'C1',t:'Numero di ossidazione del carbonio',at:2,h:`
+<p>Per ogni legame del C:</p>
+<ul><li><b>0</b> per ogni legame con un altro C;</li><li><b>−1</b> per ogni legame con H (atomi meno elettronegativi);</li><li><b>+1</b> per ogni legame con O, N, S, alogeni (C=O vale +2, C≡N vale +3).</li></ul>
+<p>Il n.o. di un C = somma dei suoi 4 contributi. Il n.o. della molecola = somma dei C.</p>
+<div class="box bl"><b>Esempi.</b> Etanolo CH₃–CH₂–OH: C1 = −3, C2 = −1, totale −4.<br>Acetaldeide: C2 = +1, totale −2. Acido acetico: C2 = +3, totale 0.</div>
+<p>Scala di ossidazione: <b>alcano → alcol → aldeide → acido → CO₂</b> (da −4 a +4).</p>`},
+{id:'formule',g:'C1',t:'Formule e classificazione dei C',at:'lab',h:`
+<table><tr><th>Formula</th><th>Cosa mostra</th></tr>
+<tr><td>Molecolare (bruta)</td><td>Solo il numero di atomi: C₅H₁₂</td></tr>
+<tr><td>Di Lewis</td><td>Tutti i legami e le coppie di elettroni</td></tr>
+<tr><td>Razionale</td><td>Evidenzia i legami C–C: CH₃–CH₂–CH₂–CH₂–CH₃</td></tr>
+<tr><td>Condensata</td><td>Raggruppa gli atomi: CH₃(CH₂)₃CH₃, (CH₃)₄C</td></tr>
+<tr><td>Topologica</td><td>Zig-zag: ogni vertice/estremità è un C, gli H del C non si scrivono, i gruppi funzionali sì</td></tr></table>
+<p>Catene: aperte (aciclici, lineari o ramificate) o chiuse (carbocicliche; eterocicliche se c’è O, N, S…).</p>
+<div class="box">C <b>primario</b> = legato a 1 altro C; <b>secondario</b> = 2; <b>terziario</b> = 3; <b>quaternario</b> = 4. Si contano i C legati, non gli H.</div>`},
+{id:'isostr',g:'C1',t:'Isomeria di struttura',at:11,h:`
+<p>Isomeri = stessa formula molecolare, diversa struttura e quindi proprietà diverse. Crescono in fretta: C₄H₁₀ 2, C₅H₁₂ 3, C₆H₁₄ 5, C₇H₁₆ 9.</p>
+<table><tr><th>Tipo</th><th>Cosa cambia</th><th>Esempio</th></tr>
+<tr><td>Di catena</td><td>scheletro di C</td><td>butano / 2-metilpropano</td></tr>
+<tr><td>Di posizione</td><td>posizione di legame multiplo, sostituente o gruppo</td><td>1-propanolo / 2-propanolo</td></tr>
+<tr><td>Di gruppo funzionale</td><td>gruppi diversi</td><td>propanale / propanone</td></tr></table>
+<div class="box bl"><b>Metodo.</b> 1) Grado di insaturazione = (2C + 2 − H)/2 (0 = solo catene sature; 1 = un doppio legame o un anello). 2) Parti dalla catena lineare, accorcia di 1 C e sposta il C tolto come ramificazione. 3) Sposta legame multiplo o gruppo. 4) Controlla cis/trans e stereocentri.</div>`},
+{id:'conf',g:'C1',t:'Isomeria conformazionale',at:4,h:`
+<p>Nasce dalla <b>libera rotazione</b> attorno a un legame semplice C–C. I conformeri si interconvertono da soli e <b>non sono separabili</b>.</p>
+<ul><li><b>Sfalsata</b>: gli H anteriori sono il più lontano possibile da quelli posteriori → più stabile.</li>
+<li><b>Eclissata</b>: gli H sono allineati → più ingombro e tensione → meno stabile (circa 12 kJ/mol in più nell’etano).</li></ul>
+<div class="box rd">Errore tipico: confondere conformeri e isomeri configurazionali. I conformeri si convertono ruotando, i configurazionali no.</div>`},
+{id:'cis',g:'C1',t:'Isomeria geometrica cis/trans',at:12,h:`
+<p>Si ha quando la rotazione è <b>impedita</b>: attorno a un doppio legame (per il π) o in un anello. <b>cis</b> = gruppi dalla stessa parte; <b>trans</b> = da parti opposte.</p>
+<div class="box">Condizione: <b>ogni C del doppio legame deve avere due sostituenti diversi.</b></div>
+<ul><li>Sì: 2-butene, 1,2-dicloroetene.</li><li>No: 1-butene (un C ha due H), 1,1-dicloroetene, 2-metil-2-butene (un C ha due CH₃).</li></ul>
+<p>Nei cicloalcani vale lo stesso: cis/trans-1,4-dimetilcicloesano.</p>`},
+{id:'chir',g:'C1',t:'Chiralità e isomeria ottica',at:5,h:`
+<p>Gli <b>enantiomeri</b> sono immagini speculari non sovrapponibili (come le mani). Servono:</p>
+<ol><li>almeno uno <b>stereocentro</b> = C sp³ con 4 gruppi tutti diversi;</li><li>nessun piano di simmetria.</li></ol>
+<ul><li><b>Uguali</b> negli enantiomeri (con reagenti achirali): p.f., p.e., densità, solubilità.</li>
+<li><b>Diversi</b>: verso di rotazione della luce polarizzata (+ destrogiro, − levogiro) e reattività verso reagenti chirali (enzimi, farmaci).</li>
+<li><b>Racemo</b>: miscela 50:50, non ruota la luce.</li>
+<li><b>Meso</b>: stereocentri ma piano di simmetria interno → achirale (2,3-diclorobutano: R,R + S,S + meso).</li>
+<li>Con n stereocentri: al massimo 2ⁿ stereoisomeri.</li></ul>
+<div class="box rd">Errori: dire «due stereocentri = sempre chirale» (c’è il meso); legare il segno (+/−) alla lettera R/S (sono indipendenti).</div>`},
+{id:'fisiche',g:'C1',t:'Proprietà fisiche',at:8,h:`
+<ul><li><b>Stato fisico</b>: poche interazioni deboli → gas; tante e forti (legami a H) → liquido o solido.</li>
+<li><b>Punto di ebollizione</b>: sale con la massa, sale molto con i legami a idrogeno (–OH, –COOH, –NH₂).</li>
+<li><b>Solubilità</b>: gruppi idrofili → acqua; catene alchiliche lunghe → solventi apolari. Il simile scioglie il simile.</li></ul>
+<div class="box bl">Etanolo (46 u) bolle a 78 °C, butano (58 u) a −0,5 °C: i legami a idrogeno contano più della massa. L’etanolo si scioglie in acqua, l’1-esanolo quasi no (prevale la catena apolare).</div>`},
+{id:'gruppi',g:'C1',t:'Gruppi funzionali',at:'lab',h:`
+<p>Gruppo funzionale = atomo o gruppo di atomi che dà una reattività specifica. Stesso gruppo = stessa classe.</p>
+<table><tr><th>Gruppo</th><th>Classe</th><th>Suffisso</th></tr>
+<tr><td>C–C</td><td>alcani</td><td>-ano</td></tr><tr><td>C=C</td><td>alcheni</td><td>-ene</td></tr><tr><td>C≡C</td><td>alchini</td><td>-ino</td></tr>
+<tr><td>–F, –Cl, –Br, –I</td><td>alogenuri alchilici</td><td>prefisso cloro-, bromo-…</td></tr>
+<tr><td>–OH</td><td>alcoli</td><td>-olo</td></tr><tr><td>–SH</td><td>tioli</td><td>-tiolo</td></tr><tr><td>–O–</td><td>eteri</td><td>alcossi-</td></tr>
+<tr><td>C=O terminale (–CHO)</td><td>aldeidi</td><td>-ale</td></tr><tr><td>C=O interno</td><td>chetoni</td><td>-one</td></tr>
+<tr><td>–COOH</td><td>acidi carbossilici</td><td>acido -oico</td></tr><tr><td>–COO–</td><td>esteri</td><td>-ato di -ile</td></tr>
+<tr><td>–CON&lt;</td><td>ammidi</td><td>-ammide</td></tr><tr><td>–NH₂</td><td>ammine</td><td>-ammina</td></tr></table>
+<p>La reattività aumenta con: legami multipli (il π è fragile), atomi elettronegativi (polarizzano il legame), gruppi funzionali.</p>`},
+{id:'ind',g:'C1',t:'Effetto induttivo',at:9,h:`
+<p>È lo spostamento <b>permanente</b> di elettroni lungo i legami σ verso l’atomo più elettronegativo. Crea δ− sull’atomo elettronegativo e δ+ sul C, e si <b>attenua con la distanza</b>.</p>
+<table><tr><th>−I (attrattori)</th><th>+I (donatori)</th></tr><tr><td>alogeni, NO₂, C=O, COOH, doppi/tripli legami</td><td>gruppi alchilici (CH₃, CH₂CH₃…)</td></tr><tr><td>aumentano la reattività</td><td>riducono la reattività</td></tr></table>`},
+{id:'nomalc',g:'C2',t:'Nomenclatura degli alcani (6 regole)',at:7,h:`
+<ol><li>Catena continua <b>più lunga</b> = nome base (met-, et-, prop-, but-, pent-, ess-, ept-, ott-, non-, dec-).</li>
+<li>Numera dall’estremità che dà ai sostituenti i <b>numeri più bassi</b> (primo punto di differenza).</li>
+<li>Sostituente con il suo numero: 2-metil-.</li>
+<li>Ripetuti: di-, tri-, tetra- e numeri separati da virgole: 2,2,4-trimetil-.</li>
+<li>Sostituenti diversi in <b>ordine alfabetico</b> (ignorando di-, tri-): 3-etil-2-metilesano.</li>
+<li>Se due catene sono pari, scegli quella con <b>più sostituenti</b>.</li></ol>
+<p>Radicali: metile, etile, propile, isopropile, butile, isobutile, sec-butile, terz-butile.</p>
+<div class="box bl">(CH₃)₃C–CH₂–CH(CH₃)₂ → 5 C, metili in 2,2,4 (non 2,4,4) → <b>2,2,4-trimetilpentano</b>.</div>
+<p class="hint">Alcani: il p.e. sale con la massa (metano −162 °C … ottano 126 °C); da 1 a 4 C gas, da 5 a circa 17 C liquidi. A pari formula i ramificati bollono più in basso (pentano 36 °C, neopentano 9,5 °C).</p>`},
+{id:'nomins',g:'C2',t:'Cicloalcani, alcheni e alchini: nomi',at:7,h:`
+<p><b>Cicloalcani</b>: prefisso ciclo-. Un solo sostituente non si numera (metilcicloesano); con più sostituenti numeri più bassi + ordine alfabetico (1-etil-2-metilciclopentano). Tensione: ciclopropano 60°, ciclobutano circa 90° (molto tesi); ciclopentano e cicloesano quasi senza tensione.</p>
+<p><b>Alcheni e alchini</b>:</p>
+<ol><li>Catena più lunga <b>che contiene il legame multiplo</b>.</li><li>Numera in modo che il legame multiplo abbia il numero più basso (ha priorità sui sostituenti).</li><li>Suffisso -ene / -ino con il numero (2-pentene, 1-butino).</li><li>Poi i sostituenti; cis/trans all’inizio. Più doppi legami: -diene.</li></ol>
+<div class="box bl">CH₃–CH(CH₃)–CH=CH–CH₃ → <b>4-metil-2-pentene</b> (doppio legame in 2, numerando da destra).<br>HC≡C–CH(CH₃)–CH₃ → <b>3-metil-1-butino</b>.</div>
+<p>Radicali: vinile CH₂=CH– e allile CH₂=CH–CH₂–.</p>`},
+{id:'radic',g:'C2',t:'Alcani: combustione e alogenazione radicalica',at:10,h:`
+<p>Gli alcani sono saturi e apolari: fanno quasi solo due reazioni.</p>
+<div class="box"><b>Combustione</b>: CₙH₂ₙ₊₂ + (3n+1)/2 O₂ → n CO₂ + (n+1) H₂O.<br>Propano: C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O. Ottano: 2 C₈H₁₈ + 25 O₂ → 16 CO₂ + 18 H₂O.</div>
+<p><b>Alogenazione radicalica</b> (serve UV o calore), reazione a catena in 3 stadi:</p>
+<ol><li><b>Inizio</b>: omolisi Cl₂ →(hν) 2 Cl·</li><li><b>Propagazione</b>: CH₄ + Cl· → CH₃· + HCl; CH₃· + Cl₂ → CH₃Cl + Cl·</li><li><b>Terminazione</b>: due radicali si combinano (Cl·+Cl·, CH₃·+Cl·, CH₃·+CH₃·).</li></ol>
+<ul><li>Radicale = elettrone spaiato. Omolitica = un elettrone a ciascuno; eterolitica = entrambi a un atomo (ioni).</li>
+<li>Con eccesso di Cl₂: CH₃Cl → CH₂Cl₂ → CHCl₃ → CCl₄.</li>
+<li>Stabilità dei radicali: terziario &gt; secondario &gt; primario &gt; metile. Il Br è più selettivo del Cl.</li></ul>`},
+{id:'ciclor',g:'C2',t:'Cicloalcani: apertura d’anello',at:6,h:`
+<p>Combustione e alogenazione radicalica come gli alcani. In più, solo <b>ciclopropano e ciclobutano</b> danno addizione con <b>apertura d’anello</b>, per l’elevata tensione.</p>
+<ul><li>ciclopropano + H₂/Pt → propano</li><li>ciclopropano + Br₂ → 1,3-dibromopropano</li><li>ciclobutano + Br₂/UV → 1,4-dibromobutano</li><li>ciclopentano + H₂/Pt → nessuna reazione (con Br₂/UV: sostituzione, bromociclopentano)</li></ul>
+<p>Attenzione: alcheni e cicloalcani hanno la stessa formula CₙH₂ₙ, quindi sono isomeri (propene e ciclopropano).</p>`},
+{id:'alcheni',g:'C2',t:'Alcheni: struttura e addizione',at:13,h:`
+<p>CₙH₂ₙ, suffisso -ene, C sp², planari a 120°. Doppio legame = 1 σ + 1 π. Tre conseguenze:</p>
+<ol><li>niente libera rotazione → <b>cis/trans</b>;</li><li>C=C più corto di C–C;</li><li>il π rende la molecola molto più <b>reattiva</b>.</li></ol>
+<p>Il π è ricco di elettroni (nucleofilo): lo attaccano gli <b>elettrofili</b>. Si rompe il π e nascono due nuovi σ: reazione di <b>addizione</b>.</p>
+<table><tr><th>Reazione</th><th>Esempio</th></tr><tr><td>Idrogenazione H₂/Pt, Pd, Ni</td><td>etene → etano</td></tr><tr><td>Alogenazione X₂</td><td>etene + Br₂ → 1,2-dibromoetano (decolora l’acqua di bromo)</td></tr><tr><td>Idroalogenazione HX</td><td>propene + HBr → 2-bromopropano</td></tr><tr><td>Idratazione H₂O/H⁺</td><td>etene → etanolo</td></tr></table>
+<div class="box"><b>Markovnikov</b>: l’H va sul C del doppio legame che ha già più H; X sul C più sostituito, perché si forma il carbocatione più stabile (3° &gt; 2° &gt; 1°, per l’effetto +I degli alchili). Con perossidi: anti-Markovnikov (radicalico).</div>
+<div class="box rd">Alcani → <b>sostituzione</b> radicalica (si perde un H). Alcheni → <b>addizione</b> (nessun H perso). Nell’idrogenazione H₂ si ossida, l’alchene si riduce (n.o. dei C da −2 a −3).</div>`},
+{id:'alchini',g:'C2',t:'Alchini e acidità del terminale',at:14,h:`
+<p>CₙH₂ₙ₋₂, suffisso -ino, C sp lineari (180°). Triplo legame = 1 σ + 2 π. Danno le stesse addizioni degli alcheni, anche due volte (HC≡CH + 2 H₂/Pt → etano; con catalizzatore di Lindlar si ferma ad alchene cis).</p>
+<div class="box"><b>Acidità</b>: R–C≡C–H + NaNH₂ → R–C≡C⁻ Na⁺ + NH₃ (acetiluro).</div>
+<table><tr><th>C</th><th>carattere s</th><th>pKa circa</th></tr><tr><td>alcano sp³</td><td>25%</td><td>50</td></tr><tr><td>alchene sp²</td><td>33%</td><td>44</td></tr><tr><td>alchino sp</td><td>50%</td><td>25 (il più acido)</td></tr></table>
+<p><b>Spiegazione da scrivere:</b> l’orbitale s è più vicino al nucleo, quindi il C sp trattiene più forte gli elettroni: il legame C–H è più polarizzato, H⁺ si cede più facilmente e l’acetiluro è più stabile.</p>
+<p>Succede solo con alchini <b>terminali</b>: il 2-butino non ha H sul C sp.</p>`},
+{id:'ciclo',g:'C2',t:'Ciclo del carbonio e sostenibilità',at:15,h:`
+<ul><li>Il C sta in rocce, giacimenti fossili, atmosfera (CO₂) e oceani. Fotosintesi → catena alimentare → respirazione e decomposizione riportano CO₂ in atmosfera.</li>
+<li><b>Impatto antropico</b>: combustione di fossili (idrocarburi) e deforestazione immettono CO₂ più in fretta di quanto venga assorbita → effetto serra e riscaldamento globale.</li>
+<li><b>Confini planetari</b> (Stockholm Resilience Centre, 2009): soglie entro cui l’umanità può operare senza destabilizzare la Terra. Nel testo: clima, biodiversità, cicli di azoto e fosforo, ozono stratosferico, acidificazione degli oceani, acqua dolce.</li>
+<li><b>Carbon footprint</b>: emissioni totali di gas serra di una persona, prodotto o organizzazione, in CO₂ equivalente.</li></ul>
+<p class="hint">Nel modello originale i confini sono nove; se il professore chiede l’elenco usa quello delle sue slide.</p>`}
+];
+
+/* [gruppo, fronte, retro] */
+const CARDS=[
+['C1','Le 5 proprietà del carbonio','4 legami covalenti e ibridazione · n.o. da −4 a +4 · elettronegatività media (2,5) · raggio piccolo (77 pm) · concatenazione.'],
+['C1','Quali composti con C restano inorganici?','Ossidi di carbonio (CO, CO₂), acido carbonico, carbonati, cianuri.'],
+['C1','Cosa dimostrò Wöhler nel 1826?','Sintetizzò l’urea da cianato di ammonio (inorganico): non serve una «forza vitale».'],
+['C1','Elementi tipici dei composti organici','C, H, O, N, P, S (CHONPS): piccoli e di elettronegatività simile, legami covalenti saldi.'],
+['C1','Geometria e angolo sp³ / sp² / sp','sp³ tetraedrica 109,5° (4σ) · sp² trigonale planare 120° (3σ+1π) · sp lineare 180° (2σ+2π).'],
+['C1','Carattere s di sp³, sp², sp','25%, 33%, 50%.'],
+['C1','Differenza tra legame σ e π','σ: sovrapposizione frontale, forte. π: sovrapposizione laterale di orbitali p, più debole e reattivo.'],
+['C1','Lunghezze dei legami tra C','C–C 154 pm > C=C 134 pm > C≡C 120 pm.'],
+['C1','Trucco per riconoscere l’ibridazione','Conta σ + coppie solitarie: 4 → sp³, 3 → sp², 2 → sp.'],
+['C1','Regole del n.o. del carbonio','C–C = 0 · C–H = −1 · C–atomo più elettronegativo = +1 (C=O vale +2, C≡N +3). Somma dei 4 legami.'],
+['C1','Scala di ossidazione del C','alcano → alcol → aldeide → acido → CO₂ (n.o. da −4 a +4).'],
+['C1','n.o. del C2 in etanolo, acetaldeide, acido acetico','−1, +1, +3 (totali −4, −2, 0).'],
+['C1','C primario, secondario, terziario','Legato a 1, 2, 3 altri C (4 = quaternario). Si contano i C, non gli H.'],
+['C1','Formula topologica','Zig-zag: vertici ed estremità sono C, gli H del C non si scrivono, i gruppi funzionali sì.'],
+['C1','Quanti isomeri: C₄H₁₀, C₅H₁₂, C₆H₁₄, C₇H₁₆?','2, 3, 5, 9.'],
+['C1','Grado di insaturazione di CₓHᵧ','(2C + 2 − H)/2. 0 = satura aperta; 1 = un doppio legame o un anello.'],
+['C1','Tre tipi di isomeria di struttura','Di catena (butano/isobutano) · di posizione (1-/2-propanolo) · di gruppo funzionale (propanale/propanone).'],
+['C1','Conformeri: sfalsata o eclissata più stabile?','Sfalsata (circa 12 kJ/mol in meno). I conformeri si interconvertono ruotando il legame semplice.'],
+['C1','Quando c’è isomeria cis/trans?','Rotazione impedita (doppio legame o anello) e ogni C del doppio legame con due sostituenti diversi.'],
+['C1','Condizioni per la chiralità','Almeno uno stereocentro (C sp³ con 4 gruppi diversi) e nessun piano di simmetria.'],
+['C1','Cos’è una forma meso?','Ha stereocentri ma un piano di simmetria interno: è achirale (es. 2,3-diclorobutano R,S).'],
+['C1','Cosa cambia tra due enantiomeri?','Verso di rotazione della luce polarizzata e reattività con reagenti chirali. P.e., p.f., densità e solubilità sono uguali.'],
+['C1','Numero massimo di stereoisomeri','2ⁿ con n stereocentri (meno se c’è una forma meso).'],
+['C1','Perché l’etanolo bolle più del butano?','Legami a idrogeno (–OH): contano più della massa (46 u contro 58 u).'],
+['C1','Suffissi: aldeide, chetone, acido, ammina','-ale, -one, acido -oico, -ammina.'],
+['C1','Effetto induttivo: −I e +I','−I: alogeni, NO₂, C=O, COOH (aumentano la reattività). +I: alchili (la riducono). Si attenua con la distanza.'],
+['C2','Formule generali di alcani, alcheni, alchini','CₙH₂ₙ₊₂ · CₙH₂ₙ · CₙH₂ₙ₋₂. I cicloalcani sono CₙH₂ₙ (isomeri degli alcheni).'],
+['C2','Perché i ramificati bollono più in basso?','Più compatti: meno superficie di contatto, forze di dispersione più deboli (pentano 36 °C, neopentano 9,5 °C).'],
+['C2','Primo passo per nominare un alcano','Trova la catena continua più lunga (a parità, quella con più sostituenti).'],
+['C2','Come si numera la catena?','Dall’estremità che dà i numeri più bassi ai sostituenti; negli insaturi il legame multiplo ha la priorità.'],
+['C2','Ordine dei sostituenti nel nome','Alfabetico, ignorando di-, tri-, tetra-: 3-etil-2-metilesano.'],
+['C2','Nome di (CH₃)₃C–CH₂–CH(CH₃)₂','2,2,4-trimetilpentano (isoottano).'],
+['C2','Angoli di ciclopropano e ciclobutano','60° e circa 90° invece di 109,5°: molto tesi e reattivi.'],
+['C2','Quali cicloalcani si aprono con addizione?','Solo ciclopropano e ciclobutano (H₂/Pt o Br₂).'],
+['C2','Combustione di un alcano CₙH₂ₙ₊₂','+ (3n+1)/2 O₂ → n CO₂ + (n+1) H₂O. Bilancia C, poi H, poi O.'],
+['C2','I 3 stadi dell’alogenazione radicalica','Inizio (Cl₂ → 2 Cl·, UV) · propagazione (R–H + Cl· → R· + HCl; R· + Cl₂ → RCl + Cl·) · terminazione (radicali che si combinano).'],
+['C2','Stabilità dei radicali','Terziario > secondario > primario > metile.'],
+['C2','Omolitica o eterolitica?','Omolitica: un elettrone a ciascun atomo (radicali). Eterolitica: entrambi a un atomo (ioni).'],
+['C2','Reazione tipica degli alcheni','Addizione al doppio legame: si rompe il π e si formano due σ (H₂, X₂, HX, H₂O).'],
+['C2','Regola di Markovnikov','L’H va sul C del doppio legame con più H; X sul più sostituito (carbocatione più stabile).'],
+['C2','Propene + HBr','2-bromopropano (Markovnikov).'],
+['C2','Etene + H₂/Pt: chi si ossida?','Si ottiene etano. H₂ si ossida (riducente), l’alchene si riduce.'],
+['C2','Perché gli alchini terminali sono acidi?','C sp: 50% carattere s, trattiene più forte gli elettroni, C–H più polarizzato, acetiluro stabile.'],
+['C2','Quale alchino reagisce con NaNH₂?','Solo il terminale (1-butino). Il 2-butino non ha H sul C sp.'],
+['C2','Cos’è la carbon footprint?','Stima delle emissioni di gas serra di persona, prodotto o organizzazione, in CO₂ equivalente.'],
+['C2','Chi propose i confini planetari e quando?','Stockholm Resilience Centre, nel 2009.']
+];
+
+/* [gruppo, domanda, giusta, [sbagliate x3], spiegazione] */
+const QS=[
+['C1','Quale NON è una proprietà che rende speciale il carbonio?','Elettronegatività molto alta (4,0)',['Forma 4 legami covalenti','Numero di ossidazione da −4 a +4','Forte tendenza alla concatenazione'],'Il C ha elettronegatività <b>media</b> (2,5): per questo condivide gli elettroni invece di perderli o acquistarli.'],
+['C1','Quale composto, pur contenendo carbonio, è considerato inorganico?','CO₂',['CH₄','C₂H₆','CH₃OH'],'Restano inorganici gli ossidi di carbonio (CO, CO₂), l’acido carbonico, i carbonati e i cianuri.'],
+['C1','Cosa dimostrò nel 1826 la sintesi dell’urea di Wöhler?','Che i composti organici si possono ottenere da inorganici, senza «forza vitale»',['Che l’urea è un idrocarburo','Che il carbonio ha 4 legami','Che le biomolecole sono inorganiche'],'Wöhler ottenne l’urea dal cianato di ammonio (NH₄OCN) scaldando: nessuna forza vitale necessaria.'],
+['C1','Ibridazione e angolo dei C dell’etene?','sp², 120°',['sp³, 109,5°','sp, 180°','sp², 109,5°'],'Il doppio legame ha 3 σ + 1 π attorno a ciascun C: sp², geometria trigonale planare, 120°.'],
+['C1','Quanti legami σ e π ci sono tra i due C dell’etino?','1 σ + 2 π',['2 σ + 1 π','3 σ','1 σ + 1 π'],'Il triplo legame è sempre 1 σ (frontale) più 2 π (laterali, perpendicolari).'],
+['C1','Quale legame tra C è il più lungo?','C–C (154 pm)',['C=C (134 pm)','C≡C (120 pm)','Hanno tutti la stessa lunghezza'],'Più legami tra due C → distanza minore: C–C > C=C > C≡C.'],
+['C1','Ibridazione del C del gruppo carbonilico C=O?','sp²',['sp³','sp','Non è ibridato'],'Ha 3 legami σ e 1 π: tre direzioni → sp².'],
+['C1','Numero di ossidazione del C nel metano CH₄?','−4',['0','−2','+4'],'4 legami C–H, ciascuno vale −1: −4 (il C più ridotto).'],
+['C1','Numero di ossidazione totale dell’etanolo CH₃–CH₂–OH?','−4',['−2','0','−3'],'C1: 3 H = −3. C2: 2 H (−2) + 1 O (+1) = −1. Totale −3 + (−1) = −4.'],
+['C1','n.o. del C del gruppo COOH nell’acido acetico?','+3',['+1','+2','−3'],'C–C = 0, C=O = +2, C–O = +1: totale +3.'],
+['C1','Quale sequenza è un’ossidazione progressiva del carbonio?','alcano → alcol → aldeide → acido → CO₂',['CO₂ → acido → aldeide → alcol → alcano','alcol → alcano → acido → aldeide','aldeide → alcano → CO₂ → alcol'],'Il n.o. sale da −4 (alcano) a +4 (CO₂); nell’altro verso è una riduzione.'],
+['C1','Un carbonio è «secondario» quando è legato a…','2 altri atomi di carbonio',['2 atomi di idrogeno','2 atomi qualsiasi','3 altri atomi di carbonio'],'La classificazione conta i <b>C legati</b>, non gli H: primario 1, secondario 2, terziario 3, quaternario 4.'],
+['C1','Quanti isomeri ha C₅H₁₂?','3',['2','4','5'],'Pentano, 2-metilbutano e 2,2-dimetilpropano (tre isomeri di catena).'],
+['C1','Grado di insaturazione di C₄H₈?','1',['0','2','3'],'(2·4 + 2 − 8)/2 = 1: un doppio legame oppure un anello.'],
+['C1','Propanale e propanone sono isomeri…','di gruppo funzionale',['di catena','di posizione','geometrici'],'Stessa formula C₃H₆O, ma uno è un’aldeide e l’altro un chetone.'],
+['C1','1-propanolo e 2-propanolo sono isomeri…','di posizione',['di catena','di gruppo funzionale','conformazionali'],'Stesso scheletro e stesso gruppo –OH, ma in posizione diversa.'],
+['C1','Quale conformazione dell’etano è più stabile?','Sfalsata',['Eclissata','Sono ugualmente stabili','Nessuna: l’etano non ruota'],'Nella sfalsata gli H anteriori e posteriori sono il più lontani possibile: minima energia (circa 12 kJ/mol meno dell’eclissata).'],
+['C1','Differenza tra conformeri e isomeri configurazionali?','I conformeri si interconvertono ruotando un legame semplice, i configurazionali no',['I conformeri hanno formule diverse','I configurazionali si interconvertono ruotando','Non c’è differenza'],'Per passare da un isomero configurazionale all’altro bisogna rompere legami; i conformeri ruotano liberamente.'],
+['C1','Quale composto ha isomeri cis/trans?','2-butene',['1-butene','1,1-dicloroetene','2-metil-2-butene'],'Serve che ogni C del doppio legame abbia due sostituenti <b>diversi</b>: nel 2-butene H e CH₃ su ciascun C.'],
+['C1','Quali sono le condizioni per l’enantiomeria?','Stereocentro e assenza di piano di simmetria',['Un C sp² e un H','Solo un doppio legame','Almeno due atomi di C uguali'],'Stereocentro = C sp³ con 4 gruppi tutti diversi; se c’è un piano di simmetria la molecola è achirale.'],
+['C1','Quale composto è chirale?','2-clorobutano',['3-cloropentano','2-propanolo','Cloroetano'],'Il C2 del 2-clorobutano ha H, Cl, CH₃, CH₂CH₃ (tutti diversi). Negli altri c’è sempre un gruppo ripetuto.'],
+['C1','Cos’è una forma meso?','Molecola con stereocentri ma con un piano di simmetria interno, achirale',['Miscela 50:50 di due enantiomeri','Enantiomero levogiro','Isomero senza stereocentri'],'La miscela 50:50 è il <b>racemo</b>. La meso è una singola molecola achirale (es. 2,3-diclorobutano R,S).'],
+['C1','In cosa differiscono due enantiomeri?','Verso di rotazione della luce polarizzata',['Punto di ebollizione','Densità','Solubilità in acqua'],'P.e., densità e solubilità sono uguali (reagenti achirali). Cambiano l’attività ottica (+/−) e la reattività con molecole chirali come gli enzimi.'],
+['C1','Quale ha il punto di ebollizione più alto?','Pentano (36 °C)',['2,2-dimetilpropano (9,5 °C)','2-metilbutano (28 °C)','Butano (−0,5 °C)'],'Più massa e catena lineare = più superficie di contatto e forze di dispersione più forti.'],
+['C1','Perché l’etanolo (46 u) bolle più del butano (58 u)?','Per i legami a idrogeno del gruppo –OH',['Perché è più pesante','Perché è più ramificato','Perché è apolare'],'I legami a idrogeno contano più della massa: etanolo 78 °C, butano −0,5 °C.'],
+['C1','Quale è più solubile in acqua?','Etanolo',['1-esanolo','Esano','Butano'],'Nell’etanolo prevale la parte idrofila –OH; negli altri prevale la catena apolare.'],
+['C1','Il gruppo –COOH caratterizza…','gli acidi carbossilici',['le aldeidi','gli esteri','le ammidi'],'Si nomina «acido …-oico». Le aldeidi hanno –CHO, gli esteri –COO–.'],
+['C1','Quale suffisso hanno i chetoni?','-one',['-ale','-olo','-oico'],'Chetone: C=O interno (propanone). Aldeide: -ale. Alcol: -olo.'],
+['C1','Quali gruppi hanno effetto induttivo −I?','Alogeni, NO₂, C=O, COOH',['CH₃ e CH₂CH₃','Solo i gruppi alchilici','Nessun gruppo'],'−I = attrattori di elettroni (più elettronegativi). I gruppi alchilici sono +I (donatori).'],
+['C2','Qual è il nome di (CH₃)₃C–CH₂–CH(CH₃)₂?','2,2,4-trimetilpentano',['2,4,4-trimetilpentano','2,2,4-trimetilesano','3-metilpentano'],'Catena di 5 C. Numerando da sinistra i metili sono in 2,2,4 (da destra 2,4,4): vince il primo punto di differenza più basso.'],
+['C2','In «3-etil-2-metilesano» perché etil viene prima di metil?','Ordine alfabetico',['Perché è più grande','Perché ha il numero più alto','Perché ha più C'],'I sostituenti diversi si scrivono in ordine alfabetico (e prima di m), ignorando di-, tri-.'],
+['C2','Nome di CH₃–CH(CH₃)–CH=CH–CH₃?','4-metil-2-pentene',['2-metil-3-pentene','4-metil-3-pentene','2-metil-2-pentene'],'Il doppio legame ha la priorità nella numerazione: numerando da destra sta in 2 e il metile in 4.'],
+['C2','Quale formula generale hanno gli alchini?','CₙH₂ₙ₋₂',['CₙH₂ₙ₊₂','CₙH₂ₙ','CₙHₙ'],'Alcani CₙH₂ₙ₊₂, alcheni e cicloalcani CₙH₂ₙ, alchini CₙH₂ₙ₋₂.'],
+['C2','Con la stessa formula CₙH₂ₙ, gli alcheni e i cicloalcani sono…','isomeri tra loro',['la stessa molecola','alcani','sempre cis/trans'],'Propene e ciclopropano sono entrambi C₃H₆ ma strutture diverse.'],
+['C2','Bilancia C₃H₈ + ? O₂ → 3 CO₂ + 4 H₂O','5',['3','4','7'],'O a destra: 3·2 + 4 = 10 → 5 O₂. Formula: (3n+1)/2 con n=3 dà 5.'],
+['C2','Nella combustione 2 C₈H₁₈ + ? O₂ → 16 CO₂ + 18 H₂O, quanti O₂?','25',['16','18','26'],'O a destra: 16·2 + 18 = 50 → 25 O₂.'],
+['C2','In quale stadio dell’alogenazione radicalica si forma Cl·?','Inizio: omolisi di Cl₂ con UV',['Terminazione','Propagazione con CH₃Cl','Non si forma mai'],'Cl₂ + hν → 2 Cl·. In propagazione Cl· viene poi rigenerato, ma nasce nell’inizio.'],
+['C2','Ordine di stabilità dei radicali alchilici?','Terziario > secondario > primario > metile',['Metile > primario > secondario > terziario','Tutti uguali','Primario > terziario > secondario'],'I gruppi alchilici con effetto +I stabilizzano l’elettrone spaiato.'],
+['C2','Con eccesso di Cl₂ il metano arriva fino a…','CCl₄ (tetraclorometano)',['CH₃Cl','Solo CH₂Cl₂','C₂H₆'],'Polialogenazione: CH₃Cl → CH₂Cl₂ → CHCl₃ → CCl₄.'],
+['C2','Quale cicloalcano NON dà apertura d’anello con H₂/Pt?','Ciclopentano',['Ciclopropano','Ciclobutano','Metilciclopropano'],'Solo gli anelli molto tesi (3 e 4 termini) si aprono; il ciclopentano è quasi privo di tensione.'],
+['C2','Ciclobutano + Br₂/UV (apertura d’anello) dà…','1,4-dibromobutano',['Bromociclobutano','1,3-dibromopropano','Butano'],'Si rompe un legame C–C e i due Br si addizionano alle estremità della catena di 4 C.'],
+['C2','Quale reazione è tipica degli alcheni?','Addizione',['Sostituzione radicalica','Solo combustione','Nessuna reazione'],'Il π si rompe e si formano due σ: nessun atomo viene perso. La sostituzione radicalica è degli alcani.'],
+['C2','Nell’idrogenazione etene + H₂/Pt → etano, cosa si ossida?','H₂ (l’alchene si riduce)',['L’etene','Il catalizzatore Pt','Niente: non è redox'],'I C dell’alchene passano da n.o. −2 a −3 (si riducono); H₂ è l’agente riducente.'],
+['C2','Propene + HBr dà, secondo Markovnikov…','2-bromopropano',['1-bromopropano','1,2-dibromopropano','Propano'],'L’H va sul C con più H (C1), il Br sul C2: si forma il carbocatione secondario, più stabile.'],
+['C2','Quale composto reagisce con NaNH₂?','1-butino',['2-butino','1-butene','Butano'],'Serve un H su un C sp: solo gli alchini <b>terminali</b>. Prodotto: acetiluro CH₃CH₂C≡C⁻Na⁺.'],
+['C2','Perché l’etino è più acido dell’etene?','Il C sp ha 50% di carattere s e trattiene più forte gli elettroni',['Ha più atomi di H','Il C sp è meno elettronegativo','Ha un solo legame σ'],'Più carattere s = orbitale più vicino al nucleo → C–H più polarizzato, H⁺ ceduto più facilmente, acetiluro stabile.'],
+['C2','Quale reazione decolora l’acqua di bromo (test per gli insaturi)?','Etene + Br₂ → 1,2-dibromoetano',['Etano + Br₂ al buio','Metano + O₂','Ciclopentano + H₂'],'L’addizione di Br₂ al doppio legame consuma il bromo colorato; gli alcani senza UV non reagiscono.'],
+['C2','Che cos’è la carbon footprint?','Stima delle emissioni di gas serra in CO₂ equivalente',['La quantità di carbonio nei fossili','Il carbonio assorbito dagli oceani','Il numero di C in una molecola'],'Si misura per persona, prodotto o organizzazione e si esprime in CO₂ equivalente.'],
+['C2','Chi propose i confini planetari e quando?','Stockholm Resilience Centre, 2009',['IPCC, 1988','ONU, 1992','NASA, 2015'],'Definiscono le soglie critiche entro cui l’umanità può operare senza destabilizzare il sistema Terra.']
+];
+
+/* ===== STUDIO, FLASHCARD, QUIZ, GUIDA LATERALE ===== */
+(()=>{
+const $=id=>document.getElementById(id),R=n=>Math.floor(Math.random()*n);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=R(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+const S=[...document.querySelectorAll('main > section')];
+const target=t=>t==='lab'?$('lab'):S[t];
+const go=t=>{const el=target(t);if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})};
+let store={};try{store=JSON.parse(localStorage.getItem('chimorg')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('chimorg',JSON.stringify(store))}catch(e){}};
+const done=store.done=store.done||{};
+
+/* ---------- studio ---------- */
+function renderStudy(){
+ const box=$('stl');let html='',last='';
+ TOPICS.forEach((t,i)=>{
+  if(t.g!==last){last=t.g;html+='<div class="grp">'+(t.g==='C1'?'C1 · Chimica del carbonio':'C2 · Idrocarburi')+'</div>'}
+  html+='<details class="tp'+(done[t.id]?' done':'')+'" data-i="'+i+'"><summary><span>'+(i+1)+'. '+t.t+'</span><span class="ck">'+(done[t.id]?'✓ studiato':'')+'</span></summary><div class="bd">'+t.h+
+   '<div class="acts"><button type="button" data-a="3d">Vedi in 3D ▸</button><button type="button" data-a="ok">'+(done[t.id]?'Segna da rifare':'Segna come studiato')+'</button><button type="button" data-a="side">Apri a lato</button></div></div></details>'});
+ box.innerHTML=html;upProg()}
+function upProg(){const n=TOPICS.filter(t=>done[t.id]).length;$('spf').style.width=(n/TOPICS.length*100)+'%';$('spt').textContent=n+' di '+TOPICS.length+' argomenti studiati'}
+$('stl').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(!b)return;const d=b.closest('.tp'),i=+d.dataset.i,t=TOPICS[i];
+ if(b.dataset.a==='3d')go(t.at);
+ else if(b.dataset.a==='side')openDrawer(i);
+ else{done[t.id]=!done[t.id];save();d.classList.toggle('done',!!done[t.id]);d.querySelector('.ck').textContent=done[t.id]?'✓ studiato':'';b.textContent=done[t.id]?'Segna da rifare':'Segna come studiato';upProg()}});
+
+/* ---------- guida laterale ---------- */
+const rail=$('grail'),dr=$('gdraw'),gb=$('gbtn');let cur=0,drI=-1;
+function renderRail(){let h='',last='';TOPICS.forEach((t,i)=>{if(t.g!==last){last=t.g;h+='<li class="gg">'+t.g+(t.g==='C1'?' · Carbonio':' · Idrocarburi')+'</li>'}
+ h+='<li data-i="'+i+'"><button type="button" class="gi" data-go="'+i+'">'+(i+1)+'. '+t.t+'</button><button type="button" class="gb" data-sp="'+i+'" aria-label="Spiegazione di '+t.t.replace(/"/g,'')+'">Spiega</button></li>'});
+ $('glist').innerHTML=h}
+function setCur(i){cur=Math.max(0,Math.min(TOPICS.length-1,i));document.querySelectorAll('#glist li[data-i]').forEach(l=>l.classList.toggle('act',+l.dataset.i===cur));
+ const a=document.querySelector('#glist li.act');if(a&&!rail.hidden){const r=$('glist');const top=a.offsetTop-r.offsetTop;if(top<r.scrollTop||top>r.scrollTop+r.clientHeight-60)r.scrollTop=top-60}}
+function toggleRail(on){rail.hidden=!on;gb.setAttribute('aria-expanded',on);gb.textContent=on?'✕ Chiudi guida':'☰ Guida';if(!on)closeDrawer();else setCur(cur)}
+gb.onclick=()=>toggleRail(rail.hidden);$('gx').onclick=()=>toggleRail(false);
+$('gup').onclick=()=>{setCur(cur-1);go(TOPICS[cur].at);if(drI>=0)openDrawer(cur)};
+$('gdn').onclick=()=>{setCur(cur+1);go(TOPICS[cur].at);if(drI>=0)openDrawer(cur)};
+$('glist').addEventListener('click',e=>{const a=e.target.closest('[data-go]'),s=e.target.closest('[data-sp]');
+ if(a){const i=+a.dataset.go;setCur(i);go(TOPICS[i].at);if(innerWidth<=900)toggleRail(false)}
+ if(s){openDrawer(+s.dataset.sp)}});
+function openDrawer(i){drI=i;setCur(i);const t=TOPICS[i];$('gdt').textContent=(i+1)+'. '+t.t;$('gdb').innerHTML=t.h;$('gdb').scrollTop=0;dr.hidden=false;
+ if(rail.hidden&&innerWidth>900){rail.hidden=false;gb.setAttribute('aria-expanded','true');gb.textContent='✕ Chiudi guida'}
+ if(innerWidth<=900){rail.hidden=true;gb.setAttribute('aria-expanded','false');gb.textContent='☰ Guida'}}
+function closeDrawer(){dr.hidden=true;drI=-1}
+$('gdx').onclick=closeDrawer;$('gdgo').onclick=()=>{if(drI>=0){go(TOPICS[drI].at);if(innerWidth<=900)closeDrawer()}};
+$('gdp').onclick=()=>{if(drI>0)openDrawer(drI-1)};$('gdn2').onclick=()=>{if(drI<TOPICS.length-1)openDrawer(drI+1)};
+addEventListener('keydown',e=>{if(e.key==='Escape'){if(!dr.hidden)closeDrawer();else if(!rail.hidden)toggleRail(false)}});
+/* evidenzia l'argomento visibile */
+let tick=0;const secs=()=>TOPICS.map(t=>target(t.at));
+function onScroll(){if(tick)return;tick=requestAnimationFrame(()=>{tick=0;const mid=innerHeight*.45;let best=-1,bd=1e9;const sc=secs();
+ sc.forEach((el,i)=>{if(!el)return;const r=el.getBoundingClientRect();if(r.top<=mid&&r.bottom>mid){const d=Math.abs(r.top);if(d<bd){bd=d;best=i}}});
+ if(best>=0&&best!==cur)setCur(best)})}
+addEventListener('scroll',onScroll,{passive:true});
+
+/* ---------- flashcard ---------- */
+let fq=[],fi=0,fshow=false,fknown=0,fagain=[],fgrp='all';
+function fbuild(){let idx=CARDS.map((_,i)=>i).filter(i=>fgrp==='all'||(fgrp==='again'?fagain.includes(i):CARDS[i][0]===fgrp));
+ fq=shuf(idx);fi=0;fknown=0;fshow=false;frender()}
+function frender(){const c=$('fc');
+ if(!fq.length){c.innerHTML='<div class="fq">Nessuna carta qui.</div><div class="hint">'+(fgrp==='again'?'Non hai carte da ripassare: ottimo.':'Scegli un altro gruppo.')+'</div>';$('fbtn').hidden=true;$('fres').hidden=true;$('fst').textContent='';return}
+ if(fi>=fq.length){c.innerHTML='<div class="fq">Giro finito.</div><div class="fa">Le hai sapute '+fknown+' su '+fq.length+'. '+(fagain.length?'Ripassa le '+fagain.length+' da rivedere con il filtro «Da ripassare».':'Tutte sapute!')+'</div>';$('fbtn').hidden=true;$('fres').hidden=true;$('fst').textContent='';return}
+ const k=CARDS[fq[fi]];c.innerHTML='<span class="tag">'+k[0]+'</span><div class="fq">'+k[1]+'</div>'+(fshow?'<div class="fa">'+k[2]+'</div>':'<div class="hint">Prova a rispondere a voce, poi gira la carta.</div>');
+ $('fbtn').hidden=fshow;$('fres').hidden=!fshow;$('fst').textContent='Carta '+(fi+1)+' di '+fq.length+' · sapute '+fknown}
+$('fbtn').onclick=()=>{fshow=true;frender();$('fk').focus()};
+$('fk').onclick=()=>{const id=fq[fi];fknown++;const p=fagain.indexOf(id);if(p>=0)fagain.splice(p,1);fi++;fshow=false;frender()};
+$('fr').onclick=()=>{const id=fq[fi];if(!fagain.includes(id))fagain.push(id);fi++;fshow=false;frender()};
+$('fsh').onclick=fbuild;
+document.querySelectorAll('#ffl button').forEach(b=>b.onclick=()=>{fgrp=b.dataset.f;document.querySelectorAll('#ffl button').forEach(x=>x.classList.toggle('on',x===b));fbuild()});
+
+/* ---------- quiz di teoria ---------- */
+let qg='all',qn=10,seen=new Set(),rnd=null;
+function pickQs(ids){return ids}
+function qstart(onlyIds){
+ let pool=QS.map((_,i)=>i).filter(i=>qg==='all'||QS[i][0]===qg);
+ let ids;
+ if(onlyIds)ids=shuf(onlyIds);
+ else{let fresh=pool.filter(i=>!seen.has(i));if(fresh.length<qn){seen=new Set();fresh=pool}ids=shuf(fresh).slice(0,Math.min(qn,fresh.length));ids.forEach(i=>seen.add(i))}
+ rnd={ids,k:0,score:0,wrong:[],ans:false};qrender()}
+function qrender(){const b=$('qbox');
+ if(!rnd){b.innerHTML='<div class="card"><h3>Pronto?</h3><p>Domande di teoria dalla guida. Se sbagli, ti spiego subito la risposta giusta. Le domande non si ripetono finché non le hai viste tutte.</p><div class="row"><button type="button" class="big go" id="qgo">Inizia il quiz</button></div></div>';$('qgo').onclick=()=>qstart();return}
+ if(rnd.k>=rnd.ids.length){const n=rnd.ids.length,p=Math.round(rnd.score/n*100);
+  b.innerHTML='<div class="card"><h3>Risultato</h3><div class="qq">'+rnd.score+' su '+n+' ('+p+'%)</div><p>'+(p>=85?'Ottimo: sei pronto su questi argomenti.':p>=60?'Buono, ripassa gli errori qui sotto.':'Rileggi la sezione Studio e riprova: gli errori sono spiegati sotto.')+'</p>'+
+  (rnd.wrong.length?'<div class="qlist">'+rnd.wrong.map(i=>'<div class="qr"><b>'+QS[i][1]+'</b><br>Giusta: <b>'+QS[i][2]+'</b><br>'+QS[i][4]+'</div>').join('')+'</div>':'')+
+  '<div class="row">'+(rnd.wrong.length?'<button type="button" class="go" id="qre">Rifai solo gli errori</button>':'')+'<button type="button" id="qnw">Nuove domande</button></div></div>';
+  if($('qre'))$('qre').onclick=()=>qstart(rnd.wrong.slice());$('qnw').onclick=()=>qstart();return}
+ const q=QS[rnd.ids[rnd.k]];const opts=shuf([q[2]].concat(q[3]));rnd.cur=opts;rnd.ans=false;
+ b.innerHTML='<div class="card"><div class="qh"><span>Domanda '+(rnd.k+1)+' di '+rnd.ids.length+' · '+q[0]+'</span><span>Giuste: '+rnd.score+'</span></div><div class="qq">'+q[1]+'</div><div class="opts" id="qop">'+opts.map((o,i)=>'<button type="button" data-o="'+i+'">'+o+'</button>').join('')+'</div><div id="qfb"></div></div>';
+ $('qop').onclick=e=>{const bt=e.target.closest('[data-o]');if(!bt||rnd.ans)return;rnd.ans=true;const q=QS[rnd.ids[rnd.k]],ok=rnd.cur[+bt.dataset.o]===q[2];
+  bt.classList.add(ok?'ok':'no');$('qop').querySelectorAll('[data-o]').forEach(x=>{if(rnd.cur[+x.dataset.o]===q[2])x.classList.add('ok');else if(x!==bt)x.classList.add('dim')});
+  if(ok)rnd.score++;else rnd.wrong.push(rnd.ids[rnd.k]);
+  const last=rnd.k===rnd.ids.length-1;
+  $('qfb').innerHTML='<div class="qwhy'+(ok?' okk':'')+'"><b>'+(ok?'Esatto.':'Non proprio. La risposta giusta è «'+q[2]+'».')+'</b><br>'+q[4]+'</div><div class="row"><button type="button" class="go big" id="qnx">'+(last?'Vedi il risultato ▸':'Avanti ▸')+'</button></div>';
+  $('qnx').onclick=()=>{rnd.k++;qrender();$('quiz').scrollIntoView({block:'start'})};$('qnx').focus({preventScroll:true})}}
+document.querySelectorAll('#qgf button').forEach(b=>b.onclick=()=>{qg=b.dataset.g;document.querySelectorAll('#qgf button').forEach(x=>x.classList.toggle('on',x===b));rnd=null;seen=new Set();qrender()});
+document.querySelectorAll('#qnf button').forEach(b=>b.onclick=()=>{qn=+b.dataset.n;document.querySelectorAll('#qnf button').forEach(x=>x.classList.toggle('on',x===b));rnd=null;qrender()});
+
+renderStudy();renderRail();setCur(0);fbuild();qrender();
+})();
+
+</script>
+</body>
+</html>

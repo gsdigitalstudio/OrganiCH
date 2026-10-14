@@ -1,0 +1,14 @@
+COME METTERLO ONLINE SU VERCEL
+Metodo veloce (senza account GitHub): installa Node, poi nella cartella apri il terminale e scrivi
+    npx vercel --prod
+Metodo da sito: vercel.com > Add New > Project > importa un repository GitHub con questi file
+(Framework Preset: "Other", Build Command e Output Directory vuoti).
+
+Nessuna compilazione: e un sito statico. index.html e la pagina principale.
+Tre.js e i font arrivano da internet (cdnjs e Google Fonts): serve la connessione.
+
+DOPO LA PUBBLICAZIONE (consigliato): in index.html cerca
+    content="/og-image-1200x630.png"
+e sostituisci con l'indirizzo completo, ad esempio
+    content="https://IL-TUO-SITO.vercel.app/og-image-1200x630.png"
+cosi l'anteprima funziona anche su WhatsApp e social.
